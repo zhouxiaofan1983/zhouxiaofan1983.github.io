@@ -74,12 +74,12 @@
     const slinky = $('#menu').slinky();
     
     /*------ ScrollUp -------- */
-    $.scrollUp({
-        scrollText: '<i class="las la-angle-up"></i>',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
+    // $.scrollUp({
+    //     scrollText: '<i class="las la-angle-up"></i>',
+    //     easingType: 'linear',
+    //     scrollSpeed: 900,
+    //     animation: 'fade'
+    // });
     
     /*------ Wow Active ----*/
     new WOW().init();
