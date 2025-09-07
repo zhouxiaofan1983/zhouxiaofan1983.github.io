@@ -1,244 +1,32 @@
 <html lang="en" data-bs-theme="light">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <title>ZXF Lab</title>
-    <!-- hero video and scroll top css -->
-    <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
-    <link rel="stylesheet" href="assets/css/icomoon.css">
-    <link rel="stylesheet" href="assets/css/animate.min.css">
-    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
-    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="shortcut icon" type="image/x-icon" href="file:///D:/data/zxflab/zxflab.com/202307089/html/assets/images/favicon.png">
+    <!-- All CSS is here
+    ============================================ -->
+    <link rel="stylesheet" href="./alumni_files/proximanova.css">
+    <link rel="stylesheet" href="./alumni_files/line-awesome.min.css">
+    <link rel="stylesheet" href="./alumni_files/magnific-popup.css">
+    <link rel="stylesheet" href="./alumni_files/swiper.min.css">
+    <link rel="stylesheet" href="./alumni_files/style.css">
+    <style type="text/css">img[onload^="SVGInject("]{visibility:hidden;}</style>
+</head>
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Brands.css">
-    <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Pro.css">
-    <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
-    <link rel="stylesheet" href="assets/css/Features-Cards-icons.css">
-    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/plugins/modal-video.min.css">
-    <link rel="stylesheet" href="assets/css/plugins/stellarnav.css">
-    <link rel="stylesheet" href="assets/css/custom_animation.css">
-    <link rel="stylesheet" href="assets/css/main.css">
-    <link rel="stylesheet" href="assets/css/typography.css">
-    <link rel="stylesheet" href="assets/css/btn.css">
-    <link rel="stylesheet" href="assets/css/inner_pages.css">
-    <link rel="stylesheet" href="assets/css/theme.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
 <style>
-/* 解除 body 固定宽度 + 容器 translate 影响 */
-body{width:auto !important;max-width:100%;overflow-x:hidden;}
-.container[style*="translate"]{transform:none !important;margin:0 auto !important;}
-
-/* Team 调整team 和team photo 在页面的位置，上下*/
-/* ≥1400px 超大屏 */
-.team-member > .row.mb-5{margin-top:0px;}
-.team-member > .text-center.mb-4{margin-top:0px;}
-/* 1200px–1399px */
-@media (min-width:1440px){
-  .team-member > .row.mb-5{margin-top:-40px;}
-  .team-member > .text-center.mb-4{margin-top:-20px;}
+.main-menu li a {
+    padding: 20px 15px;
+    font-size: 14px;
+    color: #98adc2;
+    text-transform: uppercase;
+    font-weight: 700;
 }
-/* 992px–1199px (lg) */
-@media (min-width:1024px){
-  .team-member > .row.mb-5{margin-top:-100px;}
-  .team-member > .text-center.mb-4{margin-top:-48px;}
+a {
+    color: #98adc2;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    display: inline-block;
 }
-/* 768px–991px (md) */
-@media (min-width:768px) and (max-width:991.98px){
-  .team-member > .row.mb-5{margin-top:50px;}
-  .team-member > .text-center.mb-4{margin-top:15px;}
-}
-/* 576px–767px (sm) */
-@media (max-width:767.98px){
-  .team-member > .row.mb-5{margin-top:-35px;}
-  .team-member > .text-center.mb-4{margin-top:-28px;}
-}
-/* <576px (xs) */
-@media (max-width:575.98px){
-  .team-member > .row.mb-5{margin-top:0px;}
-  .team-member > .text-center.mb-4{margin-top:0px;}
-}
-
-/* PI 区*/
-/* PI 区：左右列在 md 以下堆叠并居中 */
-@media (max-width:991.98px){
-  .row.gy-4.align-items-start > .col-md-4,
-  .row.gy-4.align-items-start > .col-md-8{
-    width:100% !important;flex:0 0 100% !important;max-width:100% !important;
-    text-align:center;
-  }
-}
-/* 调整“The PI”标题：大屏向上浮动，小屏恢复，正文随其移动 */
-  .row.gy-4.align-items-start .col-md-8 > p:first-child{
-    position:relative;          /* 取消原来的 absolute，避免遮挡 */
-    transform:translateY(-22px);/* 默认大屏上移 */
-    margin:0 0 .55rem;
-    transition:transform .25s;
-  }
-
-  .row.gy-4.align-items-start .col-md-8 > p:nth-child(2){
-    margin-top:0;
-  }
-
-  /* 1400px 以上再多上移一些 */
-  @media (min-width:1400px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:translateY(-28px);
-    }
-  }
-
-  /* 992–1399px：稍微减少上移幅度，保持平衡 */
-  @media (min-width:992px) and (max-width:1399.98px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:translateY(-18px);
-    }
-  }
-
-  /* <992px：与头像纵向堆叠，取消上移，防重叠 */
-  @media (max-width:991.98px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:none;
-    }
-  }
-
-  /* 极小屏：缩小标题字号 */
-  @media (max-width:576px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child span{
-      font-size:1.25rem !important;
-    }
-  }
-
-/* 放大 PI 区照片（保持响应式与不裁剪） */
-.row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-  width:380px !important;
-  max-width:100% !important;
-  height:auto !important;
-  object-fit:contain !important;
-}
-@media (min-width:1200px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:520px !important;
-  }
-}
-@media (max-width:991.98px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:360px !important;
-  }
-}
-@media (max-width:576px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:220px !important;
-  }
-}
-/* 小屏适当缩小宽度，防止撑出屏幕 */
-@media (max-width:576px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:200px !important;
-  }
-}
-
-/* member区 */
-/* 统一成员图片在大屏保持 200px 高，小屏自适应减小 */
-.team-member img{
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 200px !important;
-  object-fit: contain !important; /* 由 cover 改为 contain */
-  margin: 0 auto !important;
-  background: #f5f5f500; /* 保证背景一致 */
-}
-/* 针对内联设置了 max-width:52/56/62% 或 margin-left 的图片在中小屏恢复全宽 */
-@media (max-width:1200px){
-  img[style*="max-width: 52"], img[style*="max-width: 56"], img[style*="max-width: 62"]{
-    max-width:100% !important;margin-left:0 !important;
-  }
-}
-/* 成员网格：逐步从 4→2→1 列 */
-@media (max-width:1199.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 33.333%;max-width:33.333%;}
-}
-@media (max-width:991.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 50%;max-width:50%;}
-}
-@media (max-width:575.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 100%;max-width:100%;}
-}
-/* 缩小小屏字体与间距，避免拥挤 */
-@media (max-width:767.98px){
-  h2.mt-2{font-size:1.9rem;}
-  .team-member .name{font-size:18px !important;}
-  .team-member p{font-size:13px !important;line-height:1.45;}
-  .row.mb-5{margin-bottom:1.5rem !important;}
-  .team-member img{height:180px !important;}
-}
-@media (max-width:575.98px){
-  .team-member img{height:160px !important;}
-  .pi-section .pi-name{font-size:26px !important;}
-  .pi-section .pi-bio{font-size:16px !important;}
-}
-/* 去除因图片不同宽度造成的水平偏移 */
-.team-member img[style*="margin-left"]{margin-left:0 !important;}
-/* 强制高度统一（已有行内 height:200px 的保持，其他按比例补齐） */
-.team-member img:not([style*="height: 200px"]){height:200px !important;}
-/* 让“占位空列”在小屏隐藏以减少空白 */
-@media (max-width:991.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col:empty{display:none !important;}
-}
-/* 修正部分字体缩放以防换行溢出 */
-@media (max-width:420px){
-  .pi-section .pi-bio{word-break:break-word;}
-}
-/* 防止图片拉伸导致抖动 */
-.team-member img{background:#ffffff00;}
-/* 解除针对非 200px 图像的强制高度对合影的影响 */
-.team-member img[alt="Team Photo"],
-  img[alt="Team Photo"]{
-    width:85% !important;
-    max-width:800px;
-    height:auto !important;
-    object-fit:contain !important;
-    display:block;
-    margin:0 auto;
-    background:transparent;
-  }
-  /* 图片居中与尺寸 */
-.team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
-.team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]) {
-  display:block;
-  margin:0 auto !important;
-  width:100% !important;
-  max-width:240px;
-  height:200px !important;
-  object-fit:cover;
-  border-radius:6px;
-}
-/* 简介和名字文本块居中 */
-.team-member > .py-4{
-  text-align:center;
-  padding-top:.55rem;
-}
-.team-member > .py-4 .name{
-  display:block;
-  margin:0 0 .4rem;
-  text-align:center;
-  font-weight:600;
-}
-/* 小屏缩小头像 */
-@media (max-width:575.98px){
-  .team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
-  .team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]){
-    max-width:200px;
-    height:180px !important;
-  }
-}
-/* 成员姓名字体与颜色统一：Times New Roman + 黑色 */
-.team-member .name{
-  font-family:"Times New Roman","TimesNewRoman",Times,serif !important;
-  color:#000 !important;
-}
-
 /* 导航响应式（Logo 缩放 + 折叠菜单） */
 nav.site-nav{
   position:fixed;top:0;left:0;right:0;z-index:9999;
@@ -376,13 +164,13 @@ nav.site-nav > ul.main-menu li a{
   }
 }
 </style>
-</head>
-<body>
+
+<body class="body-dark-mode-wrap" data-aos-easing="ease" data-aos-duration="1000" data-aos-delay="0">
   <symbol id="chevron" viewbox="0 0 15 8">
     <path d="M13.728 0.364014L7.36407 6.72798L1.00012 0.364014"></path>
   </symbol>
 
-<!-- logo 菜单导航 -->
+    <!-- logo 菜单导航 -->
   <nav class="site-nav">
     <div class="primary-nav__inner">
       <div class="primary-nav__content">
@@ -404,8 +192,166 @@ nav.site-nav > ul.main-menu li a{
       <li><a href="halloffame.html">Alumni</a></li>
     </ul>
   </nav>
+    <div class="main-wrapper">
+        <div class="breadcrumb-area breadcrumb-padding-4">
+            <div class="container">
+                <div class="breadcrumb-content text-center">
+                    <h1 data-aos="fade-up" data-aos-delay="200" class="aos-init aos-animate">Alumni</h1>
+                    <p data-aos="fade-up" data-aos-delay="300" class="aos-init aos-animate">Our Lab Over the Years</p>
+                </div>
+            </div>
+        </div>
+        <div class="single-gallery-area pb-140">
+            <div class="slider-active-3 swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="width: 620px;margin-right: 11px;padding-bottom: 0px;">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2023毕业合照1.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2023冬至2.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2023某次聚餐.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2023谢师宴.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2023迎新饭.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2024谢师宴.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="single-gallery-img">
+                            <img src="assets/image/funlife/2025谢师宴.jpg" alt="">
+                        </div>
+                        <div class="home-slider-prev-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Previous slide" > <img class="injectable" src="alumni_files/angle-left-2.svg" alt=""></div>
+                        <div class="home-slider-next-3 main-slider-nav-3" tabindex="0" role="button" aria-label="Next slide" > <img class="injectable" src="alumni_files/angle-right-2.svg" alt=""></div>
+                    </div>
+                </div>
+            </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+            </div>
+        </div>
 
-  <footer class="site-footer" style="background:#f8f9fa;border-top:1px solid #e5e5e5;margin-top:60px;font-family:Arial, sans-serif;">
+        <div class="related-gallery-area pt-90 pb-145 section-padding-lr-1 bg-gray">
+            <div class="container-fluid">
+                <div class="section-title-2 text-center">
+                    <h2 data-aos="fade-up" data-aos-delay="200" class="aos-init aos-animate">Lab Alumni</h2>
+                </div>
+                <div class="related-gallery-active swiper-container swiper-container-initialized swiper-container-horizontal">
+                    <div class="swiper-wrapper" id="swiper-wrapper-1a21e5bf68ce3c85" aria-live="polite" style="transform: translate3d(-754px, 0px, 0px); transition-duration: 0ms;"><div class="swiper-slide swiper-slide-duplicate" role="group" aria-label="8 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="3">
+                        <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                            <a href="alumni.html"><img src="assets/image/alumni/贺谦.jpg" alt=""></a>
+                            <div class="gallery-content gallery-content-modify">
+                                <h3><a href="alumni.html">Qian He</a></h3>
+                                <p>285833130@qq.com</p>
+                            </div>
+                        </div>
+                        </div><div class="swiper-slide swiper-slide-duplicate swiper-slide-prev" role="group" aria-label="9 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="4">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+                                <a href="alumni.html"><img src="assets/image/alumni/廖心月.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Xingyue Liao</a></h3>
+                                    <p>1328302377@qq.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-active" role="group" aria-label="5 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="0">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
+                                <a href="alumni.html"><img src="assets/image/alumni/邱铭慧.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Minghui Qiu</a></h3>
+                                    <p>582756975@qq.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-next" role="group" aria-label="6 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="1">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="300">
+                                <a href="alumni.html"><img src="assets/image/alumni/丁梦凡.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Mengfan Ding</a></h3>
+                                    <p>15855525758@163.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="7 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="2">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
+                                <a href="alumni.html"><img src="assets/image/alumni/郭蕊.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Rui Guo</a></h3>
+                                    <p>3262655894@qq.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide" role="group" aria-label="8 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="3">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="500">
+                                <a href="alumni.html"><img src="assets/image/alumni/黄宇龙.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Yulong Huang</a></h3>
+                                    <p>2584919749@qq.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide swiper-slide-duplicate-prev" role="group" aria-label="9 / 13" style="width: 347px; margin-right: 30px;" data-swiper-slide-index="4">
+                            <div class="single-gallery aos-init aos-animate" data-aos="fade-up" data-aos-delay="600">
+                                <a href="alumni.html"><img src="assets/image/alumni/胡明.jpg" alt=""></a>
+                                <div class="gallery-content gallery-content-modify">
+                                    <h3><a href="alumni.html">Ming Hu</a></h3>
+                                    <p>hm@scau.edu.cn</p>
+                                </div>
+                            </div>
+                        </div>
+                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span><span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Global Vendor, plugins JS -->
+    <script src="./alumni_files/modernizr-3.11.2.min.js"></script>
+    <script src="./alumni_files/jquery-3.5.1.min.js"></script>
+    <script src="./alumni_files/jquery-migrate-3.3.0.min.js"></script>
+    <script src="./alumni_files/popper.min.js"></script>
+    <script src="./alumni_files/bootstrap.min.js"></script>
+    <script src="./alumni_files/svg-inject.min.js"></script>
+    <script src="./alumni_files/wow.js"></script>
+    <script src="./alumni_files/scrollup.js"></script>
+    <script src="./alumni_files/aos.js"></script>
+    <script src="./alumni_files/magnific-popup.js"></script>
+    <script src="./alumni_files/mouse-parallax.js"></script>
+    <script src="./alumni_files/slinky.min.js"></script>
+    <script src="./alumni_files/swiper.min.js"></script>
+    <script src="./alumni_files/ajax-mail.js"></script>
+    <!-- Main JS -->
+    <script src="./alumni_files/main.js"></script>
+
+  <footer class="site-footer" style="background:#f8f9fa;border-top:1px solid #e5e5e5;font-family:Arial, sans-serif;">
     <div class="container py-4" style="max-width:1180px;">
       <div class="row g-4">
         <!-- Logo / Intro -->
@@ -413,7 +359,7 @@ nav.site-nav > ul.main-menu li a{
           <div style="display:flex;align-items:center;gap:12px;">
             <img src="assets/image/icons/zhou_logo_2.png" alt="ZXF Lab" style="height:60px;width:auto;">
             <div>
-              <h6 style="margin:0 0 4px;font-weight:600;">Xiaofan-Zhou Lab</h6>
+              <h6 style="margin:0 0 4px;font-weight:600;font-size: 16px;">Xiaofan-Zhou Lab</h6>
               <p style="margin:0;font-size:12px;line-height:1.4;color:#555;">Integrative Microbiology Research Centre<br>South China Agricultural University<br>Guangzhou, Guangdong, P.R. China</p>
             </div>
           </div>
@@ -497,5 +443,5 @@ nav.site-nav > ul.main-menu li a{
     })();
   </script>
 
-
-</body></html>
+</body>
+</html>
