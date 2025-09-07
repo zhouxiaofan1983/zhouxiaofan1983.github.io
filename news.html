@@ -1,33 +1,243 @@
-<!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-  <link rel="icon" href="assets/image/icons/zhou_logo_2.png" type="image/png">
   <title>ZXF Lab</title>
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Brands.css">
-  <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Pro.css">
-  <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
-  <link rel="stylesheet" href="assets/css/Features-Cards-icons.css">
-  <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
-  <link rel="stylesheet" href="assets/css/plugins/owl.carousel.min.css">
-  <link rel="stylesheet" href="assets/css/plugins/modal-video.min.css">
-  <link rel="stylesheet" href="assets/css/plugins/stellarnav.css">
-  <link rel="stylesheet" href="assets/css/custom_animation.css">
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="stylesheet" href="assets/css/typography.css">
-  <link rel="stylesheet" href="assets/css/btn.css">
-  <link rel="stylesheet" href="assets/css/inner_pages.css">
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <link rel="stylesheet" href="assets/css/responsive.css">
-</head>
+    <!-- hero video and scroll top css -->
+    <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/icomoon.css">
+    <link rel="stylesheet" href="assets/css/animate.min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
 
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Brands.css">
+    <link rel="stylesheet" href="assets/css/Font%20Awesome%205%20Pro.css">
+    <link rel="stylesheet" href="assets/css/Articles-Badges-images.css">
+    <link rel="stylesheet" href="assets/css/Features-Cards-icons.css">
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/plugins/modal-video.min.css">
+    <link rel="stylesheet" href="assets/css/plugins/stellarnav.css">
+    <link rel="stylesheet" href="assets/css/custom_animation.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/btn.css">
+    <link rel="stylesheet" href="assets/css/inner_pages.css">
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
 <style>
 /* 解除 body 固定宽度 + 容器 translate 影响 */
 body{width:auto !important;max-width:100%;overflow-x:hidden;}
 .container[style*="translate"]{transform:none !important;margin:0 auto !important;}
+
+/* Team 调整team 和team photo 在页面的位置，上下*/
+/* ≥1400px 超大屏 */
+.team-member > .row.mb-5{margin-top:0px;}
+.team-member > .text-center.mb-4{margin-top:0px;}
+/* 1200px–1399px */
+@media (min-width:1440px){
+  .team-member > .row.mb-5{margin-top:-40px;}
+  .team-member > .text-center.mb-4{margin-top:-20px;}
+}
+/* 992px–1199px (lg) */
+@media (min-width:1024px){
+  .team-member > .row.mb-5{margin-top:-100px;}
+  .team-member > .text-center.mb-4{margin-top:-48px;}
+}
+/* 768px–991px (md) */
+@media (min-width:768px) and (max-width:991.98px){
+  .team-member > .row.mb-5{margin-top:50px;}
+  .team-member > .text-center.mb-4{margin-top:15px;}
+}
+/* 576px–767px (sm) */
+@media (max-width:767.98px){
+  .team-member > .row.mb-5{margin-top:-35px;}
+  .team-member > .text-center.mb-4{margin-top:-28px;}
+}
+/* <576px (xs) */
+@media (max-width:575.98px){
+  .team-member > .row.mb-5{margin-top:0px;}
+  .team-member > .text-center.mb-4{margin-top:0px;}
+}
+
+/* PI 区*/
+/* PI 区：左右列在 md 以下堆叠并居中 */
+@media (max-width:991.98px){
+  .row.gy-4.align-items-start > .col-md-4,
+  .row.gy-4.align-items-start > .col-md-8{
+    width:100% !important;flex:0 0 100% !important;max-width:100% !important;
+    text-align:center;
+  }
+}
+/* 调整“The PI”标题：大屏向上浮动，小屏恢复，正文随其移动 */
+  .row.gy-4.align-items-start .col-md-8 > p:first-child{
+    position:relative;          /* 取消原来的 absolute，避免遮挡 */
+    transform:translateY(-22px);/* 默认大屏上移 */
+    margin:0 0 .55rem;
+    transition:transform .25s;
+  }
+
+  .row.gy-4.align-items-start .col-md-8 > p:nth-child(2){
+    margin-top:0;
+  }
+
+  /* 1400px 以上再多上移一些 */
+  @media (min-width:1400px){
+    .row.gy-4.align-items-start .col-md-8 > p:first-child{
+      transform:translateY(-28px);
+    }
+  }
+
+  /* 992–1399px：稍微减少上移幅度，保持平衡 */
+  @media (min-width:992px) and (max-width:1399.98px){
+    .row.gy-4.align-items-start .col-md-8 > p:first-child{
+      transform:translateY(-18px);
+    }
+  }
+
+  /* <992px：与头像纵向堆叠，取消上移，防重叠 */
+  @media (max-width:991.98px){
+    .row.gy-4.align-items-start .col-md-8 > p:first-child{
+      transform:none;
+    }
+  }
+
+  /* 极小屏：缩小标题字号 */
+  @media (max-width:576px){
+    .row.gy-4.align-items-start .col-md-8 > p:first-child span{
+      font-size:1.25rem !important;
+    }
+  }
+
+/* 放大 PI 区照片（保持响应式与不裁剪） */
+.row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
+  width:380px !important;
+  max-width:100% !important;
+  height:auto !important;
+  object-fit:contain !important;
+}
+@media (min-width:1200px){
+  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
+    width:520px !important;
+  }
+}
+@media (max-width:991.98px){
+  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
+    width:360px !important;
+  }
+}
+@media (max-width:576px){
+  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
+    width:220px !important;
+  }
+}
+/* 小屏适当缩小宽度，防止撑出屏幕 */
+@media (max-width:576px){
+  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
+    width:200px !important;
+  }
+}
+
+/* member区 */
+/* 统一成员图片在大屏保持 200px 高，小屏自适应减小 */
+.team-member img{
+  width: 100% !important;
+  max-width: 100% !important;
+  height: 200px !important;
+  object-fit: contain !important; /* 由 cover 改为 contain */
+  margin: 0 auto !important;
+  background: #f5f5f500; /* 保证背景一致 */
+}
+/* 针对内联设置了 max-width:52/56/62% 或 margin-left 的图片在中小屏恢复全宽 */
+@media (max-width:1200px){
+  img[style*="max-width: 52"], img[style*="max-width: 56"], img[style*="max-width: 62"]{
+    max-width:100% !important;margin-left:0 !important;
+  }
+}
+/* 成员网格：逐步从 4→2→1 列 */
+@media (max-width:1199.98px){
+  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 33.333%;max-width:33.333%;}
+}
+@media (max-width:991.98px){
+  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 50%;max-width:50%;}
+}
+@media (max-width:575.98px){
+  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 100%;max-width:100%;}
+}
+/* 缩小小屏字体与间距，避免拥挤 */
+@media (max-width:767.98px){
+  h2.mt-2{font-size:1.9rem;}
+  .team-member .name{font-size:18px !important;}
+  .team-member p{font-size:13px !important;line-height:1.45;}
+  .row.mb-5{margin-bottom:1.5rem !important;}
+  .team-member img{height:180px !important;}
+}
+@media (max-width:575.98px){
+  .team-member img{height:160px !important;}
+  .pi-section .pi-name{font-size:26px !important;}
+  .pi-section .pi-bio{font-size:16px !important;}
+}
+/* 去除因图片不同宽度造成的水平偏移 */
+.team-member img[style*="margin-left"]{margin-left:0 !important;}
+/* 强制高度统一（已有行内 height:200px 的保持，其他按比例补齐） */
+.team-member img:not([style*="height: 200px"]){height:200px !important;}
+/* 让“占位空列”在小屏隐藏以减少空白 */
+@media (max-width:991.98px){
+  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col:empty{display:none !important;}
+}
+/* 修正部分字体缩放以防换行溢出 */
+@media (max-width:420px){
+  .pi-section .pi-bio{word-break:break-word;}
+}
+/* 防止图片拉伸导致抖动 */
+.team-member img{background:#ffffff00;}
+/* 解除针对非 200px 图像的强制高度对合影的影响 */
+.team-member img[alt="Team Photo"],
+  img[alt="Team Photo"]{
+    width:85% !important;
+    max-width:800px;
+    height:auto !important;
+    object-fit:contain !important;
+    display:block;
+    margin:0 auto;
+    background:transparent;
+  }
+  /* 图片居中与尺寸 */
+.team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
+.team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]) {
+  display:block;
+  margin:0 auto !important;
+  width:100% !important;
+  max-width:240px;
+  height:200px !important;
+  object-fit:cover;
+  border-radius:6px;
+}
+/* 简介和名字文本块居中 */
+.team-member > .py-4{
+  text-align:center;
+  padding-top:.55rem;
+}
+.team-member > .py-4 .name{
+  display:block;
+  margin:0 0 .4rem;
+  text-align:center;
+  font-weight:600;
+}
+/* 小屏缩小头像 */
+@media (max-width:575.98px){
+  .team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
+  .team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]){
+    max-width:200px;
+    height:180px !important;
+  }
+}
+/* 成员姓名字体与颜色统一：Times New Roman + 黑色 */
+.team-member .name{
+  font-family:"Times New Roman","TimesNewRoman",Times,serif !important;
+  color:#000 !important;
+}
 
 /* 导航响应式（Logo 缩放 + 折叠菜单） */
 nav.site-nav{
@@ -43,6 +253,35 @@ nav.site-nav .primary-nav__logo-text img{height:auto;max-height:56px;width:auto;
 @media (max-width:576px){
   nav.site-nav .primary-nav__logo-text img{max-height:42px;}
 }
+
+/* 折叠按钮（右上角） */
+.nav-toggle{
+  display:none;
+  position:absolute;
+  top:10px;
+  right:16px;
+  z-index:10002;
+  border:0;
+  background:#fff;
+  height:40px;
+  width:44px;
+  padding:0;
+  cursor:pointer;
+}
+.nav-toggle span{
+  position:absolute;
+  left:10px;
+  right:10px;
+  height:2px;
+  background:#222;
+  transition:.3s;
+}
+.nav-toggle span:nth-child(1){top:12px;}
+.nav-toggle span:nth-child(2){top:19px;}
+.nav-toggle span:nth-child(3){top:26px;}
+nav.site-nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+nav.site-nav.open .nav-toggle span:nth-child(2){opacity:0;}
+nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 /* 菜单初始（桌面） */
 nav.site-nav > ul.main-menu{
@@ -63,13 +302,12 @@ nav.site-nav > ul.main-menu li a{
   padding:4px 2px;
   font-family:Arial, sans-serif; /* 保障链接也使用 Arial */
 }
-
 /* 桌面端：菜单整体水平居中（不受左侧 Logo 影响） */
 @media (min-width:993px){
   nav.site-nav{
     display:flex;
     align-items:center;
-    position:fixed;
+    position:relative;
   }
   nav.site-nav > ul.main-menu{
     position:absolute;
@@ -82,35 +320,6 @@ nav.site-nav > ul.main-menu li a{
     flex:0 0 auto;
   }
 }
-
-/* 折叠按钮（右上角） */
-.nav-toggle{
-  display:none;
-  position:absolute;
-  top:10px;
-  right:16px;
-  z-index:10002;
-  border:0;
-  background:#ffffff;
-  height:40px;
-  width:44px;
-  padding:0;
-  cursor:pointer;
-}
-.nav-toggle span{
-  position:absolute;
-  left:10px;
-  right:10px;
-  height:2px;
-  background:#222;
-  transition:.3s;
-}
-.nav-toggle span:nth-child(1){top:12px;}
-.nav-toggle span:nth-child(2){top:19px;}
-.nav-toggle span:nth-child(3){top:26px;}
-nav.site-nav.open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg);}
-nav.site-nav.open .nav-toggle span:nth-child(2){opacity:0;}
-nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 /* 移动端 */
 @media (max-width:992px){
   /* 导航本体 */
@@ -167,8 +376,8 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
   }
 }
 </style>
-
-<body style="height:60px;">
+</head>
+<body>
   <symbol id="chevron" viewbox="0 0 15 8">
     <path d="M13.728 0.364014L7.36407 6.72798L1.00012 0.364014"></path>
   </symbol>
@@ -240,10 +449,10 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
         <!-- Contact -->
         <div class="col-12 col-md-3">
           <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Contact</h6>
-          <p style="margin:0 0 6px;font-size:13px;color:#555;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
-          <p style="margin:0 0 6px;font-size:13px;color:#555;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
+          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
+          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
           <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;">
-            <li><a href="https://scholar.google.com/citations?hl=en&user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
+            <li><a href="https://scholar.google.com/citations?hl=en&amp;user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
           </ul>
         </div>
       </div>
@@ -252,8 +461,8 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
 
       <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3" style="font-size:12px;color:#666;">
         <div>
-          © <span id="year"></span> ZXF Lab. All rights reserved.
-          <span style="margin-left:6px;">Content for academic & research purposes.</span>
+          © <span id="year">2025</span> ZXF Lab. All rights reserved.
+          <span style="margin-left:6px;">Content for academic &amp; research purposes.</span>
         </div>
       </div>
     </div>
@@ -287,5 +496,6 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
       }
     })();
   </script>
-</body>
-</html>
+
+
+</body></html>

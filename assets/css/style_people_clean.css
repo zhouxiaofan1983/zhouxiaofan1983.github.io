@@ -1,0 +1,1032 @@
+/* ===================
+fonts
+====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+/* ===================
+general css
+====================== */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  scroll-behavior: inherit !important;
+}
+
+html, body {
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.8;
+}
+
+a {
+  color: #14212B;
+  display: inline-block;
+}
+
+a, a:active, a:focus, a:hover {
+  outline: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0049D0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h6 {
+  color: #110B25;
+  margin: 0px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.2;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  margin: 0px;
+  text-indent: 2em;
+}
+
+img {
+  max-width: 100%;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  height: auto;
+}
+
+*::-moz-selection {
+  background: #d6b161;
+  color: #fff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #555;
+  color: #fff;
+  text-shadow: none;
+}
+
+::selection {
+  background: #555;
+  color: #fff;
+  text-shadow: none;
+}
+
+*::-moz-placeholder {
+  color: #999;
+  font-size: 16px;
+  opacity: 1;
+}
+
+/* ===================
+preloader
+====================== */
+
+/* ===================
+theme default css
+====================== */
+
+
+
+/* ===================
+site title css
+====================== */
+
+
+
+
+/* ===================
+margin & padding
+====================== */
+
+/* ===================
+theme button
+====================== */
+
+.main-menu li a {
+    padding: 20px 15px;
+    font-size: 14px;
+    color: #98adc2;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
+
+/* ===================
+nav menu css
+====================== */
+
+/*bootstrap menu*/
+/* dropdown toggler */
+
+/* mobile menu */
+
+
+
+
+/* ===================
+hero css 
+====================== */
+
+/* =====================
+play btn
+===================== */
+
+
+/* ===================
+video css 
+====================== */
+
+
+/* ===================
+counter css 
+====================== */
+
+/* ===================
+scroll-top css
+====================== */
+
+
+/* Portfolio */
+/* Portfolio Slider */
+
+/* Portoflio Details */
+a {
+    color: #98adc2;
+    text-decoration: none;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li {
+    margin: 10px 0 0;
+    position: relative;
+}
+@charset "UTF-8";
+/*
+*
+* Trunk version 1.2.2
+*
+*/
+/**
+ * [Table of contents]
+ *   1 Reset Styles
+ *   2 Lightgallery
+ *   3 Countdown
+ */
+/*
+*
+* Main Styles
+* ==================================================
+*/
+html *:first-child {
+	margin-top: 0;
+}
+
+html *:last-child {
+	margin-bottom: 0;
+}
+
+body {
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.71429;
+	color: #848484;
+	background-color: #fff;
+}
+
+
+a:hover, a:focus {
+	color: #2b251a;
+	text-decoration: none;
+	outline: none;
+}
+
+a[href*='mailto'] {
+	white-space: nowrap;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+img {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+}
+
+/*
+*
+* Typography
+* ==================================================
+*/
+h2, h6 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: "Poppins", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	letter-spacing: 0;
+	color: #151515;
+}
+
+h2 {
+	font-size: 32px;
+	line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+	h2 {
+		line-height: 0.93333;
+		font-size: 60px;
+	}
+}
+
+h6 {
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+	h6 {
+		line-height: 1.25;
+		font-size: 16px;
+	}
+}
+
+hr {
+	margin-top: 0;
+	margin-bottom: 0;
+	border-top: 1px solid #ebebeb;
+}
+
+/*
+*
+* Backgrounds
+* ==================================================
+*/
+
+/*
+*
+* Colors
+* ==================================================
+*/
+
+/*
+*
+* Main layout
+* ==================================================
+*/
+
+hr {
+	opacity: 1;
+}
+
+/** @section Reset Styles*/
+a:focus,
+button:focus {
+	outline: none !important;
+}
+
+button::-moz-focus-inner {
+	border: 0;
+}
+
+*:focus {
+	outline: none;
+}
+
+button {
+	outline: none;
+}
+
+button {
+	padding: 0;
+}
+
+p {
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul li {
+	display: flex;
+}
+
+html p a:hover {
+	text-decoration: none;
+}
+
+/*
+*
+* Components
+* ==================================================
+*/
+/*
+*
+* Icons
+* --------------------------------------------------
+*/
+
+/*
+*
+* Buttons
+* --------------------------------------------------
+*/
+
+/*
+*
+* Form styles
+* --------------------------------------------------
+*/
+
+/*
+*
+* Lists
+* --------------------------------------------------
+*/
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/*
+*
+* Posts
+* --------------------------------------------------
+*/
+
+/*
+*
+* Thumbnails
+* --------------------------------------------------
+*/
+
+/*
+*
+* Tooltip Custom
+* --------------------------------------------------
+*/
+
+/*
+*
+* Snackbars
+* --------------------------------------------------
+*/
+
+/*
+*
+* Navigation
+* --------------------------------------------------
+*/
+
+/*
+*
+* Page Loaders
+* --------------------------------------------------
+*/
+
+/* EDITABLE PARAMETERS */
+/* handle width */
+/* blade width */
+/* blade's height and handle's thickness will be inversely proportional to $div */
+/* initial amplitude between blades */
+/* final amplitude between blades */
+/* NON EDITABLE PARAMETERS */
+/* handle height */
+/* handle border thickness */
+/* blade height */
+/* joint diameter */
+/* left position of the center of rotation */
+/* left position in % of the center of rotation */
+/* left position of the joint in % */
+body {
+	background: #fff;
+}
+
+/*
+*
+* Pagination custom
+* --------------------------------------------------
+*/
+
+/*
+*
+* Helpers
+* ==================================================
+*/
+/*
+*
+* Text Alignment
+* --------------------------------------------------
+*/
+
+.text-center {
+	text-align: center;
+}
+
+/*
+*
+* Text styling
+* --------------------------------------------------
+*/
+
+/*
+*
+* Visibility Responsive
+* --------------------------------------------------
+*/
+
+/*
+*
+* Element groups
+* --------------------------------------------------
+*/
+
+/*
+*
+* Contexts
+* --------------------------------------------------
+*/
+
+/*
+*
+* Sections
+* --------------------------------------------------
+*/
+
+/**
+* Custom sections
+*/
+
+@supports (object-fit: cover) {
+}
+
+/*
+*
+* Offsets
+* --------------------------------------------------
+*/
+* + p {
+	margin-top: 20px;
+}
+
+* + hr {
+	margin-top: 10px;
+}
+
+p + p {
+	margin-top: 24px;
+}
+
+h2 + p {
+	margin-top: 20px;
+}
+
+.row + hr {
+	margin-top: 20px;
+}
+
+/*
+*
+* Modules
+* ==================================================
+*/
+/*
+*
+* Flex Grid system
+* --------------------------------------------------
+*/
+
+/*
+*
+* Responsive unit
+* --------------------------------------------------
+*/
+
+/*
+*
+* Plugins
+* ==================================================
+*/
+/*
+*
+* Animate.css
+* --------------------------------------------------
+*/
+
+/**
+* FadeIn Keyframes Animation
+*/
+
+/**
+* FadeInUp Keyframes Animation
+*/
+
+/**
+* FadeInDown Keyframes Animation
+*/
+
+/**
+* FadeInLeft Keyframes Animation
+*/
+
+/**
+* FadeInRight Keyframes Animation
+*/
+
+/*
+**
+* FadeOut Keyframes Animation
+*/
+
+/**
+* SlideInDown Keyframes Animation
+*/
+
+/**
+* SlideInLeft Keyframes Animation
+*/
+
+/**
+* SlideInRight Keyframes Animation
+*/
+
+/**
+* SlideOutDown Keyframes Animation
+*/
+
+/*
+*
+* Owl Carousel
+* --------------------------------------------------
+*/
+
+/* 
+ * 	Owl Carousel - Auto Height Plugin
+ */
+
+/* 
+ *  Core Owl Carousel CSS File
+ */
+
+/* No Js */
+
+/* 
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+
+/* 
+ * 	Owl Carousel - Video Plugin
+ */
+
+/*
+ * Owl Navigation
+ */
+
+/*
+ * Owl Pagination
+ */
+
+/*
+*
+* RD Navbar
+* --------------------------------------------------
+*/
+
+/*
+* Navbar components
+*/
+
+/*
+* @subsection   Hybrid  Styles
+*/
+
+/*
+* Static Layout
+*/
+
+/*
+* Fullwidth Layout
+*/
+
+/*
+* Fixed Layout
+*/
+
+/*
+* Sidebar Layout
+*/
+
+/*
+*
+* RD Parallax
+* --------------------------------------------------
+*/
+
+/*
+*
+* RD Google Map
+* --------------------------------------------------
+*/
+
+/*
+*
+* Search Results
+* --------------------------------------------------
+
+*/
+
+/*
+*
+* ToTop
+* --------------------------------------------------
+*/
+
+/** @section Lightgallery */
+@font-face {
+	font-family: 'lg';
+	src: url("../fonts/lg.eot?n1z373");
+	src: url("../fonts/lg.eot?#iefixn1z373") format("embedded-opentype"), url("../fonts/lg.woff?n1z373") format("woff"), url("../fonts/lg.ttf?n1z373") format("truetype"), url("../fonts/lg.svg?n1z373#lg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*
+*
+* Progress Bars
+* --------------------------------------------------
+*/
+
+/*
+*
+* Counter
+* --------------------------------------------------
+*/
+
+/*
+*
+* Circle Progress Bars
+* --------------------------------------------------
+*/
+
+/** @section Countdown */
+
+/*
+*
+* Swiper
+* --------------------------------------------------
+*/
+
+/* a11y */
+
+/* IE10 Windows Phone 8 Fixes */
+
+/* Coverflow */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+1. BASIC STYLE
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+2. VERTICAL SCROLLBAR
+y-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible scrollbar */
+
+/* RTL direction/left-side scrollbar */
+
+/* scrollbar position: outside */
+
+/* RTL direction/left-side scrollbar (scrollbar position: outside) */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+3. HORIZONTAL SCROLLBAR
+x-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible scrollbar */
+
+/* scrollbar position: outside */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+4. VERTICAL AND HORIZONTAL SCROLLBARS
+yx-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible horizontal scrollbar */
+
+/* non-visible vertical scrollbar/RTL direction/left-side scrollbar */
+
+/* RTL direction/left-side scrollbar */
+
+/* non-visible scrollbar/RTL direction/left-side scrollbar */
+
+/* non-visible horizontal scrollbar */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+5. TRANSITIONS
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+6. SCROLLBAR COLORS, OPACITY AND BACKGROUNDS
+------------------------------------------------------------------------------------------------------------------------
+*/
+/*
+----------------------------------------
+6.1 THEMES
+----------------------------------------
+*/
+/* default theme ("light") */
+
+/* theme: "dark" */
+
+/*
+*
+* Select 2
+* --------------------------------------------------
+*/
+/*
+Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
+*/
+
+/* results */
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+
+/* disabled styles */
+
+/* multiselect */
+
+/* disabled styles */
+
+/* end multiselect */
+
+/* Icons */
+/* Arrows */
+
+/* Dots */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li {
+    margin: 10px 0 0;
+    position: relative;
+}
+
+/**
+*  jPlayer
+* -----------------------------------------------------------------------------
+*/
+
+/*
+ * Project: CirclePlayer
+ * http://www.jplayer.org
+ *
+ * Copyright (c) 2012 Happyworm Ltd
+ *
+ * Author: Silvia Benvenuti
+ * Edited by: Mark J Panaghiston
+ * Date: 2nd October 2012
+ * Artwork inspired by: http://forrst.com/posts/Untitled-CJz
+ */
+
+/* FALLBACK for .progress
+ * (24 steps starting from 1hr filled progress, Decrease second value by 104px for next step)
+ * (It needs the container selector to work. Or use div)
+ */
+
+/* This is needed when progress is greater than 50% or for fallback */
+
+/* Fix: allow adjusting video container height and prevent cropping */
+
+/**
+* Custom Style
+*/
+
+/**
+* Build Video
+*/
+
+/*
+*
+* Layout panel
+* --------------------------------------------------
+*/
+
+
+/* Portfolio */
+/* Portfolio Slider */
+
+/* Portoflio Details */
+a {
+    color: #98adc2;
+    text-decoration: none;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li {
+    margin: 10px 0 0;
+    position: relative;
+}
+/*
+Template name : 
+Version:1.0;
+����߶�ģ�壺http://www.bootstrapmb.com
+=<::::::::::::::::::::::::::=>
+base css
+=<::::::::::::::::::::::::::=>
+
+*/
+
+
+
+html, body, div, span, h2, h6, p, a, img, strong, b, i, ul, li, footer, nav {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* make sure to set some focus styles for accessibility */
+:focus {
+    outline: 0;
+}
+
+/* HTML5 display-role reset for older browsers */
+footer, nav {
+  display: block;
+}
+
+body {
+  line-height: 1;
+  overflow-x: hidden;
+
+}
+
+ul {
+  list-style: none;
+}
+
+
+html {
+    font-size: 100%; /* 1 */
+    -webkit-text-size-adjust: 100%; /* 2 */
+    -ms-text-size-adjust: 100%; /* 2 */
+}
+
+a:focus {
+    outline: thin dotted;
+}
+
+
+a:active,
+a:hover {
+    outline: 0;
+}
+
+
+img {
+    border: 0; /* 1 */
+    -ms-interpolation-mode: bicubic; /* 2 */
+}
+
+
+button {
+    font-size: 100%; /* 1 */
+    margin: 0; /* 2 */
+    vertical-align: baseline; /* 3 */
+    *vertical-align: middle; /* 3 */
+}
+
+
+button {
+    line-height: normal;
+}
+
+
+button {
+    text-transform: none;
+}
+
+
+button {
+    -webkit-appearance: button; /* 2 */
+    cursor: pointer; /* 3 */
+    *overflow: visible;  /* 4 */
+}
+
+
+button::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+html,
+button {
+    color: #222;
+}
+
+
+::-moz-selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+img {
+    vertical-align: middle;
+}
+
+
+html{
+    scroll-behavior: smooth;
+}
+:focus{
+    transition: all .3s;
+}
+
+
+
+
+/*---------====================end main css=====================---------------*/

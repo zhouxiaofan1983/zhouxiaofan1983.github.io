@@ -17,7 +17,7 @@
 /*--------------------------
     1. TEXT TYPOGRAPHY CSS
 -----------------------------*/
-@import url('https://fonts.googleapis.com/css?family=Karla:400,400i,700,700i|Rubik:400,400i,500,500i,700,700i,900&display=swap|Meie+Script|Roboto:100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
+@import url('https://fonts.googleapis.com/css?family=Arial:400,400i,700,700i|Rubik:400,400i,500,500i,700,700i,900&display=swap|Meie+Script|Roboto:100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap&subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese');
 
 .roboto{
     font-family: 'Roboto', sans-serif;
@@ -38,7 +38,7 @@
 }
 
 a {
-    color: #3e425c;
+    color: #98adc2;
     -webkit-transition: 0.3s;
     transition: 0.3s;
     display: inline-block;
@@ -101,12 +101,10 @@ h1{
     font-size: 90px;
     line-height: 110px;
     color: #ffffff;
-    letter-spacing: -4px;
 }
 
 h2{
     font-size: 56px;
-    letter-spacing: -2px;
     line-height: 74px;
     color: #070c24;
 }
@@ -124,14 +122,14 @@ h10{
 h6{
     font-size: 16px;
     color: #98adc2;
-    font-family: 'Karla', sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
 h5{
    font-size: 18px;
     line-height: 28px;
     color: #ff5621;
-    font-family: "Karla";
+    font-family: "Arial", sans-serif;
     font-weight: 400;
 }
 
@@ -144,7 +142,7 @@ body {
     font-size: 16px;
     line-height: 27px;
     color: #6c7a88;
-    font-family: 'Karla', sans-serif;
+    font-family: 'Arial', sans-serif;
     font-weight: 500;
     overflow-x: hidden;
 }

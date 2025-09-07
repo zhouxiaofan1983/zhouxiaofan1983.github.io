@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <link rel="icon" href="assets/image/icons/zhou_logo_2.png" type="image/png">
     <!-- title -->
-    <title>ZXF Lab</title></head>
+    <title>ZXF Lab</title>
     <!-- hero video and scroll top css -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/all-fontawesome.min.css">
@@ -29,7 +29,7 @@
 
     <!-- Template Style sheet -->
     <link rel="stylesheet" href="assets/css/responsive.css">
-    <link rel="stylesheet" href="assets/css/style_index.css">
+    <link rel="stylesheet" href="assets/css/style_index_clean.css">
 
 </head>
 <style>
@@ -57,10 +57,10 @@ nav.site-nav > ul.main-menu{
   list-style:none;
   display:flex;
   justify-content:center;
-  align-items:center;
+  align-items:baseline;
   gap:40px;
   margin:0;
-  padding:0;
+  padding:6px;
   font-weight:500;
   height:58px;
   font-family:Arial, sans-serif; /* 修改为 Arial 字体 */
@@ -246,7 +246,10 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
                             Who We Are
                         </h1>
                         <p class="wow animate__ animate__fadeInUp animated" data-wow-duration="1s" data-wow-delay=".75s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.75s; animation-name: fadeInUp;">
-                            The Zhou lab is part of the Integrative Microbiology Research Centre and the College of Plant Protection at South China Agricultural University. Our lab explores a fundamental evolutionary question: Why and how do microbes become pathogens? We answer this by connecting data with discovery. <br>We use computational biology to find evolutionary clues from big data and generate hypotheses. We then test these ideas through rigorous experiments in the lab, uncovering the molecular story behind how pathogens evolve. Our goal is to bridge genes and traits, understand evolution, and develop new strategies for sustainable agriculture.
+                            The Zhou lab is part of the Integrative Microbiology Research Centre and the College of Plant Protection at South China Agricultural University. Our lab explores a fundamental evolutionary question: Why and how do microbes become pathogens? We answer this by connecting data with discovery.
+                        </p>
+                        <p class="wow animate__ animate__fadeInUp animated" data-wow-duration="1s" data-wow-delay=".75s" style="visibility: visible; animation-duration: 1s; animation-delay: 0.75s; animation-name: fadeInUp;">
+                            We use computational biology to find evolutionary clues from big data and generate hypotheses. We then test these ideas through rigorous experiments in the lab, uncovering the molecular story behind how pathogens evolve. Our goal is to bridge genes and traits, understand evolution, and develop new strategies for sustainable agriculture.
                         </p>
                         <div class="hero-btn wow animate__ animate__fadeInUp animated" data-wow-duration="1s" data-wow-delay="1s" style="visibility: visible; animation-duration: 1s; animation-delay: 1s; animation-name: fadeInUp;">
                             <a href="#" class="theme-btn" onclick="event.preventDefault();var f=document.querySelector('footer.site-footer');if(f){f.scrollIntoView({behavior:'smooth',block:'end'});}else{window.scrollTo({top:document.documentElement.scrollHeight,behavior:'smooth'});}">Contact Us<i class="far fa-long-arrow-right"></i></a>
@@ -358,8 +361,6 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
 
   <script src="./portfolio_files/main.js"></script>
 
-  <link rel="stylesheet" href="202404059/html/css/style.css">
-
   <div class="text-center page animated" style="animation-duration: 500ms;"> 
     <main>
       <!-- About us-->
@@ -433,6 +434,7 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
       </section>
     </main>
   </div>
+  
   <!-- Global Mailform Output-->
   <div class="snackbars" id="form-output-global"> </div>
 
@@ -441,14 +443,14 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
       <div class="row g-4">
         <!-- Logo / Intro -->
         <div class="col-12 col-md-4">
-          <div style="display:flex;align-items:center;gap:12px;">
+          <div style="margin: 34px 0 0;display:flex;align-items:center;gap:12px;">
             <img src="assets/image/icons/zhou_logo_2.png" alt="ZXF Lab" style="height:60px;width:auto;">
             <div>
               <h6 style="margin:0 0 4px;font-weight:600;">Xiaofan-Zhou Lab</h6>
-              <p style="margin:0;font-size:12px;line-height:1.4;color:#555;">Integrative Microbiology Research Centre<br>South China Agricultural University<br>Guangzhou, Guangdong, P.R. China</p>
+              <h1 style="margin:0;font-size:12px;line-height:1.4;color:#555;">Integrative Microbiology Research Centre<br>South China Agricultural University<br>Guangzhou, Guangdong, P.R. China</p>
             </div>
           </div>
-          <p style="margin:14px 0 0;font-size:13px;color:#666;line-height:1.5;">
+          <h2 style="margin: 34px 0 0;font-size:13px;color:#666;line-height:1.5;">
             Advancing data‑driven life science research through integrative genomics, algorithm design, and collaborative innovation.
           </p>
         </div>
@@ -480,8 +482,8 @@ nav.site-nav.open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotat
         <!-- Contact -->
         <div class="col-12 col-md-3">
           <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Contact</h6>
-          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
-          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
+          <a style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></a><br>
+          <a style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></a>
           <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;">
             <li><a href="https://scholar.google.com/citations?hl=en&user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
           </ul>

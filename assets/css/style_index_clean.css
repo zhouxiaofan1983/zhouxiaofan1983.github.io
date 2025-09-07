@@ -1,0 +1,1786 @@
+/* ===================
+fonts
+====================== */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+/* ===================
+general css
+====================== */
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+* {
+  scroll-behavior: inherit !important;
+}
+
+html, body {
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-size: 16px;
+  font-weight: normal;
+  line-height: 1.8;
+}
+
+a {
+  color: #14212B;
+  display: inline-block;
+}
+
+a, a:active, a:focus, a:hover {
+  outline: none;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0049D0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+h1, h6 {
+  color: #110B25;
+  margin: 0px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  line-height: 1.2;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h6 {
+  font-size: 16px;
+}
+
+p {
+  margin: 0px;
+  text-indent: 2em;
+}
+
+img {
+  max-width: 100%;
+  -webkit-transition: all 0.3s ease-out 0s;
+  -moz-transition: all 0.3s ease-out 0s;
+  -ms-transition: all 0.3s ease-out 0s;
+  -o-transition: all 0.3s ease-out 0s;
+  transition: all 0.3s ease-out 0s;
+  height: auto;
+}
+
+*::-moz-selection {
+  background: #d6b161;
+  color: #fff;
+  text-shadow: none;
+}
+
+::-moz-selection {
+  background: #555;
+  color: #fff;
+  text-shadow: none;
+}
+
+::selection {
+  background: #555;
+  color: #fff;
+  text-shadow: none;
+}
+
+*::-moz-placeholder {
+  color: #999;
+  font-size: 16px;
+  opacity: 1;
+}
+
+/* ===================
+preloader
+====================== */
+
+.preloader {
+  background: #fff;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+}
+
+.loader {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  top: calc(50% - 30px);
+  left: calc(50% - 20px);
+}
+
+.loader-box-1, .loader-box-2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-image: linear-gradient(to left, #EB3349 0%, #F45C43 100%);
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: loader-bounce 2.0s infinite ease-in-out;
+}
+
+.loader-box-2 {
+  animation-delay: -1.0s;
+}
+
+@keyframes loader-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+  }
+  50% {
+    transform: scale(1.0);
+  }
+}
+
+/* ===================
+theme default css
+====================== */
+
+
+
+/* ===================
+site title css
+====================== */
+
+
+
+
+/* ===================
+margin & padding
+====================== */
+
+.pb-60 {
+  padding-bottom: 60px;
+}
+
+/* ===================
+theme button
+====================== */
+
+.theme-btn {
+  font-size: 16px;
+  color: #ffffff;
+  padding: 12px 30px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  text-transform: uppercase;
+  position: relative;
+  border-radius: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+  border: none;
+  background-image: linear-gradient(to left, #007a49 0%, #007a49 100%);
+  box-shadow: 0 3px 24px rgb(0 0 0 / 10%);
+}
+
+.theme-btn::before {
+  content: "";
+  height: 300px;
+  width: 300px;
+  background: #110B25;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%) scale(0);
+  transition: 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: -1;
+}
+
+.theme-btn:hover {
+  color: #fff;
+}
+
+.theme-btn:hover::before {
+  transform: translateY(-50%) translateX(-50%) scale(1);
+}
+
+.theme-btn i {
+  margin-left: 8px;
+  font-size: 18px;
+}
+
+.main-menu li a {
+    padding: 20px 15px;
+    font-size: 14px;
+    color: #98adc2;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+
+
+
+/* ===================
+nav menu css
+====================== */
+
+.main {
+  margin-top: -6rem;
+}
+
+/*bootstrap menu*/
+
+
+.text-white {
+  color: #ffffff !important;
+}
+/* dropdown toggler */
+
+/* mobile menu */
+
+
+
+
+/* ===================
+hero css 
+====================== */
+
+.hero-single {
+  padding-top: 150px;
+  padding-bottom: 140px;
+  background: #F9F5F4;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-single::before {
+  position: absolute;
+  right: 0;
+  top: 0;
+  content: "";
+  height: 100%;
+  width: 33%;
+  background-image: linear-gradient(to left, #007a49, #007a49);
+  z-index: -1;
+}
+
+.hero-single::after {
+  position: absolute;
+  left: -90px;
+  top: -90px;
+  content: "";
+  height: 400px;
+  width: 400px;
+  border-radius: 50%;
+  border: 50px solid #007a4983;
+  opacity: .1;
+  z-index: -1;
+}
+
+.hero-single .hero-content {
+  height: 100%;
+}
+
+.hero-single .hero-content .hero-title {
+  color: #110B25;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.hero-single .hero-content p {
+  line-height: 30px;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.hero-single .hero-content .hero-btn {
+  gap: 2rem;
+  display: flex;
+  margin-top: 1rem;
+  justify-content: start;
+}
+
+.hero-title {
+  font-weight: 700;
+  margin: 20px 0;
+}
+
+@media all and (max-width: 1199px) {
+  .hero-single .hero-content .hero-title {
+    font-size: 37px;
+  }
+}
+
+@media all and (max-width: 991px) {
+  .hero-single .hero-content .hero-title {
+    font-size: 35px;
+  }
+  .hero-single {
+    padding-top: 280px;
+  }
+  .hero-single::after {
+    width: 100%;
+    transform: none;
+    margin: 0;
+  }
+}
+
+@media all and (max-width: 767px) {
+  .hero-single .hero-content .hero-btn {
+    gap: 1rem;
+  }
+  .hero-single .hero-content .theme-btn {
+    padding: 10px 25px;
+  }
+  .hero-single .hero-img {
+    margin-top: 80px;
+  }
+}
+
+/* =====================
+play btn
+===================== */
+
+
+/* ===================
+video css 
+====================== */
+
+.video-area {
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.video-area::before {
+  content: "";
+  position: absolute;
+  background: rgba(0, 0, 0, 0.279);
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+.video-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  height: 650px;
+  z-index: 100;
+}
+
+@media all and (max-width: 767px) {
+  .video-wrapper {
+    height: 280px;
+  }
+
+}
+
+
+/* ===================
+counter css 
+====================== */
+
+/* ===================
+scroll-top css
+====================== */
+
+
+/* Portfolio */
+.section {
+    position: relative;
+    padding: 110px 0;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.primary-bg {
+    background-color: #007a49;
+}
+.section-title.text-left .subtitle {
+    justify-content: flex-start;
+}
+.section-title {
+    position: relative;
+    margin-bottom: 50px;
+    max-width: 550px;
+}
+.section-title .title {
+    position: relative;
+    margin: 0;
+    font-size: 70px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+.section-title.text-left .subtitle {
+    justify-content: flex-start;
+    font-size: 50px;
+}
+.absolute-img {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.sigma_portfolio-item{
+  position: relative;
+  margin-bottom: 150px;
+  cursor: pointer;
+}
+.sigma_portfolio-item img{
+  width: 100%;
+}
+
+.sigma_portfolio-item .sigma_portfolio-item-content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: .3s;
+  padding: 20px;
+}
+.sigma_portfolio-item:hover .sigma_portfolio-item-content{
+  background-color: rgba(0,0,0,.4);
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner{
+  margin-top: auto;
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.sigma_portfolio-item:hover .sigma_portfolio-item-content-inner{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+/* Portfolio Slider */
+
+/* Portoflio Details */
+.sigma_portfolio-item.style-2 .sigma_portfolio-item-content {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    top: auto;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    left: auto;
+    box-shadow: 0px 10px 50px 0px rgba(53,82,99,0.09);
+    background-color: #fff;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: .3s;
+    padding: 20px;
+}
+.fw-600 {
+    font-weight: 600;
+}
+a {
+    color: #98adc2;
+    text-decoration: none;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li {
+    margin: 10px 0 0;
+    position: relative;
+}
+@charset "UTF-8";
+/*
+*
+* Trunk version 1.2.2
+*
+*/
+/**
+ * [Table of contents]
+ *   1 Reset Styles
+ *   2 Lightgallery
+ *   3 Countdown
+ */
+/*
+*
+* Main Styles
+* ==================================================
+*/
+html *:first-child {
+	margin-top: 0;
+}
+
+html *:last-child {
+	margin-bottom: 0;
+}
+
+body {
+	font-family: "Lato", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.71429;
+	color: #848484;
+	background-color: #fff;
+}
+
+
+a:hover, a:focus {
+	color: #2b251a;
+	text-decoration: none;
+	outline: none;
+}
+
+a[href*='mailto'] {
+	white-space: nowrap;
+}
+
+.overflow-hidden {
+	overflow: hidden;
+}
+
+p {
+	margin-bottom: 0;
+}
+
+img {
+	display: inline-block;
+	max-width: 100%;
+	height: auto;
+}
+
+/*
+*
+* Typography
+* ==================================================
+*/
+h1, h2, h6 {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-family: "Poppins", Helvetica, Arial, sans-serif;
+	font-weight: 700;
+	letter-spacing: 0;
+	color: #98adc2;
+}
+
+h2 a {
+	transition: .3s all ease;
+}
+
+h2 a:hover {
+	color: #8a7954;
+}
+
+h1 {
+	font-size: 54px;
+	line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+	h1 {
+		line-height: 1.15789;
+		font-size: 95px;
+	}
+}
+
+h2 {
+	font-size: 32px;
+	line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+	h2 {
+		line-height: 0.93333;
+		font-size: 60px;
+	}
+}
+
+h6 {
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+	h6 {
+		line-height: 1.25;
+		font-size: 16px;
+	}
+}
+
+hr {
+	margin-top: 0;
+	margin-bottom: 0;
+	border-top: 1px solid #ebebeb;
+}
+
+/*
+*
+* Backgrounds
+* ==================================================
+*/
+.bg-default {
+	background-color: #fff;
+}
+
+.bg-secondary-3 {
+	background-color: #007a49;
+}
+
+.bg-secondary-3 p {
+	max-width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/*
+*
+* Colors
+* ==================================================
+*/
+
+/*
+*
+* Main layout
+* ==================================================
+*/
+
+.subtitle {
+	font-size: 24px;
+}
+
+.page {
+	position: relative;
+	overflow: hidden;
+	min-height: 100vh !important;
+}
+
+hr {
+	opacity: 1;
+}
+
+/** @section Reset Styles*/
+a:focus,
+button:focus {
+	outline: none !important;
+}
+
+button::-moz-focus-inner {
+	border: 0;
+}
+
+*:focus {
+	outline: none;
+}
+
+button {
+	outline: none;
+}
+
+button {
+	padding: 0;
+}
+
+p {
+	margin: 0;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+ul li {
+	display: flex;
+}
+
+html p a:hover {
+	text-decoration: none;
+}
+
+/*
+*
+* Components
+* ==================================================
+*/
+/*
+*
+* Icons
+* --------------------------------------------------
+*/
+
+/*
+*
+* Buttons
+* --------------------------------------------------
+*/
+
+/*
+*
+* Form styles
+* --------------------------------------------------
+*/
+
+#form-output-global {
+	position: fixed;
+	bottom: 30px;
+	left: 15px;
+	visibility: hidden;
+	transform: translateX(-500px);
+	transition: .3s all ease;
+	z-index: 9999999;
+}
+
+@media (min-width: 576px) {
+	#form-output-global {
+		left: 30px;
+	}
+}
+
+/*
+*
+* Lists
+* --------------------------------------------------
+*/
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+/*
+*
+* Posts
+* --------------------------------------------------
+*/
+
+/*
+*
+* Thumbnails
+* --------------------------------------------------
+*/
+
+/*
+*
+* Tooltip Custom
+* --------------------------------------------------
+*/
+
+/*
+*
+* Snackbars
+* --------------------------------------------------
+*/
+.snackbars {
+	max-width: 280px;
+	padding: 9px 16px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #fff;
+	text-align: left;
+	background-color: #151515;
+	border-radius: 0;
+	box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+	font-size: 14px;
+}
+
+@media (min-width: 576px) {
+	.snackbars {
+		max-width: 380px;
+		padding: 12px 15px;
+		font-size: 16px;
+	}
+}
+
+/*
+*
+* Navigation
+* --------------------------------------------------
+*/
+
+/*
+*
+* Page Loaders
+* --------------------------------------------------
+*/
+.preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	float: left;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	z-index: 9999999;
+	background: #fff;
+	transition: .3s all ease;
+}
+
+/* EDITABLE PARAMETERS */
+/* handle width */
+/* blade width */
+/* blade's height and handle's thickness will be inversely proportional to $div */
+/* initial amplitude between blades */
+/* final amplitude between blades */
+/* NON EDITABLE PARAMETERS */
+/* handle height */
+/* handle border thickness */
+/* blade height */
+/* joint diameter */
+/* left position of the center of rotation */
+/* left position in % of the center of rotation */
+/* left position of the joint in % */
+body {
+	background: #fff;
+}
+
+/*
+*
+* Pagination custom
+* --------------------------------------------------
+*/
+
+/*
+*
+* Helpers
+* ==================================================
+*/
+/*
+*
+* Text Alignment
+* --------------------------------------------------
+*/
+.text-left {
+	text-align: left;
+}
+
+.text-center {
+	text-align: center;
+}
+
+/*
+*
+* Text styling
+* --------------------------------------------------
+*/
+
+/*
+*
+* Visibility Responsive
+* --------------------------------------------------
+*/
+
+/*
+*
+* Element groups
+* --------------------------------------------------
+*/
+
+/*
+*
+* Contexts
+* --------------------------------------------------
+*/
+.bg-secondary-3 {
+	color: #fff;
+}
+
+.bg-secondary-3 h2, .bg-secondary-3 {
+	color: #848484;
+}
+
+.bg-secondary-3 h2 {
+	color: #ffffff;
+}
+
+/*
+*
+* Sections
+* --------------------------------------------------
+*/
+
+.section-md {
+	padding-top: 50px;
+	padding-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+	.section-md {
+		padding-top: 80px;
+		padding-bottom: 90px;
+	}
+}
+
+.section-wrap-content-var-1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+	padding: 30px;
+}
+
+.section-wrap-content-var-1-inner {
+	max-width: 420px;
+}
+
+.section-wrap-content-var-1-inner p {
+	color: #ffffff;
+}
+
+/**
+* Custom sections
+*/
+
+@supports (object-fit: cover) {
+}
+
+/*
+*
+* Offsets
+* --------------------------------------------------
+*/
+* + p {
+	margin-top: 20px;
+}
+
+* + hr {
+	margin-top: 10px;
+}
+
+p + p {
+	margin-top: 24px;
+}
+
+h1 + p {
+	margin-top: 5px;
+}
+
+h2 + p {
+	margin-top: 20px;
+}
+
+h6 + p {
+	margin-top: 20px;
+}
+
+.row + hr {
+	margin-top: 20px;
+}
+
+html .row-50 {
+	margin-bottom: -50px;
+}
+
+html .row-50 > * {
+	margin-bottom: 50px;
+}
+
+/*
+*
+* Modules
+* ==================================================
+*/
+/*
+*
+* Flex Grid system
+* --------------------------------------------------
+*/
+.container-wide {
+	max-width: 1800px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+/*
+*
+* Responsive unit
+* --------------------------------------------------
+*/
+
+/*
+*
+* Plugins
+* ==================================================
+*/
+/*
+*
+* Animate.css
+* --------------------------------------------------
+*/
+.animated {
+	-webkit-animation-duration: 1.4s;
+	animation-duration: 1.4s;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	opacity: 1;
+}
+
+/**
+* FadeIn Keyframes Animation
+*/
+
+/**
+* FadeInUp Keyframes Animation
+*/
+@-webkit-keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 100%, 0);
+		transform: translate3d(0, 100%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, 100%, 0);
+		transform: translate3d(0, 100%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+.fadeInUp {
+	-webkit-animation-name: fadeInUp;
+	animation-name: fadeInUp;
+}
+
+/**
+* FadeInDown Keyframes Animation
+*/
+@-webkit-keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -20%, 0);
+		transform: translate3d(0, -20%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0;
+		-webkit-transform: translate3d(0, -20%, 0);
+		transform: translate3d(0, -20%, 0);
+	}
+	100% {
+		opacity: 1;
+		-webkit-transform: none;
+		transform: none;
+	}
+}
+
+.fadeInDown {
+	-webkit-animation-name: fadeInDown;
+	animation-name: fadeInDown;
+}
+
+/**
+* FadeInLeft Keyframes Animation
+*/
+
+/**
+* FadeInRight Keyframes Animation
+*/
+
+/*
+**
+* FadeOut Keyframes Animation
+*/
+
+/**
+* SlideInDown Keyframes Animation
+*/
+
+/**
+* SlideInLeft Keyframes Animation
+*/
+
+/**
+* SlideInRight Keyframes Animation
+*/
+
+/**
+* SlideOutDown Keyframes Animation
+*/
+
+/*
+*
+* Owl Carousel
+* --------------------------------------------------
+*/
+
+/* 
+ * 	Owl Carousel - Auto Height Plugin
+ */
+
+/* 
+ *  Core Owl Carousel CSS File
+ */
+
+/* No Js */
+
+/* 
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+
+/* 
+ * 	Owl Carousel - Video Plugin
+ */
+
+/*
+ * Owl Navigation
+ */
+
+/*
+ * Owl Pagination
+ */
+
+/*
+*
+* RD Navbar
+* --------------------------------------------------
+*/
+
+main {
+	transition: 0.35s all cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+/*
+* Navbar components
+*/
+
+/*
+* @subsection   Hybrid  Styles
+*/
+
+/*
+* Static Layout
+*/
+
+/*
+* Fullwidth Layout
+*/
+
+/*
+* Fixed Layout
+*/
+
+/*
+* Sidebar Layout
+*/
+
+/*
+*
+* RD Parallax
+* --------------------------------------------------
+*/
+
+/*
+*
+* RD Google Map
+* --------------------------------------------------
+*/
+
+/*
+*
+* Search Results
+* --------------------------------------------------
+
+*/
+
+/*
+*
+* ToTop
+* --------------------------------------------------
+*/
+
+/** @section Lightgallery */
+@font-face {
+	font-family: 'lg';
+	src: url("../fonts/lg.eot?n1z373");
+	src: url("../fonts/lg.eot?#iefixn1z373") format("embedded-opentype"), url("../fonts/lg.woff?n1z373") format("woff"), url("../fonts/lg.ttf?n1z373") format("truetype"), url("../fonts/lg.svg?n1z373#lg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*
+*
+* Progress Bars
+* --------------------------------------------------
+*/
+
+/*
+*
+* Counter
+* --------------------------------------------------
+*/
+
+/*
+*
+* Circle Progress Bars
+* --------------------------------------------------
+*/
+
+/** @section Countdown */
+
+/*
+*
+* Swiper
+* --------------------------------------------------
+*/
+
+/* a11y */
+
+/* IE10 Windows Phone 8 Fixes */
+
+/* Coverflow */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+1. BASIC STYLE
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+2. VERTICAL SCROLLBAR
+y-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible scrollbar */
+
+/* RTL direction/left-side scrollbar */
+
+/* scrollbar position: outside */
+
+/* RTL direction/left-side scrollbar (scrollbar position: outside) */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+3. HORIZONTAL SCROLLBAR
+x-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible scrollbar */
+
+/* scrollbar position: outside */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+4. VERTICAL AND HORIZONTAL SCROLLBARS
+yx-axis
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/* non-visible horizontal scrollbar */
+
+/* non-visible vertical scrollbar/RTL direction/left-side scrollbar */
+
+/* RTL direction/left-side scrollbar */
+
+/* non-visible scrollbar/RTL direction/left-side scrollbar */
+
+/* non-visible horizontal scrollbar */
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+5. TRANSITIONS
+------------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+------------------------------------------------------------------------------------------------------------------------
+6. SCROLLBAR COLORS, OPACITY AND BACKGROUNDS
+------------------------------------------------------------------------------------------------------------------------
+*/
+/*
+----------------------------------------
+6.1 THEMES
+----------------------------------------
+*/
+/* default theme ("light") */
+
+/* theme: "dark" */
+
+/*
+*
+* Select 2
+* --------------------------------------------------
+*/
+/*
+Version: 3.5.4 Timestamp: Sun Aug 30 13:30:32 EDT 2015
+*/
+
+/* results */
+
+/*
+disabled look for disabled choices in the results dropdown
+*/
+
+/* disabled styles */
+
+/* multiselect */
+
+/* disabled styles */
+
+/* end multiselect */
+
+/* Icons */
+/* Arrows */
+
+/* Dots */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li {
+    margin: 10px 0 0;
+    position: relative;
+}
+
+/**
+*  jPlayer
+* -----------------------------------------------------------------------------
+*/
+
+/*
+ * Project: CirclePlayer
+ * http://www.jplayer.org
+ *
+ * Copyright (c) 2012 Happyworm Ltd
+ *
+ * Author: Silvia Benvenuti
+ * Edited by: Mark J Panaghiston
+ * Date: 2nd October 2012
+ * Artwork inspired by: http://forrst.com/posts/Untitled-CJz
+ */
+
+/* FALLBACK for .progress
+ * (24 steps starting from 1hr filled progress, Decrease second value by 104px for next step)
+ * (It needs the container selector to work. Or use div)
+ */
+
+/* This is needed when progress is greater than 50% or for fallback */
+
+/* Fix: allow adjusting video container height and prevent cropping */
+
+/**
+* Custom Style
+*/
+
+/**
+* Build Video
+*/
+
+/*
+*
+* Layout panel
+* --------------------------------------------------
+*/
+
+
+/* Portfolio */
+.section {
+    position: relative;
+    padding: 60px 0;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.primary-bg {
+    background-color: #007a49;
+}
+.section-title.text-left .subtitle {
+    justify-content: flex-start;
+}
+.section-title {
+    position: relative;
+    margin-bottom: 50px;
+    max-width: 550px;
+}
+.section-title .title {
+    position: relative;
+    margin: 0;
+    font-size: 70px;
+    line-height: 1.2;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+.section-title.text-left .subtitle {
+    justify-content: flex-start;
+    font-size: 50px;
+}
+h4 {
+    font-family: "Barlow", sans-serif;
+    margin: 0 0 20px;
+    line-height: 1.2;
+    color: #222222;
+    font-weight: 700;
+}
+.absolute-img {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+.slick-dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 0;
+    margin-top: 25px;
+    justify-content: flex-start;
+}
+.sigma_portfolio-item{
+  position: relative;
+  margin-bottom: 150px;
+  cursor: pointer;
+}
+.sigma_portfolio-item img{
+  width: 100%;
+}
+.sigma_portfolio-item span{
+  color: #fff;
+  transform: translateY(-10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+
+.sigma_portfolio-item .sigma_portfolio-item-content{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: .3s;
+  padding: 20px;
+}
+.sigma_portfolio-item:hover .sigma_portfolio-item-content{
+  background-color: rgba(0,0,0,.4);
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner{
+  margin-top: auto;
+  transform: translateY(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: .3s;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner h5{
+  margin: 0 0 10px;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner p{
+  margin: 0;
+  color: #d2d2d2;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner h5 a{
+  color: #fff;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content-inner h5 a:hover{
+  color: #007a49;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content i{
+  font-size: 15px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #fff;
+  transition: .3s;
+  z-index: 3;
+  background-color: #007a49;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sigma_portfolio-item:hover .sigma_portfolio-item-content i{
+  opacity: 1;
+  visibility: visible;
+  bottom: 20px;
+}
+
+.sigma_portfolio-item:hover  span,
+.sigma_portfolio-item:hover .sigma_portfolio-item-content-inner{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.filter-items{
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #efefef;
+}
+.filter-items.left{
+  margin-left: 0;
+}
+.filter-items h5{
+  position: relative;
+  transition: .3s;
+  padding: 20px 40px;
+  color: #777;
+  border-bottom: 3px solid transparent;
+  margin: 0;
+  cursor: pointer;
+}
+.filter-items h5 + h5::before{
+  content: '';
+  width: 2px;
+  height: 15px;
+  background-color: #efefef;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+}
+.filter-items h5.active{
+  border-bottom-color: #007a49;
+  color: #007a49;
+}
+.filter-items h5:not(.active):hover{
+  color: #222222;
+}
+/* Portfolio Slider */
+.sigma_portfolio-slider .slick-list{
+  overflow: visible;
+}
+
+.sigma_portfolio-slider .slick-list{
+  margin: 0 -35px;
+}
+.sigma_portfolio-slider .slick-slide{
+  margin: 0 35px;
+}
+
+.sigma_portfolio-slider img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sigma_portfolio-slider .slick-list .slick-active + .slick-slide .row{
+  flex-direction: row-reverse;
+}
+
+.sigma_portfolio-section .sigma_arrows{
+  position: absolute;
+  bottom: 40px;
+  left: 15px;
+}
+.sigma_portfolio-slider .portfolio-item .section-title{
+  max-width: 100%;
+  margin-bottom: 0;
+}
+.sigma_portfolio-slider .portfolio-item .section-title .title{
+  font-size: 32px;
+}
+
+.sigma_portfolio-slider-2 .slick-list{
+  overflow: visible;
+}
+
+/* Portoflio Details */
+.sigma_post-single-thumb .sigma_box{
+  position: absolute;
+  top: -100px;
+  right: 40px;
+  margin: 0;
+  min-width: 300px;
+}
+
+.sigma_list-item + .sigma_list-item{
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #efefef;
+}
+.sigma_list-item label{
+  display: block;
+  margin: 0;
+}
+.sigma_list-item .sigma_sm li a{
+  color: #777;
+}
+.sigma_list-item .sigma_sm li a:hover{
+  color: #007a49;
+}
+.sigma_portfolio-item.style-3 .sigma_portfolio-item-content, .sigma_portfolio-item.style-2 .sigma_portfolio-item-content {
+    position: relative;
+    opacity: 1;
+    visibility: visible;
+    top: auto;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    left: auto;
+    box-shadow: 0px 10px 50px 0px rgba(53,82,99,0.09);
+    background-color: #fff;
+}
+.sigma_portfolio-item .sigma_portfolio-item-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: .3s;
+    padding: 20px;
+}
+
+.slick-slider .slick-track, .slick-slider .slick-list {
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+.slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.fw-600 {
+    font-weight: 600;
+}
+a {
+    color: #98adc2;
+    text-decoration: none;
+    -webkit-transition: .3s;
+    -o-transition: .3s;
+    transition: .3s;
+}
+.slick-dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 0;
+    justify-content: flex-start;
+}
+ol, ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+ul li, ol li {
+    margin: 10px 0 0;
+    position: relative;
+}
+.slick-dots li.slick-active button {
+    opacity: 1;
+    width: 50px;
+}
+.slick-dots li button {
+    font-size: 0;
+    width: 30px;
+    height: 7px;
+    background-color: #fff;
+    border: 0;
+    opacity: .6;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    cursor: pointer;
+    outline: none;
+}
+.slick-dots li {
+    margin: 0 5px;
+    text-align: center;
+}
