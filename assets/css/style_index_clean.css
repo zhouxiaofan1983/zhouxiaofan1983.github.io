@@ -1474,7 +1474,7 @@ ul li {
 .section-title .title {
     position: relative;
     margin: 0;
-    font-size: 70px;
+    font-size: 60px;
     line-height: 1.2;
     margin-bottom: 15px;
     font-weight: 700;
@@ -1732,6 +1732,7 @@ h4 {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    height: 350px;
 }
 .fw-600 {
     font-weight: 600;
@@ -1783,4 +1784,21 @@ ul li, ol li {
 .slick-dots li {
     margin: 0 5px;
     text-align: center;
+}
+
+
+/* 仅限制首页 Portfolio 区域的图片高度，统一显示 */
+.sigma_portfolio-slider-2 .sigma_portfolio-item > img{
+  width: 100%;
+  height: 240px;          /* 统一高度，可按需调整 */
+  object-fit: cover;      /* 等比填充，超出部分裁剪 */
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 991px){
+  .sigma_portfolio-slider-2 .sigma_portfolio-item > img{ height: 200px; }
+}
+@media (max-width: 575px){
+  .sigma_portfolio-slider-2 .sigma_portfolio-item > img{ height: 160px; }
 }
