@@ -168,649 +168,707 @@ nav.site-nav > ul.main-menu li a{
 }
 </style>
 <style>
-.pub-filter{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:8px 0 14px; }
+.pub-filter{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:40px 0 0px; }
 .pub-filter button{
   border:1px solid #d0d7de; background:#fff; color:#333; padding:3px 19px; border-radius:16px;
-  font-size:15px; line-height:1; cursor:pointer;font-family: "Arial", sans-serif;
+  font-size:18px; line-height:1; cursor:pointer;font-family: "Arial", sans-serif;
 }
 .pub-filter button.active{ background:#111; color:#fff; border-color:#111; }
 #Research ol li.is-hidden{ display:none !important; }
 /* 强制出版列表内的 <strong> 实际加粗显示 */
 #pub-list-research li strong{ font-weight:700 !important; }
-    /* 为每条记录添加自动编号（随排序/筛选自动更新） */
-    #pub-list-research{
-        counter-reset: pub;
-        list-style: none;
-        margin: 24px 24px 32px;
-        padding: 0 4px;
-    }
-    #pub-list-research > li{
-        counter-increment: pub;
-        position: relative;
-        padding-left: 2.4em; /* 为序号留出空间 */
-        margin-bottom: 8px;
-    }
-    #pub-list-research > li::before{
-        content: counter(pub) ". ";
-        position: absolute;
-        left: 0;
-        width: 2em;
-        text-align: right;
-        color: #666;
-        font-weight: 600;
-    }
-</style>
+/* 为每条记录添加自动编号（随排序/筛选自动更新） */
+#pub-list-research{
+    counter-reset: pub;
+    list-style: none;
+    margin: 24px 24px 32px;
+    padding: 0 4px;
+    line-height: 1.55; /* 新增：放大列表整体行距，自动换行更易读 */
+}
+#pub-list-research > li{
+    counter-increment: pub;
+    position: relative;
+    padding-left: 2.4em; 
+    margin-bottom: 18px; /* 稍微加大条目间距 */
+    line-height: inherit; /* 保证子元素继承行距 */
+}
+#pub-list-research a{
+    line-height: inherit; /* 链接与正文一致的行距 */
+}
+#pub-list-research > li::before{
+    content: counter(pub) ". ";
+    position: absolute;
+    left: 0;
+    width: 2em;
+    text-align: right;
+    color: #000000;
+    font-weight: 600;
+}
+#pub-list-research li strong{
+    font-weight:700 !important;
+    color:#000 !important;
+}
+
+/* 小屏再放大一点行距，防止拥挤（可选） */
+@media (max-width: 576px){
+    #pub-list-research{ line-height: 1.65; }
+}
+
+#backToTop{
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  line-height: 44px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease, background-color .2s ease;
+  z-index: 10003;
+}
+#backToTop:hover{ background:#000; }
+#backToTop.show{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+@media (max-width: 576px){
+  #backToTop{ right: 14px; bottom: 16px; }
+}</style>
 
 <body>
-  <symbol id="chevron" viewbox="0 0 15 8">
+    <symbol id="chevron" viewbox="0 0 15 8">
     <path d="M13.728 0.364014L7.36407 6.72798L1.00012 0.364014"></path>
-  </symbol>
+    </symbol>
 
-<!-- logo 菜单导航 -->
-  <nav class="site-nav">
+    <!-- logo 菜单导航 -->
+    <nav class="site-nav">
     <div class="primary-nav__inner">
-      <div class="primary-nav__content">
+        <div class="primary-nav__content">
         <div class="primary-nav__top">
-          <a class="primary-nav__logo-text" href="https://www.scau.edu.cn/" style="position: relative;z-index:10001;display:inline-block;">
+            <a class="primary-nav__logo-text" href="https://www.scau.edu.cn/" style="position: relative;z-index:10001;display:inline-block;">
             <img src="assets/image/icons/scau_1.png" alt="SCAU Logo" style="background:#ffffff;">
             <img src="assets/image/icons/zhou_logo_2.png" alt="labLogo">
-          </a>
+            </a>
         </div>
-      </div>
+        </div>
     </div>
     <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
     <ul class="main-menu">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="news.html">News</a></li>
-      <li><a href="people.html">Team</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="halloffame.html">Alumni</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="people.html">Team</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="publications.html">Publications</a></li>
+        <li><a href="halloffame.html">Alumni</a></li>
     </ul>
-  </nav>
-  <div class="rich-text" id="Research" data-component="Rich Text">
-      <!-- 新增：筛选栏 -->
-      <div class="pub-filter">
-        <button type="button" class="active" data-filter="all">ALL</button>
-        <button type="button" data-filter="first-author">FIRST-AUTHOR</button>
-        <button type="button" data-filter="corresponding-author">CORRESPONDING-AUTHOR</button>
-        <button type="button" data-filter="other">OTHER</button>
-      </div>
+    </nav>
+    <div class="rich-text" id="Research" data-component="Rich Text">
+    <!-- 新增：筛选栏 -->
+    <div class="pub-filter" style="padding: 40px 8px;">
+    <button type="button" class="active" data-filter="all">ALL</button>
+    <button type="button" data-filter="first-author">FIRST-AUTHOR</button>
+    <button type="button" data-filter="corresponding-author">CORRESPONDING-AUTHOR</button>
+    <button type="button" data-filter="other">OTHER</button>
+    </div>
 
-    <ol id="pub-list-research" style="margin: 24px 24px 32px; padding: 0 4px;">
-          <li data-role="first-author">
-          <strong>Xiaofan Zhou</strong>, Zhenguo Lin, Hong Ma (2008). Evolutionary history of histone demethylase families：distinct evolutionary patterns suggest functional divergence. BMC Evo Biol.&nbsp;
-          <a href="assets/publications/第一作者/2008 - BMC Evo Biol - Evolutionary history of histone demethylase families：distinct evolutionary patterns suggest functional divergence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou; Zhenguo Lin; Hong Ma (2010). Phylogenetic detection of numerous gene duplications shared by animals, fungi and plants. GB.&nbsp;
-              <a href="assets/publications/第一作者/2010 - GB - Phylogenetic detection of numerous gene duplications shared by animals, fungi and plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou; Jesse D. Slone; Antonis Rokas; Shelley L. Berger; Jürgen Liebig; Anandasankar Ray; Danny Reinberg; Laurence J. Zwiebel (2012). Phylogenetic and Transcriptomic Analysis of Chemosensory Receptors in a Pair of Divergent Ant Species Reveals Sex-Specific Signatures of Odor Coding. PLoS Genetics.&nbsp;
-              <a href="assets/publications/第一作者/2012 - PLoS Genetics - Phylogenetic and Transcriptomic Analysis of Chemosensory Receptors in a Pair of Divergent Ant Species Reveals Sex-Specific Signatures of Odor Coding.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              David C Rinker1, Xiaofan Zhou, Ronald Jason Pitts, The AGC Consortium, Antonis Rokasand Laurence J Zwiebel (2013). Antennal transcriptome profiles of anopheline mosquitoes reveal human host olfactory specialization in Anopheles gambiae. BMC Genomics.&nbsp;
-              <a href="assets/publications/第一作者/2013 - BMC Genomics - Antennal transcriptome profiles of anopheline mosquitoes reveal human host olfactory specialization in Anopheles gambiae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou; David C. Rinker; Ronald Jason Pitts; Antonis Rokas; Laurence J. Zwiebel (2014). Divergent and Conserved Elements Comprise the Chemoreceptive Repertoire of the Nonblood-Feeding Mosquito Toxorhynchites amboinensis. GBE.&nbsp;
-              <a href="assets/publications/第一作者/2014 - GBE - Divergent and Conserved Elements Comprise the Chemoreceptive Repertoire of the Nonblood-Feeding Mosquito Toxorhynchites amboinensis.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou; Antonis Rokas (2014). Prevention, Diagnosis, and Treatment of High Throughput Sequencing Data Pathologies. ME.&nbsp;
-              <a href="assets/publications/第一作者/2014 - ME - Prevention, Diagnosis, and Treatment of High Throughput Sequencing Data Pathologies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              R. Jason Pitts; Chao Liu; Xiaofan Zhou; Juan C. Malpartida; Laurence J. Zwiebel (2014). Odorant receptor-mediated sperm activation in disease vector mosquitoes. PNAS.&nbsp;
-              <a href="assets/publications/第一作者/2014 - PNAS - Odorant receptor-mediated sperm activation in disease vector mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou, Antonis Rokas, Shelley L. Berger, Jürgen Liebig, Anandasankar Ray, and Laurence J. Zwiebel (2015). Chemoreceptor Evolution in Hymenoptera and Its Implications for the Evolution of Eusociality. GBE.&nbsp;
-              <a href="assets/publications/第一作者/2015 - GBE - Chemoreceptor Evolution in Hymenoptera and Its Implications for the Evolution of Eusociality.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou, David Peris, Jacek Kominek, Cletus P. Kurtzman, Chris Todd Hittinger, and Antonis Rokas (2016). In Silico Whole Genome Sequencer and Analyzer (iWGS). G3.&nbsp;
-              <a href="assets/publications/第一作者/2016 - G3 - In Silico Whole Genome Sequencer and Analyzer (iWGS).pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xin Yi, Jiangwei Qi, Xiaofan Zhou, Mei Ying Hu & Guo Hua Zhong (2017). Differential expression of chemosensory-protein genes in midguts in response to diet of Spodoptera litura. SR.&nbsp;
-              <a href="assets/publications/第一作者/2017 - SR - Differential expression of chemosensory-protein genes in midguts in response to diet of Spodoptera litura.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xing-Xing Shen, Dana A. Opulente, Jacek Kominek, Xiaofan Zhou, Jacob L. Steenwyk, Kelly V. Buh, Max A.B. Haase, Jennifer H. Wisecaver, Mingshuang Wang, Drew T. Doering, James T. Boudouris, Rachel M. Schneider, Quinn K. Langdon, Moriya Ohkuma, Rikiya Endoh, Masako Takashima, Ri-ichiroh Manabe, Neža Čadež, Diego Libkind, Carlos A. Rosa, Jeremy DeVirgilio, Amanda Beth Hulfachor, Marizeth Groenewald, Cletus P. Kurtzman, Chris Todd Hittinger, and Antonis Rokas (2018). Tempo and Mode of Genome Evolution in the Budding Yeast Subphylum. Cell.&nbsp;
-              <a href="assets/publications/第一作者/2018 - Cell - Tempo and Mode of Genome Evolution in the Budding Yeast Subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Xiaofan Zhou, Xing-Xing Shen, Chris Todd Hittinger, and Antonis Rokas (2018). Evaluating Fast Maximum Likelihood-Based Phylogenetic Programs Using Empirical Phylogenomic Data Sets. MBE.&nbsp;
-              <a href="assets/publications/第一作者/2018 - MBE - Evaluating Fast Maximum Likelihood-Based Phylogenetic Programs Using Empirical Phylogenomic Data Sets.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Yuyu Wang, Xiaofan Zhou, Liming Wang, Xingyue Liu, Ding Yang and Antonis Rokas (2019). Gene Selection and Evolutionary Modeling Affect Phylogenomic Inference of Neuropterida Based on Transcriptome Data. IJMS.&nbsp;
-              <a href="assets/publications/第一作者/2019 - IJMS - Gene Selection and Evolutionary Modeling Affect Phylogenomic Inference of Neuropterida Based on Transcriptome Data.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              E. Anne Hatmaker, Xiaofan Zhou, Matthew E. Mead, Heungyun Moon, Jae-Hyuk Yu, Antonis Rokas (2020). Revised Transcriptome-Based Gene Annotation for Aspergillus flavus Strain NRRL 3357. MRA.&nbsp;
-              <a href="assets/publications/第一作者/2020 - MRA - Revised Transcriptome-Based Gene Annotation for Aspergillus flavus Strain NRRL 3357.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              XIAOFAN ZHOU, SARAH LUTTEROPP, LUCAS CZECH, ALEXANDROS STAMATAKIS, MORITZ VON LOOZ, AND ANTONIS ROKAS, (2020). Quartet-Based Computations of Internode Certainty Provide Robust Measures of Phylogenetic Incongruence. SB.&nbsp;
-              <a href="assets/publications/第一作者/2020 - SB - Quartet-Based Computations of Internode Certainty Provide Robust Measures of Phylogenetic Incongruence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Yanqiu He, Xiaofan Zhou, Jieling Li, Huaping Li, Yunfeng Li and Yanfang Nie (2021). In Vitro Secretome Analysis Suggests Differential Pathogenic Mechanisms between Fusarium oxysporum f. sp. cubense Race 1 and Race 4. Biomolecules.&nbsp;
-              <a href="assets/publications/第一作者/2021 - Biomolecules - In Vitro Secretome Analysis Suggests Differential Pathogenic Mechanisms between Fusarium oxysporum f. sp. cubense Race 1 and Race 4.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Ming Hu, Chuhao Li, Xiaofan Zhou, Yang Xue, Si Wang, Anqun Hu, Shanshan Chen, Xiuwen Mo and Jianuan Zhou (2021). Microbial Diversity Analysis and Genome Sequencing Identify Xanthomonas perforans as the Pathogen of Bacterial Leaf Canker of Water Spinach (Ipomoea aquatic). FiM.&nbsp;
-              <a href="assets/publications/第一作者/2021 - FiM - Microbial Diversity Analysis and Genome Sequencing Identify Xanthomonas perforans as the Pathogen of Bacterial Leaf Canker of Water Spinach (Ipomoea aquatic).pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Pankaj Bhatt, Xiaofan Zhou, Yaohua Huang, Wenping Zhang, Shaohua Chen (2021). Characterization of the role of esterases in the biodegradation of organophosphate, carbamate, and pyrethroid pesticides. JHM.&nbsp;
-              <a href="assets/publications/第一作者/2021 - JHM - Characterization of the role of esterases in the biodegradation of organophosphate, carbamate, and pyrethroid pesticides.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Tiantian Yan, Xiaofan Zhou, Jieling Li, Guanjun Li, Yali Zhao, Haojie Wang, Huaping Li, Yanfang Nie and Yunfeng Li (2022). FoCupin1, a Cupin_1 domain-containing protein, is necessary for the virulence of Fusarium oxysporum f. sp. cubense tropical race 4. FiM.&nbsp;
-              <a href="assets/publications/第一作者/2022 - FiM - FoCupin1, a Cupin_1 domain-containing protein, is necessary for the virulence of Fusarium oxysporum f. sp. cubense tropical race 4.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Peng Yang, Xu-Yi Ling, Xiao-Fan Zhou, Yuan-Xia Chen, Tian-Tian Wang, Xiao-Jing Lin, Yuan-Yuan Zhao, Yu-Shi Ye, Lin-Xuan Huang, Ye-Wen Sun, Yu-Xin Qi, Dong-Ming Ma, Ruo-Ting Zhan,*, Xue-Shuang Huang2,*, Jin-Fen Yang1,* (2023). Comparing genomes of Fructus Amomi-producing species reveals genetic basis of volatile terpenoid divergence. PP.&nbsp;
-              <a href="assets/publications/第一作者/2023 - PP - Comparing genomes of Fructus Amomi-producing species reveals genetic basis of volatile terpenoid divergence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Lin Chen, Xiaofan Zhou, Yiqing Liu, Yaojun Tong, Yixuan Wang, Yao Li, Yiqi Liu, Yaojun Tong, Yixuan Wang, Yao Li (2023). Chromosome-level genome assembly of the Asian red-tail catfish (Hemibagrus wyckioides). FiM.&nbsp;
-              <a href="assets/publications/第一作者/2024 - FR - Evolutionary divergence of subgenomes in common carp provides insights into speciation and allopolyploid success.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="first-author">
-              Chao Liu, Xiaofan Zhou, Yuanning Li, Chris Todd Hittinger, Ronghui Pan, Jinyan Huang, Xue-xin Chen, Antonis Rokas, Yun Chen, and Xing-Xing Shen (2024). The Influence of the Number of Tree Searches on Maximum Likelihood Inference in Phylogenomics. SB.&nbsp;
-              <a href="assets/publications/第一作者/2024 - SB - The Influence of the Number of Tree Searches on Maximum Likelihood Inference in Phylogenomics.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <!-- 新增通讯作者文献 -->
-          <li data-role="corresponding-author">
-              Ren Ren, Yazhou Sun, Yue Zhao, David Geiser, Hong Ma and Xiaofan Zhou (2016). Phylogenetic Resolution of Deep Eukaryotic and Fungal Relationships Using Highly Conserved Low-Copy Nuclear Genes. GBE.&nbsp;
-              <a href="assets/publications/通讯作者/2016 - GBE - Phylogenetic Resolution of Deep Eukaryotic and Fungal Relationships Using Highly Conserved Low-Copy Nuclear Genes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xin Yi, Song Shi, Peidan Wang, Yaoyao Chen, Qiqi Lu, Tianyi Wang, Xiaofan Zhou and Guohua Zhong (2019). Characterizing potential repelling volatiles for “push-pull” strategy against stem borer：a case study in Chilo auricilius. BMC Genomics.&nbsp;
-              <a href="assets/publications/通讯作者/2019 - BMC Genomics - Characterizing potential repelling volatiles for “push-pull” strategy against stem borer：a case study in Chilo auricilius.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yue Zhong, Meixin Yan, Jinyan Jiang, Zhihan Zhang, Junjun Huang, Lianhui Zhang, Yinyue Deng, Xiaofan Zhou and Fei He (2019). Mycophenolic Acid as a Promising Fungal Dimorphism Inhibitor to Control Sugar Cane Disease Caused by Sporisorium scitamineum. JAFC.&nbsp;
-              <a href="assets/publications/通讯作者/2019 - JAFC - Mycophenolic Acid as a Promising Fungal Dimorphism Inhibitor to Control Sugar Cane Disease Caused by Sporisorium scitamineum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Peng Li, Ying Zhang, Yuqingqing Sun, Xingxing Wu, Zhiyuan Wang, Jianuan Zhou and Xiaofan Zhou (2019). Comparative genomic analysis of subspecies of Pantoea stewartii. JPP.&nbsp;
-              <a href="assets/publications/通讯作者/2019 - JPP - Comparative genomic analysis of subspecies of Pantoea stewartii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Li Zheng, Jun-jian Situ, Qing-feng Zhu, Ping-gen Xia, Yin Zheng, Hong-xia Liu, Xiaofan Zhou, Zi-de Jiang (2019). Identification of volatile organic compounds for the biocontrol of postharvest litchi fruit pathogen Peronophythora litchii. PBT.&nbsp;
-              <a href="assets/publications/通讯作者/2019 - PBT - Identification of volatile organic compounds for the biocontrol of postharvest litchi fruit pathogen Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Tian Ye, Tian Zhou, Xudan Xu, Wenping Zhang, Xinghui Fan, Sandhya Mishra, Lianhui Zhang, Xiaofan Zhou and Shaohua Chen (2020). Whole-Genome Sequencing Analysis of Quorum Quenching Bacterial Strain Acinetobacter lactucae QL-1 Identifies the FadY Enzyme for Degradation of the Diffusible Signal Factor. IJMS.&nbsp;
-              <a href="assets/publications/通讯作者/2020 - IJMS - Whole-Genome Sequencing Analysis of Quorum Quenching Bacterial Strain Acinetobacter lactucae QL-1 Identifies the FadY Enzyme for Degradation of the Diffusible Signal Factor.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xudan Xu, Tian Ye, Wenping Zhang, Tian Zhou, Xiaofan Zhou, Weijun Dai and Shaohua Chen (2021). Identification of FadT as a Novel Quorum Quenching Enzyme for the Degradation of Diffusible Signal Factor in Cupriavidus pinatubonensis Strain HN-2. IJMS.&nbsp;
-              <a href="assets/publications/通讯作者/2021 - IJMS - Identification of FadT as a Novel Quorum Quenching Enzyme for the Degradation of Diffusible Signal Factor in Cupriavidus pinatubonensis Strain HN-2.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Ming Hu, Chuhao Li, Yang Xue, Anqun Hu, Shanshan Chen, Yufan Chen, Guangtao Lu, Xiaofan Zhou and Jianuan Zhou (2021). Isolation, characterization, and genomic investigation of a phytopathogenic strain of Stenotrophomonas maltophilia. Phytopathology.&nbsp;
-              <a href="assets/publications/通讯作者/2021 - Phytopathology - Isolation, characterization, and genomic investigation of a phytopathogenic strain of Stenotrophomonas maltophilia.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yang Liu, Stephen Dela Ahator, Huishan Wang, Qishun Feng, Yinuo Xu, Chuhao Li, Xiaofan Zhou and Lian-Hui Zhang (2022). Microevolution of the mexT and lasR Reinforces the Bias of Quorum Sensing System in Laboratory Strains of Pseudomonas aeruginosa PAO1. FiM.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - FiM - Microevolution of the mexT and lasR Reinforces the Bias of Quorum Sensing System in Laboratory Strains of Pseudomonas aeruginosa PAO1.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yanfang Nie, Guanjun Li, Jieling Li, Xiaoshu Zhou, Yanzhi Zhang, Qingchuan Shi, Xiaofan Zhou, Huaping Li, Xiao-Lin Chen and Yunfeng Li (2022). A novel elicitor MoVcpo is necessary for the virulence of Magnaporthe oryzae and triggers rice defense responses. FiPS.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - FiPS - A novel elicitor MoVcpo is necessary for the virulence of Magnaporthe oryzae and triggers rice defense responses.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Jianuan Zhou, Ming Hu, Anqun Hu1, Chuhao Li, Xinyue Ren, Min Tao, Yang Xue, Shanshan Chen, Chongzhi Tang, Yiwu Xu, Lianhui Zhang and Xiaofan Zhou (2022). Isolation and Genome Analysis of Pectobacterium colocasium sp. nov. and Pectobacterium aroidearum, Two New Pathogens of Taro. FiPS.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - FiPS - Isolation and Genome Analysis of Pectobacterium colocasium sp. nov. and Pectobacterium aroidearum, Two New Pathogens of Taro.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Chenxing Tan, Chuhao Li, Ming Hu , Anqun Hu, Yang Xue, Xiaofan Zhou and Jianuan Zhou (2022). Comparative Pathogenomic Analysis of Two Banana Pathogenic Dickeya Strains Isolated from China and the Philippines. IJMS.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - IJMS - Comparative Pathogenomic Analysis of Two Banana Pathogenic Dickeya Strains Isolated from China and the Philippines.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Ming Hu, Yang Xue, Chuhao Li, Mingfa Lv, Lianhui Zhang, Matthew R. Parsek, Guangtao Lu, Xiaofan Zhou, Jianuan Zhou (2022). Genomic and Functional Dissections of Dickeya zeae Shed Light on the Role of Type III Secretion System and Cell Wall-Degrading Enzymes to Host Range and Virulence. Microbiol. Spectr.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - Microbiol. Spectr. - Genomic and Functional Dissections of Dickeya zeae Shed Light on the Role of Type III Secretion System and Cell Wall-Degrading Enzymes to Host Range and Virulence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Mingfa Lv, Yufan Chen, Ming Hu, Qinglin Yu, Cheng Duan, Sixuan Ye, Jinfeng Ling, Jianuan Zhou, Xiaofan Zhou, Lianhui Zhang (2022). OhrR is a central transcriptional regulator of virulence in Dickeya zeae. MPP.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - MPP - OhrR is a central transcriptional regulator of virulence in Dickeya zeae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yuwei Liang, Fan Li, Qiang Gao, Chunlian Jin, Liqing Dong, Qi Wang, Min Xu, Fuhui Sun, Bo Bi, Peng Zhao, Shenchong Li, Jiwei Ruan, Xiaofan Zhou, Liangsheng Zhang and Jihua Wang (2022). The genome of Eustoma grandiflorum reveals the whole‐genome triplication event. PBJ.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - PBJ  - The genome of Eustoma grandiflorum reveals the whole‐genome triplication event.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Peng Yang, Hai-Ying Zhao, Jie-Shu Wei, Yuan-Yuan Zhao, Xiao-Jing Lin, Jing Su, Fang-Ping Li, Meng Li, Dong-Ming Ma, Xu-Kai Tan, Hui-Lin Liang, Ye-Wen Sun, Ruo-Ting Zhan, Guo-Zhen He, Xiao-Fan Zhou and Jin-Fen Yang (2022). Chromosome-level genome assembly and functional characterization of terpene synthases provide new insights into the volatile terpenoid biosynthesis of Wurfbainia villosa. PJ.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - PJ - Chromosome-level genome assembly and functional characterization of terpene synthases provide new insights into the volatile terpenoid biosynthesis of Wurfbainia villosa.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              王莹乐，李泳霖，梁 雪，黄淑芬，张炼辉，廖立胜，周筱帆 (2022). 生物炭环境协同生防菌Bacillus amyloliquefaciens P4防控香芋软腐病的研究. 湖北农业科学.&nbsp;
-              <a href="assets/publications/通讯作者/2022 - 湖北农业科学 - 生物炭环境协同生防菌Bacillus amyloliquefaciens P4防控香芋软腐病的研究.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Wen-Juan Chen, Wenping Zhang, Qiqi Lei, Shao-Fang Chen, Yaohua Huang, Kalpana Bhatt, Lisheng Liao, Xiaofan Zhou (2023). Pseudomonas aeruginosa based concurrent degradation of beta-cypermethrin and metabolite 3-phenoxybenzaldehyde, and its bioremediation efficacy in contaminated soils. ER.&nbsp;
-              <a href="assets/publications/通讯作者/2023 - ER - Pseudomonas aeruginosa based concurrent degradation of beta-cypermethrin and metabolite 3-phenoxybenzaldehyde, and its bioremediation efficacy in contaminated soils.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Jianuan Zhou, Steffen Kolb and Xiaofan Zhou (2023). Editorial：Pathogen co-infections and plant diseases. FiPS.&nbsp;
-              <a href="assets/publications/通讯作者/2023 - FiPS - Editorial：Pathogen co-infections and plant diseases.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Min Xue, Qiang Gao, Mengwei Jiang, Wenling Wang, Juan Hu, Xiaojun Chang, Dinggao Liu, Yuwei Liang, Yifan Jiang, Fei Chen, Chuhao Li, Haoran Huang, Feng Chen, Fan Li, Robert N. Trigiano, Jihua Wang, Chen Jiao, Xiaofan Zhou, and Liangsheng Zhang (2023). A novel genome sequence of Jasminum sambac helps uncover the molecular mechanism underlying the accumulation of jasmonates. JEB.&nbsp;
-              <a href="assets/publications/通讯作者/2023 - JEB - A novel genome sequence of Jasminum sambac helps uncover the molecular mechanism underlying the accumulation of jasmonates.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Qingmei Liu, Chuhao Li, Xiaohan Zhang, Mengfan Ding, Xinyue Liao, Jinli Yan, Ming Hu, Leilei Yang, Xiaoqing Wang, Lisheng Liao, Peng Li, Xiaofan Zhou (2023). PhcX Is a LqsR-family response regulator that contributes to Ralstonia solanacearum virulence and regulates multiple virulence factors. mBio.&nbsp;
-              <a href="assets/publications/通讯作者/2023 - mBio - PhcX Is a LqsR-family response regulator that contributes to Ralstonia solanacearum virulence and regulates multiple virulence factors.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Qian He, Juming Li, Qingmei Liu, Yonglin Li, Xinyue Liao, Jianuan Zhou, and Xiaofan Zhou (2023). Complete genome sequence resource of Pantoea anthophila CL1 causing soft rot disease in Clausena lansium (Wampee) in China. PD.&nbsp;
-              <a href="assets/publications/通讯作者/2023 - PD - Complete genome sequence resource of Pantoea anthophila CL1 causing soft rot disease in Clausena lansium (Wampee) in China.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              WenJuan Chen, ShaoFang Chen, Haoran Song, Zeren Li, Xiaofang Luo, Xidong Zhang, Xiaofan Zhou (2024). Current insights into environmental acetochlor toxicity and remediation strategies. EGH.&nbsp;
-              <a href="assets/publications/通讯作者/2024 - EGH - Current insights into environmental acetochlor toxicity and remediation strategies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Minghui Qiu, Yonglin Li, Qingmei Liu, Xiaohan Zhang, Yulong Huang, Rui Guo, Ming Hu, Jianuan Zhou and Xiaofan Zhou (2024). Pseudomonas machongensis sp. nov. and Stenotrophomonas capsici sp. nov., isolated from wilted pepper plants. IJSEM.&nbsp;
-              <a href="assets/publications/通讯作者/2024 - IJSEM - Pseudomonas machongensis sp. nov. and Stenotrophomonas capsici sp. nov., isolated from wilted pepper plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xiuxiu Li, Sheng Yu, Zhihao Cheng, Xiaojun Chang, Yingzi Yun, Mengwei Jiang, Xuequn Chen, Xiaohui Wen, Hua Li, Wenjun Zhu, Shiyao Xu, Yanbing Xu, Xianjun Wang, Chen Zhang, Qiong Wu, Jin Hu, Zhenguo Lin, Jean-Marc Aury, Yves Van de Peer, Zonghua Wang, Xiaofan Zhou, Jihua Wang, Peitao Lü, Liangsheng Zhang (2024). Origin and evolution of the triploid cultivated banana genome. NG.&nbsp;
-              <a href="assets/publications/通讯作者/2024 - NG - Origin and evolution of the triploid cultivated banana genome.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xiaoqing Wang, Chuhao Li, Shaohua Huang, Huagui Gao, Yonglin Li, Xuemei Chen, Liangzhou Huang, Jianhua Luo, LianHui Zhang and Xiaofan Zhou (2024). Pathogenic and Comparative Genomic Analysis of Ralstonia pseudosolanacearum Isolated from Casuarina. PD.&nbsp;
-              <a href="assets/publications/通讯作者/2024 - PD - Pathogenic and Comparative Genomic Analysis of Ralstonia pseudosolanacearum Isolated from Casuarina.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Siliang Zuo, Linghui Xu, Huiyan Zhang, Meiqian Jiang, Sifeng Wu, Lian-Hui Zhang, Xiaofan Zhou and Junxia Wan (2024). FlgI Is a Sec-Dependent Effector of Candidatus Liberibacter asiaticus That Can Be Blocked by Small Molecules Identified Using a Yeast Screen. Plants.&nbsp;
-              <a href="assets/publications/通讯作者/2024 - Plants - FlgI Is a Sec-Dependent Effector of Candidatus Liberibacter asiaticus That Can Be Blocked by Small Molecules Identified Using a Yeast Screen.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yixiao Zhu, Yonglin Li, Chuhao Li, Xing-Xing Shen, Xiaofan Zhou (2025). A critical evaluation of deep-learning based phylogenetic inference programs using simulated data sets. JGG.&nbsp;
-              <a href="assets/publications/通讯作者/2025 - JGG - A critical evaluation of deep-learning based phylogenetic inference programs using simulated data sets.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Bo Feng, Yonglin Li, Biyang Xu, Hongyue Liu, Jacob L Steenwyk, Kyle T Davi, Xiaolin Tian, Carla Gonçalves, Dana A Opulente, Abigail L LaBella, Marie-Claire Harrison, John F Wolters 10, Shengyuan Shao, Zhaohao Chen, Kaitlin J Fisher, Marizeth Groenewald, Chris Todd Hittinger, Xing-Xing Shen, Shengying Li, Antonis Rokas, Xiaofan Zhou and Yuanning Li (2025). Unique trajectory of gene family-evolution from genomic analysis of nearly all known species in an ancient yeast lineage. MSB.&nbsp;
-              <a href="assets/publications/通讯作者/2025 - MSB - Unique trajectory of gene family-evolution from genomic analysis of nearly all known species in an ancient yeast lineage.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Yuwei Liang, Qiang Gao, Fan Li, Yunpeng Du, Jian Wu, Wenqiang Pan, Shaokun Wang, Xiuhai Zhang, Mingfang Zhang, Xiaoming Song, Linlin Zhong, Fan Zhang, Yan Li, Zhiwei Wang, Danqing Li, Qing Duan, Shenchong Li, Chunlian Jin, Peihua Zhang, Yang Gu, Zhong-Hua Chen, Klaus F. X. Mayer, Xiaofan Zhou, Jihua Wang & Liangsheng Zhang (2025). The giant genome of lily provides insights into the hybridization of cultivated lilies. NC.&nbsp;
-              <a href="assets/publications/通讯作者/2025 - NC - The giant genome of lily provides insights into the hybridization of cultivated lilies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xiaohui Wen, Yuwei Liang, Hongyan Shan, Xiaojun Chang, Xiaoming Song, Shaoqin Shen, Yanhong Fu, Dan Chen, Fei Chen, Yueqing Li, Qian Guan, Qiang Gao, Qi Wang, Yonglin Li, Zhengjia Wang, Hongzhi Kong, Huan Liu, Xiang Gao, Xiaofan Zhou, Chris Thorogood and Liangsheng Zhang (2025). The genome of giant waterlily provides insights into the origin of angiosperms, leaf gigantism, and stamen function innovation. Plant Commun.&nbsp;
-              <a href="assets/publications/通讯作者/2025 - Plant Commun - The genome of giant waterlily provides insights into the origin of angiosperms, leaf gigantism, and stamen function innovation.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="corresponding-author">
-              Xiaoqing Wang, Hongyu Shi, Xiaoyan Wu, Xuemei Chen, Shaobo Liu, Qinglin Yu, Lian-Hui Zhang and Xiaofan Zhou (2025). Microbial diversity in coastal Casuarina equisetifolia forest and its potential in counteracting bacterial wilt infections. PMS.&nbsp;
-              <a href="assets/publications/通讯作者/2025 - PMS - Microbial diversity in coastal Casuarina equisetifolia forest and its potential in counteracting bacterial wilt infections.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Danhua Jiang, Changsong Yin, Aiping Yu, Xiaofan Zhou, Wanqi Liang, Zheng Yuan, Yun Xu, Qingbo Yu, Tieqiao Wen, Dabing Zhang (2006). Duplication and expression analysis of multicopy miRNA gene family members in Arabidopsis and rice. Cell Res.&nbsp;
-              <a href="assets/publications/co-author/2006 - Cell Res - Duplication and expression analysis of multicopy miRNA gene family members in Arabidopsis and rice.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Yujin Sun, Xiaofan Zhou and Hong Ma (2007). Genome‐wide Analysis of Kelch Repeat‐containing F‐box Family. JIPB.&nbsp;
-              <a href="assets/publications/co-author/2007 - JIPB - Genome‐wide Analysis of Kelch Repeat‐containing F‐box Family.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Alexandra Surcel, Xiaofan Zhou, Li Quan, Hong Ma (2008). Long-term maintenance of stable copy number in the eukaryotic SMC family - origin of a vertebrate meiotic SMC1 and fate of recent segmental duplicates. JSE.&nbsp;
-              <a href="assets/publications/co-author/2008 - JSE - Long-term maintenance of stable copy number in the eukaryotic SMC family - origin of a vertebrate meiotic SMC1 and fate of recent segmental duplicates.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Baomin Feng, Lianchao Li, Xiaofan Zhou, Bruce Stanley and Hong Ma (2009). Analysis of the Arabidopsis Floral Proteome：Detection of over 2000 Proteins and Evidence for Posttranslational Modifications. JIPB.&nbsp;
-              <a href="assets/publications/co-author/2009 - JIPB - Analysis of the Arabidopsis Floral Proteome：Detection of over 2000 Proteins and Evidence for Posttranslational Modifications.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Antonis Rokas, John G. Gibbons, Xiaofan Zhou, Anne Beauvais, and Jean-Paul Latg ́ (2012). The diverse applications of RNA‐seq for functional genomic studies in Aspergillus fumigatus. NYAS.&nbsp;
-              <a href="assets/publications/co-author/2012 - NYAS - The diverse applications of RNA‐seq for functional genomic studies in Aspergillus fumigatus.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Sree V Chintapalli, Gaurav Bhardwaj, Jagadish Babu, Loukia Hadjiyianni, Yoojin Hong, George K Todd, Casey A Boosalis, Zhenhai Zhang, Xiaofan Zhou, Hong Ma, Andriy Anishkin, Damian B van Rossum and Randen L Patterson (2013). Reevaluation of the evolutionary events within recA-RAD51 phylogeny. BMC Genomics.&nbsp;
-              <a href="assets/publications/co-author/2013 - BMC Genomics - Reevaluation of the evolutionary events within recA-RAD51 phylogeny.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              David C. Rinkera, R. Jason Pitts, Xiaofan Zhou, Eunho Suh, Antonis Rokas, and Laurence J. Zwiebel (2013). Blood meal-induced changes to antennal transcriptome profiles reveal shifts in odor sensitivities in the malaria vector mosquito Anopheles gambiae. PNAS.&nbsp;
-              <a href="assets/publications/co-author/2013 - PNAS - Blood meal-induced changes to antennal transcriptome profiles reveal shifts in odor sensitivities in the malaria vector mosquito Anopheles gambiae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Yuyu Wang, Xiaofan Zhou, Ding Yang, and Antonis Rokas (2015). A genome-scale investigation of incongruence in culicidae mosquitoes. GBE.&nbsp;
-              <a href="assets/publications/co-author/2015 - GBE - A genome-scale investigation of incongruence in culicidae mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Daniel E. Neafsey, Robert M. Waterhouse, Mohammad R. Abai, Sergey S. Aganezov, Max A. Alekseyev, James E. Allen, James Amon, Bruno Arcà, Peter Arensburger, Gleb Artemov, Lauren A. Assour, Hamidreza Basseri, Aaron Berlin, Bruce W. Birren, Stephanie A. Blandin, Andrew I. Brockman, Thomas R. Burkot, Austin Burt, Clara S. Chan, Cedric Chauve, Joanna C. Chiu, Mikkel Christensen, Carlo Costantini, Victoria L. M. Davidson, Elena Deligianni, Tania Dottorini, Vicky Dritsou, Stacey B. Gabriel, Wamdaogo M. Guelbeogo, Andrew B. Hall, Mira V. Han, Thaung Hlaing, Daniel S. T. Hughes, Adam M. Jenkins, Xiaofang Jiang, Irwin Jungreis, Evdoxia G. Kakani, Maryam Kamali, Petri Kemppainen, Ryan C. Kennedy, Ioannis K. Kirmitzoglou, Lizette L. Koekemoer, Njoroge Laban, Nicholas Langridge, Mara K. N. Lawniczak, Manolis Lirakis, Neil F. Lobo, Ernesto Lowy, Robert M. MacCallum, Chunhong Mao, Gareth Maslen, Charles Mbogo, Jenny McCarthy, Kristin Michel, Sara N. Mitchell, Wendy Moore, Katherine A. Murphy, Anastasia N. Naumenko, Tony Nolan, Eva M. Novoa, Samantha O’Loughlin, Chioma Oringanje, Mohammad A. Oshaghi, Nazzy Pakpour, Philippos A. Papathanos, Ashley N. Peery, Michael Povelones, Anil Prakash, David P. Price, Ashok Rajaraman, Lisa J. Reimer, David C. Rinker, Antonis Rokas, Tanya L. Russell, N’Fale Sagnon, Maria V. Sharakhova, Terrance Shea, Felipe A. Simão, Frederic Simard, Michel A. Slotman, Pradya Somboon, Vladimir Stegniy, Claudio J. Struchiner, Gregg W. C. Thomas, Marta Tojo, Pantelis Topalis, José M. C. Tubio, Maria F. Unger, John Vontas, Catherine Walton, Craig S. Wilding, Judith H. Willis, Yi-Chieh Wu, Guiyun Yan, Evgeny M. Zdobnov, Xiaofan Zhou, Flaminia Catteruccia, George K. Christophides, Frank H. Collins, Robert S. Cornman, Andrea Crisanti, Martin J. Donnelly, Scott J. Emrich, Michael C. Fontaine, William Gelbart, Matthew W. Hahn, Immo A. Hansen, Paul I. Howell, Fotis C. Kafatos, Manolis Kellis, Daniel Lawson, Christos Louis, Shirley Luckhart, Marc A. T. Muskavitch, José M. Ribeiro, Michael A. Riehle, Igor V. Sharakhov, Zhijian Tu, Laurence J. Zwiebel, and Nora J. Besansky (2015). Highly evolvable malaria vectors - the genomes of 16 Anopheles mosquitoes. Science.&nbsp;
-              <a href="assets/publications/co-author/2015 - Science - Highly evolvable malaria vectors - the genomes of 16 Anopheles mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Yue Zhao, Qi Liu, Pankaj Acharya, Kristy R. Stengel, Quanhu Sheng, Xiaofan Zhou, Hojoong Kwak, Melissa A. Fischer, James E. Bradner, Stephen A. Strickland, Sanjay R. Mohan, Michael R. Savona, Bryan J. Venters, Ming-Ming Zhou, John T. Lis, and Scott W. Hiebert (2016). High-Resolution Mapping of RNA Polymerases Identifies Mechanisms of Sensitivity and Resistance to BET Inhibitors in t(8;21) AML. Cell Report.&nbsp;
-              <a href="assets/publications/co-author/2016 - Cell Report - High-Resolution Mapping of RNA Polymerases Identifies Mechanisms of Sensitivity and Resistance to BET Inhibitors in t(8;21) AML.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Xing-Xing Shen, Xiaofan Zhou, Jacek Kominek, Cletus P. Kurtzman, Chris Todd Hittinger, and Antonis Rokas (2016). Reconstructing the Backbone of the Saccharomycotina Yeast Phylgoeny Using Genome-Scale Data. G3.&nbsp;
-              <a href="assets/publications/co-author/2016 - G3 - Reconstructing the Backbone of the Saccharomycotina Yeast Phylgoeny Using Genome-Scale Data.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Hua Yan, Comzit Opachaloemphan, Giacomo Mancini, Huan Yang, Matthew Gallitto, Jakub Mlejnek, Alexandra Leibholz, Kevin Haight, Majid Ghaninia, Lucy Huo, Michael Perry, Jesse Slone, Xiaofan Zhou, Maria Traficante, Clint A. Penick, Kelly Dolezal, Kaustubh Gokhale, Kelsey Stevens, Ingrid Fetter-Pruneda, Roberto Bonasio, Laurence J. Zwiebel, Shelley L. Berger, Jürgen Liebig, Danny Reinberg, and Claude Desplan (2017). An Engineered orco Mutation Produces Aberrant Social Behavior and Defective Neural Development in Ants. Cell.&nbsp;
-              <a href="assets/publications/co-author/2017 - Cell - An Engineered orco Mutation Produces Aberrant Social Behavior and Defective Neural Development in Ants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Sha Jin, Xiaofan Zhou, Feng Gu, Guohua Zhong, and Xin Yi (2017). Olfactory plasticity variation in the expression of chemosensory receptors in Bactrocera dorsalis in different physiological states. FIP.&nbsp;
-              <a href="assets/publications/co-author/2017 - FIP - Olfactory plasticity variation in the expression of chemosensory receptors in Bactrocera dorsalis in different physiological states.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Gregory M. Pask, Jesse D. Slone, Jocelyn G. Millar, Prithwiraj Das, Jardel A. Moreira, Xiaofan Zhou, Jan Bello, Shelley L. Berger, Roberto Bonasio, Claude Desplan, Danny Reinberg, Jürgen Liebig, Laurence J. Zwiebel & Anandasankar Ray (2017). Specialized odorant receptors in social insects that detect cuticular hydrocarbon cues and candidate pheromones. NC.&nbsp;
-              <a href="assets/publications/co-author/2017 - NC - Specialized odorant receptors in social insects that detect cuticular hydrocarbon cues and candidate pheromones.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Liyuan Zhao, Xiaofan Zhou, Antonis Rokas & Roger D. Con (2017). Functional variants of the melanocortin-4 receptor associated with the Odontoceti and Mysticeti suborders of cetaceans. SR.&nbsp;
-              <a href="assets/publications/co-author/2017 - SR - Functional variants of the melanocortin-4 receptor associated with the Odontoceti and Mysticeti suborders of cetaceans.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jing Wang, Yue Zhao, Xiaofan Zhou, Scott W. Hiebert, Qi Liu and Yu Shyr (2018). Nascent RNA sequencing analysis provides insights into enhancer-mediated gene regulation. BMC Genomics.&nbsp;
-              <a href="assets/publications/co-author/2018 - BMC Genomics - Nascent RNA sequencing analysis provides insights into enhancer-mediated gene regulation.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Carla Gonc ̧alves, Jennifer H Wisecaver, Jacek Kominek, Madalena Salema Oom, Maria Jose ́ Leandro, Xing-Xing Shen, Dana A Opulente, Xiaofan Zhou, David Peris, Cletus P Kurtzman, Chris Todd Hittinger, Antonis Rokas, Paula Gonc ̧alves (2018). Evidence for loss and reacquisition of alcoholic fermentation in a fructophilic yeast lineage. eLife.&nbsp;
-              <a href="assets/publications/co-author/2018 - eLife - Evidence for loss and reacquisition of alcoholic fermentation in a fructophilic yeast lineage.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Tadeusz Krassowski, Aisling Y. Coughlan, Xing-Xing Shen, Xiaofan Zhou, Jacek Kominek, Dana A. Opulente, Robert Riley, Igor V. Grigoriev, Nikunj Maheshwari, Denis C. Shields, Cletus P. Kurtzman, Chris Todd Hittinger, Antonis Rokas & Kenneth H. Wolfe (2018). Evolutionary instability of CUG-Leu in the genetic code of budding yeasts. NC.&nbsp;
-              <a href="assets/publications/co-author/2018 - NC - Evolutionary instability of CUG-Leu in the genetic code of budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              David J. Krausea, Jacek Komineka, Dana A. Opulentea, Xing-Xing Shen, Xiaofan Zhou, Quinn K. Langdon, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Antonis Rokas and Chris Todd Hittinger (2018). Functional and evolutionary characterization of a secondary metabolite gene cluster in budding yeasts. PNAS.&nbsp;
-              <a href="assets/publications/co-author/2018 - PNAS - Functional and evolutionary characterization of a secondary metabolite gene cluster in budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jacek Kominek, Drew T. Doering, Dana A. Opulente, Xing-Xing Shen, Xiaofan Zhou, Jeremy DeVirgilio, Amanda B. Hulfachor, Marizeth Groenewald, Mcsean A. Mcgee, Steven D. Karlen, Cletus P. Kurtzman, Antonis Rokas, and Chris Todd Hittinger (2019). Eukaryotic acquisition of a bacterial operon. Cell.&nbsp;
-              <a href="assets/publications/co-author/2019 - Cell - Eukaryotic acquisition of a bacterial operon.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Tadeusz Krassowski, Jacek Kominek, Xing-Xing Shen, Dana A. Opulente, Xiaofan Zhou, Antonis Rokas, Chris Todd Hittinger and Kenneth H. Wolfe (2019). Multiple reinventions of mating-type switching during budding yeast evolution. Current Biol.&nbsp;
-              <a href="assets/publications/co-author/2019 - Current Biol - Multiple reinventions of mating-type switching during budding yeast evolution.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Susu Zhang, Yue Zhao, Tiffany M. Heaster, Melissa A. Fischer, Kristy R. Stengel, Xiaofan Zhou, Haley Ramsey, Ming‐Ming Zhou, Michael R. Savona, Melissa C. Skala, Scott W. Hiebert (2019). BET inhibitors reduce cell size and induce reversible cell cycle arrest in AML. JCB.&nbsp;
-              <a href="assets/publications/co-author/2019 - JCB - BET inhibitors reduce cell size and induce reversible cell cycle arrest in AML.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Zhibin Liang, Luhao Huang, Fei He, Xiaofan Zhou, Zurong Shi, Jianuan Zhou, Yufan Chen, Mingfa Lv, Yumei Chen, Lian-Hui Zhang (2019). A Substrate-Activated Efflux Pump, DesABC, Confers Zeamine Resistance to Dickeya zeae. mBio.&nbsp;
-              <a href="assets/publications/co-author/2019 - mBio - A Substrate-Activated Efflux Pump, DesABC, Confers Zeamine Resistance to Dickeya zeae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jacob L. Steenwyk, Dana A. Opulente, Jacek Kominek, Xing-Xing Shen, Xiaofan Zhou, Abigail L. Labella, Noah P. Bradley, Brandt F. Eichman, Nezˇa Čadezˇ, Diego Libkind, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Chris Todd Hittinger, Antonis Rokas (2019). Extensive loss of cell-cycle and DNA repair genes in an ancient lineage of bipolar budding yeasts. PLoS Biol.&nbsp;
-              <a href="assets/publications/co-author/2019 - PLoS Biol - Extensive loss of cell-cycle and DNA repair genes in an ancient lineage of bipolar budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Hua Yan, Shadi Jafari, Gregory Pask, Xiaofan Zhou, Danny Reinberg and Claude Desplan (2020). Evolution, developmental expression and function of odorant receptors in insects. JEB.&nbsp;
-              <a href="assets/publications/co-author/2020 - JEB - Evolution, developmental expression and function of odorant receptors in insects.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Liangsheng Zhang, Fei Chen, Xingtan Zhang, Zhen Li, Yiyong Zhao, Rolf Lohaus, Xiaojun Chang, Wei Dong, Simon Y. W. Ho, Xing Liu, Aixia Song, Junhao Chen, Wenlei Guo, Zhengjia Wang, Yingyu Zhuang, Haifeng Wang, Xuequn Chen, Juan Hu, Yanhui Liu, Yuan Qin, Kai Wang, Shanshan Dong, Yang Liu, Shouzhou Zhang, Xianxian Yu, Qian Wu, Liangsheng Wang, Xueqing Yan, Yuannian Jiao, Hongzhi Kong, Xiaofan Zhou, Cuiwei Yu, Yuchu Chen, Fan Li, Jihua Wang, Wei Chen, Xinlu Chen, Qidong Jia, Chi Zhang, Yifan Jiang, Wanbo Zhang, Guanhua Liu, Jianyu Fu, Feng Chen, Hong Ma, Yves Van de Peer & Haibao Tang (2020). The water lily genome and the early evolution of flowering plants. Nature.&nbsp;
-              <a href="assets/publications/co-author/2020 - Nature - The water lily genome and the early evolution of flowering plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Lingxiao Yang, Danyan Su1, Xin Chang, Charles S.P. Foster, Linhua Sun, Chien-Hsun Huang, Xiaofan Zhou, Liping Zeng, Hong Ma and Bojian Zhong (2020). Phylogenomic insights into deep phylogeny of Angiosperms based on broad nuclear gene sampling. Plant Comm.&nbsp;
-              <a href="assets/publications/co-author/2020 - Plant Comm - Phylogenomic insights into deep phylogeny of Angiosperms based on broad nuclear gene sampling.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Xing-Xing Shen, Jacob L. Steenwyk, Abigail L. LaBella, Dana A. Opulente, Xiaofan Zhou, Jacek Kominek, Yuanning Li, Marizeth Groenewald, Chris T. Hittinger, Antonis Rokas (2020). Genome-scale phylogeny and contrasting modes of genome evolution in the fungal phylum Ascomycota. SA.&nbsp;
-              <a href="assets/publications/co-author/2020 - SA - Genome-scale phylogeny and contrasting modes of genome evolution in the fungal phylum Ascomycota.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Kai Wang, Xia Li, Chunxi Yang, Shihao Song, Chaoyu Cui, Xiaofan Zhou, Yinyue Deng (2021). A LysR Family Transcriptional Regulator Modulates Burkholderia cenocepacia Biofilm Formation and Protease Production. AEM.&nbsp;
-              <a href="assets/publications/co-author/2021 - AEM - A LysR Family Transcriptional Regulator Modulates Burkholderia cenocepacia Biofilm Formation and Protease Production.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Wen Li, Peng Li, Xiaofan Zhou, Junjian Situ, Yiming Lin, Jiahui Qiu, Yuling Yuan, Pinggen Xi, Zide Jiang and Guanghui Kong (2021). A Cytochrome B 5-Like HemeSteroid Binding Domain Protein, PlCB5L1, Regulates Mycelial Growth, Pathogenicity and Oxidative Stress Tolerance in Peronophythora litchii. FIPS.&nbsp;
-              <a href="assets/publications/co-author/2021 - FIPS - A Cytochrome B 5-Like HemeSteroid Binding Domain Protein, PlCB5L1, Regulates Mycelial Growth, Pathogenicity and Oxidative Stress Tolerance in Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Max A. B. Haase, Jacek Kominek, Dana A. Opulente, Xing-Xing Shen, Abigail L. LaBella, Xiaofan Zhou, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Antonis Rokas, and Chris Todd Hittinger (2021). Repeated horizontal gene transfer of GALactose metabolism genes violates Dollo's law of irreversible loss. Genetics.&nbsp;
-              <a href="assets/publications/co-author/2021 - Genetics - Repeated horizontal gene transfer of GALactose metabolism genes violates Dollo's law of irreversible loss.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Rui-Fang Gao, Jie-Yu Wang, Ke-Wei Liu, Kouki Yoshida, Yu-Yun Hsiao, Yi-Xiang Shi, Kun-Chan Tsai, You-Yi Chen, Nobutaka Mitsuda, Chieh-Kai Liang, Zhi-Wen Wang, Ying Wang, Di-Yang Zhang, Laiqiang Huang, Xiang Zhao, Wen-Ying Zhong, Ying-Hui Cheng, Zi-De Jiang, Ming-He Li, Wei-Hong Sun, Xia Yu, Wenqi Hu, Zhuang Zhou, Xiao-Fan Zhou, Chuan-Ming Yeh, Kazutaka Katoh, Wen-Chieh Tsai, Zhong-Jian Liu, Francis Martin, Gui-Ming Zhang (2021). Comparative analysis of Phytophthora genomes reveals oomycete pathogenesis in crops. Heliyon.&nbsp;
-              <a href="assets/publications/co-author/2021 - Heliyon - Comparative analysis of Phytophthora genomes reveals oomycete pathogenesis in crops.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Danyan Su, Lingxiao Yang, Xuan Shi, Xiaoya Ma, Xiaofan Zhou, S. Blair Hedges, and Bojian Zhong (2021). Large-scale phylogenomic analyses reveal the monophyly of bryophytes and Neoproterozoic origin of land plants. MBE.&nbsp;
-              <a href="assets/publications/co-author/2021 - MBE - Large-scale phylogenomic analyses reveal the monophyly of bryophytes and Neoproterozoic origin of land plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jacob L. Steenwyk, Matthew E. Mead, Patrícia Alves de Castro, Clara Valero, André Damasio, Renato A. C. dos Santos, Abigail L. Labella, Yuanning Li, Sonja L. Knowles, Huzefa A. Raja, Nicholas H. Oberlies, Xiaofan Zhou, Oliver A. Cornely, Frieder Fuchs, Philipp Koehler, Gustavo H. Goldman, Antonis Rokas (2021). Genomic and Phenotypic Analysis of COVID-19-Associated Pulmonary Aspergillosis Isolates of Aspergillus fumigatu. Microbiol. Spectr.&nbsp;
-              <a href="assets/publications/co-author/2021 - Microbiol. Spectr. - Genomic and Phenotypic Analysis of COVID-19-Associated Pulmonary Aspergillosis Isolates of Aspergillus fumigatu.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jinli Yan, Peng Li, Xiaoqing Wang, Minya Zhu, Hongyu Shi, Guohui Yu, Xuemei Chen, Huishan Wang, Xiaofan Zhou, Lisheng Liao, Lianhui Zhang (2022). RasI-R Quorum Sensing System Controls the Virulence of Ralstonia solanacearum Strain EP1. AEM.&nbsp;
-              <a href="assets/publications/co-author/2022 - AEM - RasI-R Quorum Sensing System Controls the Virulence of Ralstonia solanacearum Strain EP1.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Yuanning Li, Hongyue Liu, Jacob L. Steenwyk, Abigail L. LaBella, Marie-Claire Harrison, Marizeth Groenewald, Xiaofan Zhou, Xing-Xing Shen, Tao Zhao, Chris Todd Hittinger and Antonis Rokas (2022). Contrasting modes of macro and microsynteny evolution in a eukaryotic subphylum. CB.&nbsp;
-              <a href="assets/publications/co-author/2022 - CB - Contrasting modes of macro and microsynteny evolution in a eukaryotic subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Peiyi Ye, Xia Li, Binbin Cui, Shihao Song, Fangfang Shen, Xiayu Chen, Gerun Wang, Xiaofan Zhou & Yinyue Deng (2022). Proline utilization A controls bacterial pathogenicity by sensing its substrate and cofactors. Commun Biol.&nbsp;
-              <a href="assets/publications/co-author/2022 - Commun Biol - Proline utilization A controls bacterial pathogenicity by sensing its substrate and cofactors.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Zhou, X. (2022). Markerless gene deletion in Ralstonia solanacearum based on its natural transformation competence. FiM.&nbsp;
-              <a href="assets/publications/co-author/2022 - FiM - Markerless gene deletion in Ralstonia solanacearum based on its natural transformation competence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jinli Yan, Nuoqiao Lin, Xiaoqing Wang, Xuemei Chen, Huishan Wang, Qiqi Lin, Xiaofan Zhou, Lianhui Zhang and Lisheng Liao (2022). Two-component system ArcBA modulates cell motility and biofilm formation in Dickeya oryzae. FiPS.&nbsp;
-              <a href="assets/publications/co-author/2022 - FiPS - Two-component system ArcBA modulates cell motility and biofilm formation in Dickeya oryzae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Yu Shi, Xiaobei Yang, Xiaoxin Ye, Jiaying Feng, Tianfang Cheng, Xiaofan Zhou, Ding Xiang Liu, Linghui Xu and Junxia Wang (2022). The Methyltransferase HemK Regulates the Virulence and Nutrient Utilization of the Phytopathogenic Bacterium Xanthomonas citri subsp. citri. IJMS.&nbsp;
-              <a href="assets/publications/co-author/2022 - IJMS - The Methyltransferase HemK Regulates the Virulence and Nutrient Utilization of the Phytopathogenic Bacterium Xanthomonas citri subsp. citri.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Huishan Wang, Lisheng Liao, Xiaofan Zhou, Lingling Dong, Xin Lin and Lianhui Zhang (2022). Genome Sequence Resource of a Quorum-Quenching Biocontrol Agent, Pseudomonas nitroreducens HS-18. MPMI.&nbsp;
-              <a href="assets/publications/co-author/2022 - MPMI - Genome Sequence Resource of a Quorum-Quenching Biocontrol Agent, Pseudomonas nitroreducens HS-18.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Zhou, X. (2022). The integration host factor regulates multiple virulence pathways in bacterial pathogen Dickeya zeae MS2. MPP.&nbsp;
-              <a href="assets/publications/co-author/2022 - MPP - The integration host factor regulates multiple virulence pathways in bacterial pathogen Dickeya zeae MS2.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Shanshan Chen, Ming Hu, Anqun Hu, Yang Xue, Si Wang, Fan Liu, Chuhao Li, Xiaofan Zhou, Jianuan Zhou (2022). Insulin signaling in the long-lived reproductive caste of ants. Science.&nbsp;
-              <a href="assets/publications/co-author/2022 - Science - Insulin signaling in the long-lived reproductive caste of ants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Danqing Li, Han‑Yang Lin, Xiuyun Wang, Bo Bi, Yuan Gao, Lingmei Shao, Runlong Zhang, Yuwei Liang, Yiping Xia, Yun‑Peng Zhao, Xiaofan Zhou and Liangsheng Zhang (2023). Genome and whole-genome resequencing of Cinnamomum camphora elucidate its dominance in subtropical urban landscapes. BMC Biol.&nbsp;
-              <a href="assets/publications/co-author/2023 - BMC Biol - Genome and whole-genome resequencing of Cinnamomum camphora elucidate its dominance in subtropical urban landscapes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Zhibin Liang, Qiqi Lin, Qingwei Wang, Luhao Huang, Huidi Liu, Zurong Shi, Zining Cui, Xiaofan Zhou, Yong‑Gui Gao, Jianuan Zhou, Lian‑Hui Zhang and Yizhen Deng (2023). Gram‑negative bacteria resist antimicrobial agents by a DzrR‑mediated envelope stress response. BMC Biol.&nbsp;
-              <a href="assets/publications/co-author/2023 - BMC Biol - Gram‑negative bacteria resist antimicrobial agents by a DzrR‑mediated envelope stress response.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Si Wang, Ming Hu, Huilin Chen, Chuhao Li, Yang Xue, Xinyue Song, Yuqing Qi, Fan Liu, Xiaofan Zhou, Lian-hui Zhang and Jianuan Zhou (2023). Pseudomonas forestsoilum sp. nov. and P. tohonis biocontrol bacterial wilt by quenching 3-hydroxypalmitic acid methyl ester. FiPS.&nbsp;
-              <a href="assets/publications/co-author/2023 - FiPS - Pseudomonas forestsoilum sp. nov. and P. tohonis biocontrol bacterial wilt by quenching 3-hydroxypalmitic acid methyl ester.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Fan Liu, Ming Hu, Xu Tan, Yang Xue, Chuhao Li, Si Wang, Mingfa Lv, Xiaoyuan Chen, Xiaofan Zhou, Lian-hui Zhang and Jianuan Zhou (2023). Pseudomonas chlororaphis L5 and Enterobacter asburiae L95 biocontrol Dickeya soft. Microbial Biotech.&nbsp;
-              <a href="assets/publications/co-author/2023 - Microbial Biotech - Pseudomonas chlororaphis L5 and Enterobacter asburiae L95 biocontrol Dickeya soft.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jacob L. Steenwyk, Yuanning Li, Xiaofan Zhou, Xing-Xing Shen & Antonis Rokas (2023). Incongruence in the phylogenomics era. NRG.&nbsp;
-              <a href="assets/publications/co-author/2023 - NRG - Incongruence in the phylogenomics era.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Junjian Situ, Xinning Zhang, Xiaofan Zhou, Zijing Zhang, Pinggen Xi, Guanghui Kong and Zide Jiang (2023). The ankyrin repeat-containing protein PlANK1 mediates mycelial growth, oospore development, and virulence in Peronophythora litchii. Phyto Res.&nbsp;
-              <a href="assets/publications/co-author/2023 - Phyto Res - The ankyrin repeat-containing protein PlANK1 mediates mycelial growth, oospore development, and virulence in Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Danlu Han, Wenliang Li, Zhuangwei Hou, Chufang Lin, Yun Xie, Xiaofang Zhou, Yuan Gao, Junwen Huang, Jianbin Lai, Li Wang, Liangsheng Zhang and Chengwei Yang (2023). The chromosome-scale assembly of the Salvia rosmarinus genome provides insight into carnosic acid biosynthesis . PJ.&nbsp;
-              <a href="assets/publications/co-author/2023 - PJ - The chromosome-scale assembly of the Salvia rosmarinus genome provides insight into carnosic acid biosynthesis .pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Peng Li, Wen Li, Xiaofan Zhou, Junjian Situ, Lizhu Xie, Pinggen Xi, Bo Yang, Guanghui Kong and Zide Jiang (2023). Peronophythora litchii RXLR effector P. litchii avirulence homolog 202 destabilizes a host ethylene biosynthesis enzyme. PP.&nbsp;
-              <a href="assets/publications/co-author/2023 - PP - Peronophythora litchii RXLR effector P. litchii avirulence homolog 202 destabilizes a host ethylene biosynthesis enzyme.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              M. Groenewald, C.T. Hittinger, K. Bensch1, D.A. Opulente, X.-X. Shen, Y. Li5, C. Liu, A.L. LaBella, X. Zhou, S. Limtong, S. Jindamorakot, P. Gonçalves, V. Robert, K.H. Wolfe, C.A. Rosa, T. Boekhout, N. Čadež, G. Péter, J.P. Sampaio, M.-A. Lachance, A.M. Yurkov, H.-M. Daniel, M. Takashima, K. Boundy-Mills, D. Libkind, K. Aoki, T. Sugita, A. Rokas (2023). A genome-informed higher rank classification of the biotechnologically important fungal subphylum Saccharomycotina. Studies in Mycology.&nbsp;
-              <a href="assets/publications/co-author/2023 - Studies in Mycology - A genome-informed higher rank classification of the biotechnologically important fungal subphylum Saccharomycotina.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Bryan Zavala, Lauren Dineen, Kaitlin J. Fisher, Dana A. Opulente, Marie-Claire Harrison, John F. Wolters, Xing-Xing Shen, Xiaofan Zhou, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas, Abigail Leavitt LaBella (2024). Genomic factors shaping codon usage across the Saccharomycotina subphylum. G3.&nbsp;
-              <a href="assets/publications/co-author/2024 - G3 - Genomic factors shaping codon usage across the Saccharomycotina subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Na Zhang, Xinyang Li, Liangping Ming, Wenda Sun, Xiaofang Xie, Cailing Zhi, Xiaofan Zhou, Yanhua Wen, Zhibin Liang and Yizhen Deng (2024). Comparative Genomics and Pathogenicity Analysis of Three Fungal Isolates Causing Barnyard Grass Blast. J Fungi.&nbsp;
-              <a href="assets/publications/co-author/2024 - J Fungi - Comparative Genomics and Pathogenicity Analysis of Three Fungal Isolates Causing Barnyard Grass Blast.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Liang Sun, Kyle T. David, John F. Wolters, Steven D. Karlen, Carla Gonçalves, Dana A. Opulente, Abigail Leavitt LaBella, Marizeth Groenewald, Xiaofan Zhou, Xing-Xing Shen, Antonis Rokas and Chris Todd Hittinger (2024). Functional and evolutionary integration of a fungal gene with a bacterial operon. MBE.&nbsp;
-              <a href="assets/publications/co-author/2024 - MBE - Functional and evolutionary integration of a fungal gene with a bacterial operon.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Johnathan G. Crandall, Xiaofan Zhou, Antonis Rokas, Chris Todd Hittinger (2024). Specialization Restricts the Evolutionary Paths Available to Yeast Sugar Transporters. MBE.&nbsp;
-              <a href="assets/publications/co-author/2024 - MBE - Specialization Restricts the Evolutionary Paths Available to Yeast Sugar Transporters.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jacob L. Steenwyk, Sonja Knowles, Rafael W. Bastos, Charu Balamurugan, David Rinker, Matthew E. Mead, Christopher D. Roberts, Huzefa A. Raja, Yuanning Li, Ana Cristina Colabardini, Patrícia Alves de Castro, Thaila Fernanda dos Reis, Adiyantara Gumilang, María Almagro-Molto, Alexandre Alanio, Dea Garcia-Hermoso, Endrews Delbaje, Laís Pontes, Camila Figueiredo Pinzan, Angélica Zaninelli Schreiber, David Canóvas, Rafael Sanchez Luperini, Katrien Lagrou, Egídio Torrado, Fernando Rodrigues, Nicholas H. Oberlies, Xiaofan Zhou, Gustavo H. Goldman & Antonis Rokas (2024). Evolutionary origin and population diversity of a cryptic hybrid pathogen. NC.&nbsp;
-              <a href="assets/publications/co-author/2024 - NC - Evolutionary origin and population diversity of a cryptic hybrid pathogen.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Jingyang Sun, Yonglin Li, Li Zheng, Daipeng Chen, Xiaofan Zhou and Peng Li (2024). The first complete genome of Robbsia andropogonis reveals its arsenal of virulence system causing leaf spot disease of areca palm. Phyto Res.&nbsp;
-              <a href="assets/publications/co-author/2024 - Phyto Res - The first complete genome of Robbsia andropogonis reveals its arsenal of virulence system causing leaf spot disease of areca palm.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Hongyue Liu, Jacob L. Steenwyk, Xiaofan Zhou, Darrin T. Schultz, Kevin M. Kocot, Xing-Xing Shen, Antonis Rokas, Yuanning Li (2024). A taxon-rich and genome-scale phylogeny of Opisthokonta. PLoS Biol.&nbsp;
-              <a href="assets/publications/co-author/2024 - PLoS Biol - A taxon-rich and genome-scale phylogeny of Opisthokonta.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Carla Gonçalves, Marie-Claire Harrison, Jacob L. Steenwyk, Dana A. Opulente, Abigail L. LaBella, John F. Wolters, Xiaofan Zhou, Xing-Xing Shen, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas (2024). Diverse signatures of convergent evolution in cactus-associated yeasts. PLoS Biol.&nbsp;
-              <a href="assets/publications/co-author/2024 - PLoS Biol - Diverse signatures of convergent evolution in cactus-associated yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Zhou, X. (2024). Machine learning enables identification of an alternative yeast galactose utilization pathway. PNAS.&nbsp;
-              <a href="assets/publications/co-author/2024 - PNAS - Machine learning enables identification of an alternative yeast galactose utilization pathway.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Marie- Claire Harrison, Emily J. Ubbelohde, Abigail L. LaBella, Dana A. Opulente, John F. Wolters, Xiaofan Zhou, Xing- Xing Shen, Marizeth Groenewald, Chris Todd Hittinger, and Antonis Rokas (2024). Saccharomycotina yeasts defy long-standing macroecological patterns. PNAS.&nbsp;
-              <a href="assets/publications/co-author/2024 - PNAS - Saccharomycotina yeasts defy long-standing macroecological patterns.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Dana A. Opulente, Abigail Leavitt LaBella, Marie-Claire Harrison, John F. Wolters, Chao Liu, Yonglin Li, Jacek Kominek, Jacob L. Steenwyk, Hayley R. Stoneman, Jenna VanDenAvond, Caroline R. Miller, Quinn K. Langdon, Margarida Silva, Carla Gonçalves, Emily J. Ubbelohde, Yuanning Li, Kelly V. Buh, Martin Jarzyna, Max A. B. Haase, Carlos A. Rosa, Neža C ˇadež, Diego Libkind, Jeremy H. DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, José Paulo Sampaio, Paula Gonçalves, Xiaofan Zhou, Xing-Xing Shen, Marizeth Groenewald, Antonis Rokas, Chris Todd Hittinger (2024). Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts. Science.&nbsp;
-              <a href="assets/publications/co-author/2024 - Science - Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Marie‐Claire Harrison, Dana A. Opulente, John F. Wolters, Xing‐Xing Shen, Xiaofan Zhou, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas, Abigail Leavitt LaBella (2024). Exploring Saccharomycotina Yeast Ecology Through an Ecological Ontology Framework. Yeast.&nbsp;
-              <a href="assets/publications/co-author/2024 - Yeast - Exploring Saccharomycotina Yeast Ecology Through an Ecological Ontology Framework.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-          <li data-role="other">
-              Wen-Juan Chen, Xiaofang Luo, Xuanrui Zhang, Kalpana Bhatt, Shao-Fang Chen, Mohamed A. Ghorab, Xiaofan Zhou and Yaohua Huang (2025). Elucidating the kinetics and mechanisms of tetramethrin biodegradation by the fungal strain Neocosmospora sp. AF3. MCF.&nbsp;
-              <a href="assets/publications/co-author/2025 - MCF - Elucidating the kinetics and mechanisms of tetramethrin biodegradation by the fungal strain Neocosmospora sp. AF3.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
-          </li>
-      </ol>
-  </div>
+    <ol id="pub-list-research" style="margin: 24px 24px 32px; padding: 0 4px;font-size: 30px; font-family: 'Times New Roman', Times, serif;">
+        <li data-role="first-author">
+        <strong>Xiaofan Zhou</strong>, Zhenguo Lin, Hong Ma<sup>*</sup> (2008). Evolutionary history of histone demethylase families：distinct evolutionary patterns suggest functional divergence. . <a href="https://doi.org/10.1186/1471-2148-8-294" rel="noopener noreferrer" target="_blank">BMC Evol Biol 8, 294 (2008) doi: 10.1186/1471-2148-8-294</a>&nbsp;
+        <a href="assets/publications/第一作者/2008 - BMC Evo Biol - Evolutionary history of histone demethylase families：distinct evolutionary patterns suggest functional divergence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            <strong>Xiaofan Zhou</strong>; Zhenguo Lin; Hong Ma<sup>*</sup> (2010). Phylogenetic detection of numerous gene duplications shared by animals, fungi and plants. <a href="Genome Biol 11, R38 (2010). https://doi.org/10.1186/gb-2010-11-4-r38" rel="noopener noreferrer" target="_blank">Genome Biol 11, R38 (2010). doi: 10.1186/gb-2010-11-4-r38</a>&nbsp;
+            <a href="assets/publications/第一作者/2010 - GB - Phylogenetic detection of numerous gene duplications shared by animals, fungi and plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            <strong>Xiaofan Zhou<sup>#</sup></strong>; Jesse D. Slone<sup>#</sup>; Antonis Rokas; Shelley L. Berger; Jürgen Liebig; Anandasankar Ray; Danny Reinberg; Laurence J. Zwiebel<sup>*</sup> (2012). Phylogenetic and Transcriptomic Analysis of Chemosensory Receptors in a Pair of Divergent Ant Species Reveals Sex-Specific Signatures of Odor Coding. <a href="https://doi.org/10.1371/journal.pgen.1002930" rel="noopener noreferrer" target="_blank">PLoS Genet 8(8): e1002930. doi:10.1371/journal.pgen.1002930</a>&nbsp;
+            <a href="assets/publications/第一作者/2012 - PLoS Genetics - Phylogenetic and Transcriptomic Analysis of Chemosensory Receptors in a Pair of Divergent Ant Species Reveals Sex-Specific Signatures of Odor Coding.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            David C Rinker#, <strong>Xiaofan Zhou<sup>#</sup></strong>, Ronald Jason Pitts, The AGC Consortium, Antonis Rokas and Laurence J Zwiebel<sup>*</sup> (2013). Antennal transcriptome profiles of anopheline mosquitoes reveal human host olfactory specialization in Anopheles gambiae. <a href="https://doi.org/10.1186/1471-2164-14-749" rel="noopener noreferrer" target="_blank">BMC Genomics 14, 749 (2013). doi: 10.1186/1471-2164-14-749</a>&nbsp;
+            <a href="assets/publications/第一作者/2013 - BMC Genomics - Antennal transcriptome profiles of anopheline mosquitoes reveal human host olfactory specialization in Anopheles gambiae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou#, David C. Rinker#, Ronald Jason Pitts, Antonis Rokas, Laurence J. Zwiebel* (2014). Divergent and Conserved Elements Comprise the Chemoreceptive Repertoire of the Nonblood-Feeding Mosquito Toxorhynchites amboinensis. <a href="https://academic.oup.com/gbe/article/6/10/2883/614986" rel="noopener noreferrer" target="_blank">Genome Biol Evol. 2014 Oct 16;6(10):2883-96. doi: 10.1093/gbe/evu231.</a>&nbsp;
+            <a href="assets/publications/第一作者/2014 - GBE - Divergent and Conserved Elements Comprise the Chemoreceptive Repertoire of the Nonblood-Feeding Mosquito Toxorhynchites amboinensis.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou, Antonis Rokas* (2014). Prevention, Diagnosis, and Treatment of High Throughput Sequencing Data Pathologies. <a href="assets/publications/第一作者/2014 - ME - Prevention, Diagnosis, and Treatment of High Throughput Sequencing Data Pathologies.pdf" rel="noopener noreferrer" target="_blank">Molecular EcologyVolume 23, Issue 7 pp. 1679-1700.doi.org/10.1111/mec.12680</a>&nbsp;
+            <a href="assets/publications/第一作者/2014 - ME - Prevention, Diagnosis, and Treatment of High Throughput Sequencing Data Pathologies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            R. Jason Pitts#, Chao Liu#, Xiaofan Zhou#, Juan C. Malpartida, Laurence J. Zwiebel* (2014). Odorant receptor-mediated sperm activation in disease vector mosquitoes. <a href="https://doi.org/10.1073/pnas.1322923111" rel="noopener noreferrer" target="_blank">Proc. Natl. Acad. Sci. U.S.A. 111 (7) 2566-2571, doi: 10.1073/pnas.1322923111</a>&nbsp;
+            <a href="assets/publications/第一作者/2014 - PNAS - Odorant receptor-mediated sperm activation in disease vector mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou, Antonis Rokas, Shelley L. Berger, Jürgen Liebig, Anandasankar Ray, and Laurence J. Zwiebel (2015). Chemoreceptor Evolution in Hymenoptera and Its Implications for the Evolution of Eusociality. <a href="https://doi.org/10.1093/gbe/evv149" rel="noopener noreferrer" target="_blank">Genome Biol. Evol. 7(8):2407–2416. doi:10.1093/gbe/evv149</a>&nbsp;
+            <a href="assets/publications/第一作者/2015 - GBE - Chemoreceptor Evolution in Hymenoptera and Its Implications for the Evolution of Eusociality.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou, David Peris, Jacek Kominek, Cletus P. Kurtzman, Chris Todd Hittinger*, and Antonis Rokas* (2016). In Silico Whole Genome Sequencer and Analyzer (iWGS). <a href="https://doi.org/10.1534/g3.116.034249" rel="noopener noreferrer" target="_blank">G3.doi: 10.1534/g3.116.034249</a>&nbsp;
+            <a href="assets/publications/第一作者/2016 - G3 - In Silico Whole Genome Sequencer and Analyzer (iWGS).pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xin Yi#, Jiangwei Qi#, Xiaofan Zhou#, Mei Ying Hu & Guo Hua Zhong* (2017). Differential expression of chemosensory-protein genes in midguts in response to diet of Spodoptera litura. <a href="https://doi.org/10.1038/s41598-017-00403-5" rel="noopener noreferrer" target="_blank">Sci Rep 7, 296 (2017). DOI:10.1038/s41598-017-00403-5</a>&nbsp;
+            <a href="assets/publications/第一作者/2017 - SR - Differential expression of chemosensory-protein genes in midguts in response to diet of Spodoptera litura.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xing-Xing Shen#, Dana A. Opulente#, Jacek Kominek#, Xiaofan Zhou#, Jacob L. Steenwyk, Kelly V. Buh, Max A.B. Haase, Jennifer H. Wisecaver, Mingshuang Wang, Drew T. Doering, James T. Boudouris, Rachel M. Schneider, Quinn K. Langdon, Moriya Ohkuma, Rikiya Endoh, Masako Takashima, Ri-ichiroh Manabe, Neža Čadež, Diego Libkind, Carlos A. Rosa, Jeremy DeVirgilio, Amanda Beth Hulfachor, Marizeth Groenewald, Cletus P. Kurtzman, Chris Todd Hittinger*, and Antonis Rokas* (2018). Tempo and Mode of Genome Evolution in the Budding Yeast Subphylum. <a href="https://doi.org/10.1016/j.cell.2018.10.023" rel="noopener noreferrer" target="_blank">Cell 175, 1533—1545.e1—e11, November 29, 2018. doi: 10.1016/j.cell.2018.10.023</a>&nbsp;
+            <a href="assets/publications/第一作者/2018 - Cell - Tempo and Mode of Genome Evolution in the Budding Yeast Subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou, Xing-Xing Shen, Chris Todd Hittinger, and Antonis Rokas* (2018). Evaluating Fast Maximum Likelihood-Based Phylogenetic Programs Using Empirical Phylogenomic Data Sets. <a href="https://doi.org/10.1093/molbev/msx302" rel="noopener noreferrer" target="_blank">Mol. Biol. Evol. 35(2):486–503 doi:10.1093/molbev/msx302</a>&nbsp;
+            <a href="assets/publications/第一作者/2018 - MBE - Evaluating Fast Maximum Likelihood-Based Phylogenetic Programs Using Empirical Phylogenomic Data Sets.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Yuyu Wang#, Xiaofan Zhou#, Liming Wang, Xingyue Liu, Ding Yang* and Antonis Rokas* (2019). Gene Selection and Evolutionary Modeling Affect Phylogenomic Inference of Neuropterida Based on Transcriptome Data. <a href=" https://doi.org/10.3390/ijms20051072" rel="noopener noreferrer" target="_blank">Int. J. Mol. Sci. 2019, 20, 1072 doi:10.3390/ijms20051072</a>&nbsp;
+            <a href="assets/publications/第一作者/2019 - IJMS - Gene Selection and Evolutionary Modeling Affect Phylogenomic Inference of Neuropterida Based on Transcriptome Data.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            E. Anne Hatmaker#, Xiaofan Zhou#, Matthew E. Mead, Heungyun Moon, Jae-Hyuk Yu, Antonis Rokas* (2020). Revised Transcriptome-Based Gene Annotation for Aspergillus flavus Strain NRRL 3357. <a href="https://doi.org/10.1128/mra.01155-20" rel="noopener noreferrer" target="_blank">Microbiol Resour Announc 9:e01155-20. doi: 10.1128/MRA.01155-20</a>&nbsp;
+            <a href="assets/publications/第一作者/2020 - MRA - Revised Transcriptome-Based Gene Annotation for Aspergillus flavus Strain NRRL 3357.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Xiaofan Zhou, Sarah Lutteropp, Lucas Czech, Alexandros Stamatakis, Moritz von Looz, and Antonis Rokas* (2020). Quartet-Based Computations of Internode Certainty Provide Robust Measures of Phylogenetic Incongruence. <a href="https://doi.org/10.1093/sysbio/syz058" rel="noopener noreferrer" target="_blank">Syst. Biol. 69(2):308–324, 202 DOI:10.1093/sysbio/syz058</a>&nbsp;
+            <a href="assets/publications/第一作者/2020 - SB - Quartet-Based Computations of Internode Certainty Provide Robust Measures of Phylogenetic Incongruence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Yanqiu He#, Xiaofan Zhou#, Jieling Li, Huaping Li, Yunfeng Li* and Yanfang Nie* (2021). In Vitro Secretome Analysis Suggests Differential Pathogenic Mechanisms between Fusarium oxysporum f. sp. cubense Race 1 and Race 4. <a href="https://doi.org/10.3390/biom11091353" rel="noopener noreferrer" target="_blank">Biomolecules 2021, 11, 1353. doi: 10.3390/biom11091353</a>&nbsp;
+            <a href="assets/publications/第一作者/2021 - Biomolecules - In Vitro Secretome Analysis Suggests Differential Pathogenic Mechanisms between Fusarium oxysporum f. sp. cubense Race 1 and Race 4.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Ming Hu#, Chuhao Li,# Xiaofan Zhou#, Yang Xue, Si Wang, Anqun Hu, Shanshan Chen, Xiuwen Mo and Jianuan Zhou* (2021). Microbial Diversity Analysis and Genome Sequencing Identify Xanthomonas perforans as the Pathogen of Bacterial Leaf Canker of Water Spinach (Ipomoea aquatic). <a href="https://doi.org/10.3389/fmicb.2021.752760" rel="noopener noreferrer" target="_blank">Front. Microbiol. 12:752760. doi: 10.3389/fmicb.2021.752760</a>&nbsp;
+            <a href="assets/publications/第一作者/2021 - FiM - Microbial Diversity Analysis and Genome Sequencing Identify Xanthomonas perforans as the Pathogen of Bacterial Leaf Canker of Water Spinach (Ipomoea aquatic).pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Pankaj Bhatt#, Xiaofan Zhou#, Yaohua Huang, Wenping Zhang, Shaohua Chen* (2021). Characterization of the role of esterases in the biodegradation of organophosphate, carbamate, and pyrethroid pesticides. <a href="https://doi.org/10.1016/j.jhazmat.2020.125026" rel="noopener noreferrer" target="_blank">Journal of Hazardous Materials 411 (2021) 125026 doi: 10.1016/j.jhazmat.2020.125026</a>&nbsp;
+            <a href="assets/publications/第一作者/2021 - JHM - Characterization of the role of esterases in the biodegradation of organophosphate, carbamate, and pyrethroid pesticides.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Tiantian Yan#, Xiaofan Zhou#, Jieling Li#, Guanjun Li, Yali Zhao, Haojie Wang, Huaping Li*, Yanfang Nie* and Yunfeng Li* (2022). FoCupin1, a Cupin_1 domain-containing protein, is necessary for the virulence of Fusarium oxysporum f. sp. cubense tropical race 4. <a href="https://doi.org/10.3389/fmicb.2022.1001540" rel="noopener noreferrer" target="_blank">Front. Microbiol. 13:1001540.doi: 10.3389/fmicb.2022.1001540</a>&nbsp;
+            <a href="assets/publications/第一作者/2022 - FiM - FoCupin1, a Cupin_1 domain-containing protein, is necessary for the virulence of Fusarium oxysporum f. sp. cubense tropical race 4.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Peng Yang#, Xu-Yi Ling#, Xiao-Fan Zhou#, Yuan-Xia Chen, Tian-Tian Wang, Xiao-Jing Lin, Yuan-Yuan Zhao, Yu-Shi Ye, Lin-Xuan Huang, Ye-Wen Sun, Yu-Xin Qi, Dong-Ming Ma, Ruo-Ting Zhan,*, Xue-Shuang Huang2,*, Jin-Fen Yang1,* (2023). Comparing genomes of Fructus Amomi-producing species reveals genetic basis of volatile terpenoid divergence. <a href="https://doi.org/10.1093/plphys/kiad400" rel="noopener noreferrer" target="_blank">Plant Physiol. 2023 Sep 22;193(2):1244-1262. doi: 10.1093/plphys/kiad400</a>&nbsp;
+            <a href="assets/publications/第一作者/2023 - PP - Comparing genomes of Fructus Amomi-producing species reveals genetic basis of volatile terpenoid divergence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Lin Chen#, Chengyu Li#, Bijun Li#, Xiaofan Zhou#, Yulin Bai, Xiaoqing Zou, Zhixiong Zhou, Qian He, Baohua Chen, Mei Wang, Yaguo Xue, Zhou Jiang, Jianxin Feng, Tao Zhou, Zhanjiang Liu*, Peng Xu* (2024). Evolutionary divergence of subgenomes in common carp provides insights into speciation and allopolyploid success. <a href="https://doi.org/10.1016/j.fmre.2023.06.011" rel="noopener noreferrer" target="_blank">FundamentalResearch 4(2024)589–602. doi: 10.1016/j.fmre.2023.06.011</a>&nbsp;
+            <a href="assets/publications/第一作者/2024 - FR - Evolutionary divergence of subgenomes in common carp provides insights into speciation and allopolyploid success.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="first-author">
+            Chao Liu#, Xiaofan Zhou#, Yuanning Li, Chris Todd Hittinger, Ronghui Pan, Jinyan Huang, Xue-xin Chen, Antonis Rokas, Yun Chen, and Xing-Xing Shen* (2024). The Influence of the Number of Tree Searches on Maximum Likelihood Inference in Phylogenomics. <a href="https://doi.org/10.1093/sysbio/sya" rel="noopener noreferrer" target="_blank">Syst. Biol. 73(5):807–822, 20 doi: 10.1093/sysbio/sya</a>&nbsp;
+            <a href="assets/publications/第一作者/2024 - SB - The Influence of the Number of Tree Searches on Maximum Likelihood Inference in Phylogenomics.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <!-- 新增通讯作者文献 -->
+        <li data-role="corresponding-author">
+            Ren Ren, Yazhou Sun, Yue Zhao, David Geiser, Hong Ma* and Xiaofan Zhou* (2016). Phylogenetic Resolution of Deep Eukaryotic and Fungal Relationships Using Highly Conserved Low-Copy Nuclear Genes. <a href="https://doi.org/10.1093/gbe/evw196" rel="noopener noreferrer" target="_blank">Genome Biol. Evol. 8(9):2683—2701. doi:10.1093/gbe/evw196</a>&nbsp;
+            <a href="assets/publications/通讯作者/2016 - GBE - Phylogenetic Resolution of Deep Eukaryotic and Fungal Relationships Using Highly Conserved Low-Copy Nuclear Genes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xin Yi, Song Shi, Peidan Wang, Yaoyao Chen, Qiqi Lu, Tianyi Wang, Xiaofan Zhou* and Guohua Zhong* (2019). Characterizing potential repelling volatiles for “push-pull” strategy against stem borer：a case study in Chilo auricilius. <a href="https://doi.org/10.1186/s12864-019-6112-4" rel="noopener noreferrer" target="_blank">BMC Genomics 20, 751 (2019). doi: 10.1186/s12864-019-6112-4</a>&nbsp;
+            <a href="assets/publications/通讯作者/2019 - BMC Genomics - Characterizing potential repelling volatiles for “push-pull” strategy against stem borer：a case study in Chilo auricilius.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yue Zhong#, Meixin Yan#, Jinyan Jiang#, Zhihan Zhang, Junjun Huang, Lianhui Zhang, Yinyue Deng*, Xiaofan Zhou* and Fei He* (2019). Mycophenolic Acid as a Promising Fungal Dimorphism Inhibitor to Control Sugar Cane Disease Caused by Sporisorium scitamineum. <a href="https://doi.org/10.1021/acs.jafc.8b04893" rel="noopener noreferrer" target="_blank">Journal of Agricultural and Food Chemistry 2019 67 (1), 112-119 DOI: 10.1021/acs.jafc.8b04893</a>&nbsp;
+            <a href="assets/publications/通讯作者/2019 - JAFC - Mycophenolic Acid as a Promising Fungal Dimorphism Inhibitor to Control Sugar Cane Disease Caused by Sporisorium scitamineum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Peng Li*, Ying Zhang, Yuqingqing Sun, Xingxing Wu, Zhiyuan Wang, Jianuan Zhou and Xiaofan Zhou* (2019). Comparative genomic analysis of subspecies of Pantoea stewartii. <a href="https://doi.org/10.1007/s42161-019-00328-0" rel="noopener noreferrer" target="_blank">J Plant Pathol 101, 997–1004 (2019). doi: 10.1007/s42161-019-00328-0</a>&nbsp;
+            <a href="assets/publications/通讯作者/2019 - JPP - Comparative genomic analysis of subspecies of Pantoea stewartii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Li Zheng, Jun-jian Situ, Qing-feng Zhu, Ping-gen Xia, Yin Zheng, Hong-xia Liu, Xiaofan Zhou*, Zide Jiang* (2019). Identification of volatile organic compounds for the biocontrol of postharvest litchi fruit pathogen Peronophythora litchii. <a href="https://doi.org/10.1016/j.postharvbio.2019.05.009" rel="noopener noreferrer" target="_blank">Postharvest Biology and Technology 155 (2019) 37-46 doi: 10.1016/j.postharvbio.2019.05.009</a>&nbsp;
+            <a href="assets/publications/通讯作者/2019 - PBT - Identification of volatile organic compounds for the biocontrol of postharvest litchi fruit pathogen Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Tian Ye#, Tian Zhou#, Xudan Xu#, Wenping Zhang, Xinghui Fan, Sandhya Mishra, Lianhui Zhang, Xiaofan Zhou* and Shaohua Chen* (2020). Whole-Genome Sequencing Analysis of Quorum Quenching Bacterial Strain Acinetobacter lactucae QL-1 Identifies the FadY Enzyme for Degradation of the Diffusible Signal Factor. <a href="https://doi.org/10.3390/ijms21186729" rel="noopener noreferrer" target="_blank">Int. J. Mol. Sci. 2020, 21, 6729 doi:10.3390/ijms21186729 www.mdpi.com/journal/ijms</a>
+            <a href="assets/publications/通讯作者/2020 - IJMS - Whole-Genome Sequencing Analysis of Quorum Quenching Bacterial Strain Acinetobacter lactucae QL-1 Identifies the FadY Enzyme for Degradation of the Diffusible Signal Factor.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xudan Xu#, Tian Ye#, Wenping Zhang, Tian Zhou, Xiaofan Zhou*, Weijun Dai& and Shaohua Chen& (2021). Identification of FadT as a Novel Quorum Quenching Enzyme for the Degradation of Diffusible Signal Factor in Cupriavidus pinatubonensis Strain HN-2. <a href="https://doi.org/10.3390/ijms22189862" rel="noopener noreferrer" target="_blank">Int. J. Mol. Sci. 2021, 22, 9862. doi: 10.3390/ijms22189862</a>&nbsp;
+            <a href="assets/publications/通讯作者/2021 - IJMS - Identification of FadT as a Novel Quorum Quenching Enzyme for the Degradation of Diffusible Signal Factor in Cupriavidus pinatubonensis Strain HN-2.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Ming Hu, Chuhao Li, Yang Xue, Anqun Hu, Shanshan Chen, Yufan Chen, Guangtao Lu, Xiaofan Zhou* and Jianuan Zhou* (2021). Isolation, characterization, and genomic investigation of a phytopathogenic strain of Stenotrophomonas maltophilia.  <a href="https://doi.org/10.1094/PHYTO-11-20-0501-R" rel="noopener noreferrer" target="_blank">Phytopathology® 2021 111:11, 2088-2099 doi: 10.1094/PHYTO-11-20-0501-R</a>
+            Mycotoxins and Human Pathogens on Plants
+            <a href="assets/publications/通讯作者/2021 - Phytopathology - Isolation, characterization, and genomic investigation of a phytopathogenic strain of Stenotrophomonas maltophilia.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yang Liu#, Stephen Dela Ahator#, Huishan Wang, Qishun Feng, Yinuo Xu, Chuhao Li, Xiaofan Zhou* and Lian-Hui Zhang* (2022). Microevolution of the mexT and lasR Reinforces the Bias of Quorum Sensing System in Laboratory Strains of Pseudomonas aeruginosa PAO1. <a href="https://doi.org/10.3389/fmicb.2022.821895" rel="noopener noreferrer" target="_blank">Front. Microbiol., 12 April 2022 doi: 10.3389/fmicb.2022.821895</a>
+            <a href="assets/publications/通讯作者/2022 - FiM - Microevolution of the mexT and lasR Reinforces the Bias of Quorum Sensing System in Laboratory Strains of Pseudomonas aeruginosa PAO1.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yanfang Nie#, Guanjun Li#, Jieling Li, Xiaoshu Zhou, Yanzhi Zhang, Qingchuan Shi, Xiaofan Zhou*, Huaping Li*, Xiao-Lin Chen* and Yunfeng Li* (2022). A novel elicitor MoVcpo is necessary for the virulence of Magnaporthe oryzae and triggers rice defense responses. <a href="https://doi.org/10.3389/fpls.2022.1018616" rel="noopener noreferrer" target="_blank">Front. Plant Sci., 17 October 2022 doi: 10.3389/fpls.2022.1018616</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - FiPS - A novel elicitor MoVcpo is necessary for the virulence of Magnaporthe oryzae and triggers rice defense responses.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Jianuan Zhou#, Ming Hu#, Anqun Hu#, Chuhao Li, Xinyue Ren, Min Tao, Yang Xue, Shanshan Chen, Chongzhi Tang, Yiwu Xu, Lianhui Zhang and Xiaofan Zhou* (2022). Isolation and Genome Analysis of Pectobacterium colocasium sp. nov. and Pectobacterium aroidearum, Two New Pathogens of Taro. <a href="https://doi.org/10.3389/fpls.2022.852750" rel="noopener noreferrer" target="_blank">Front. Plant Sci., 26 April 2022 doi: 10.3389/fpls.2022.852750</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - FiPS - Isolation and Genome Analysis of Pectobacterium colocasium sp. nov. and Pectobacterium aroidearum, Two New Pathogens of Taro.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Chenxing Tan, Chuhao Li, Ming Hu , Anqun Hu, Yang Xue, Xiaofan Zhou* and Jianuan Zhou* (2022). Comparative Pathogenomic Analysis of Two Banana Pathogenic Dickeya Strains Isolated from China and the Philippines. <a href="https://doi.org/10.3390/ijms232112758" rel="noopener noreferrer" target="_blank">Int. J. Mol. Sci. 2022, 23(21), 12758; doi: 10.3390/ijms232112758</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - IJMS - Comparative Pathogenomic Analysis of Two Banana Pathogenic Dickeya Strains Isolated from China and the Philippines.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Ming Hu, Yang Xue, Chuhao Li, Mingfa Lv, Lianhui Zhang, Matthew R. Parsek, Guangtao Lu, Xiaofan Zhou*, Jianuan Zhou* (2022). Genomic and Functional Dissections of Dickeya zeae Shed Light on the Role of Type III Secretion System and Cell Wall-Degrading Enzymes to Host Range and Virulence. <a href="https://doi.org/10.1128/spectrum.01590-21" rel="noopener noreferrer" target="_blank">Microbiol Spectr. 2022 Feb 23;10(1):e0159021. doi: 10.1128/spectrum.01590-21</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - Microbiol. Spectr. - Genomic and Functional Dissections of Dickeya zeae Shed Light on the Role of Type III Secretion System and Cell Wall-Degrading Enzymes to Host Range and Virulence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Mingfa Lv, Yufan Chen, Ming Hu, Qinglin Yu, Cheng Duan, Sixuan Ye, Jinfeng Ling, Jianuan Zhou, Xiaofan Zhou*, Lianhui Zhang* (2022). OhrR is a central transcriptional regulator of virulence in Dickeya zeae. <a href="https://doi.org/10.1111/mpp.13141" rel="noopener noreferrer" target="_blank">Mol Plant Pathol. 2022;23:45–59. DOI: 10.1111/mpp.13141</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - MPP - OhrR is a central transcriptional regulator of virulence in Dickeya zeae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yuwei Liang#, Fan Li#, Qiang Gao#, Chunlian Jin, Liqing Dong, Qi Wang, Min Xu, Fuhui Sun, Bo Bi, Peng Zhao, Shenchong Li, Jiwei Ruan, Xiaofan Zhou*, Liangsheng Zhang* and Jihua Wang* (2022). The genome of Eustoma grandiflorum reveals the whole‐genome triplication event. <a href="https://doi.org/10.1111/pbi.13899" rel="noopener noreferrer" target="_blank">Plant Biotechnology Journal (2022) 20, pp. 1856–1858 doi: 10.1111/pbi.13899</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - PBJ  - The genome of Eustoma grandiflorum reveals the whole‐genome triplication event.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Peng Yang, Hai-Ying Zhao, Jie-Shu Wei, Yuan-Yuan Zhao, Xiao-Jing Lin, Jing Su, Fang-Ping Li, Meng Li, Dong-Ming Ma, Xu-Kai Tan, Hui-Lin Liang, Ye-Wen Sun, Ruo-Ting Zhan, Guo-Zhen He*, Xiao-Fan Zhou* and Jin-Fen Yang* (2022). Chromosome-level genome assembly and functional characterization of terpene synthases provide new insights into the volatile terpenoid biosynthesis of Wurfbainia villosa. <a href="https://doi.org/10.1111/tpj.15968" rel="noopener noreferrer" target="_blank">The Plant Journal (2022) 112, 630–645 doi: 10.1111/tpj.15968</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - PJ - Chromosome-level genome assembly and functional characterization of terpene synthases provide new insights into the volatile terpenoid biosynthesis of Wurfbainia villosa.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            王莹乐，李泳霖，梁 雪，黄淑芬，张炼辉，廖立胜，<strong>周筱帆</strong> (2022). 生物炭环境协同生防菌Bacillus amyloliquefaciens P4防控香芋软腐病的研究. <a href="https://doi.org/10.14088/j.cnki.issn0439-8114.2022.21.014" rel="noopener noreferrer" target="_blank">湖北农业科学，2022，61（21）：79-85 DOI:10.14088/j.cnki.issn0439-8114.2022.21.014</a>&nbsp;
+            <a href="assets/publications/通讯作者/2022 - 湖北农业科学 - 生物炭环境协同生防菌Bacillus amyloliquefaciens P4防控香芋软腐病的研究.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Wen-Juan Chen#, Wenping Zhang#, Qiqi Lei#, Shao-Fang Chen, Yaohua Huang, Kalpana Bhatt, Lisheng Liao*, Xiaofan Zhou* (2023). Pseudomonas aeruginosa based concurrent degradation of beta-cypermethrin and metabolite 3-phenoxybenzaldehyde, and its bioremediation efficacy in contaminated soils. <a href="https://doi.org/10.1016/j.envres.2023.116619" rel="noopener noreferrer" target="_blank">Environmental Research 236 (2023) 116619 doi: 10.1016/j.envres.2023.116619</a>&nbsp;
+            <a href="assets/publications/通讯作者/2023 - ER - Pseudomonas aeruginosa based concurrent degradation of beta-cypermethrin and metabolite 3-phenoxybenzaldehyde, and its bioremediation efficacy in contaminated soils.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Jianuan Zhou*, Steffen Kolb* and Xiaofan Zhou* (2023). Editorial：Pathogen co-infections and plant diseases. Front. <a href="https://doi.org/10.3389/fmicb.2023.1189476" rel="noopener noreferrer" target="_blank">Microbiol. 14:1189476. doi: 10.3389/fmicb.2023.1189476</a>&nbsp;
+            <a href="assets/publications/通讯作者/2023 - FiPS - Editorial：Pathogen co-infections and plant diseases.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Min Xue#, Qiang Gao#, Mengwei Jiang, Wenling Wang, Juan Hu, Xiaojun Chang, Dinggao Liu, Yuwei Liang, Yifan Jiang, Fei Chen, Chuhao Li, Haoran Huang, Feng Chen, Fan Li, Robert N. Trigiano, Jihua Wang*, Chen Jiao*, Xiaofan Zhou* and Liangsheng Zhang* (2023). A novel genome sequence of Jasminum sambac helps uncover the molecular mechanism underlying the accumulation of jasmonates. <a href="https://doi.org/10.1093/jxb/erac464" rel="noopener noreferrer" target="_blank">Journal of Experimental Botany, Vol. 74, No. 4 pp. 1275–1290, 2023 doi: 10.1093/jxb/erac464</a>&nbsp;
+            <a href="assets/publications/通讯作者/2023 - JEB - A novel genome sequence of Jasminum sambac helps uncover the molecular mechanism underlying the accumulation of jasmonates.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Qingmei Liu, Chuhao Li, Xiaohan Zhang, Mengfan Ding, Xinyue Liao, Jinli Yan, Ming Hu, Leilei Yang, Xiaoqing Wang, Lisheng Liao, Peng Li, Xiaofan Zhou* (2023). PhcX Is a LqsR-family response regulator that contributes to Ralstonia solanacearum virulence and regulates multiple virulence factors. 
+            <a href="https://doi.org/10.1128/mbio.02028-23" rel="noopener noreferrer" target="_blank">mBio 14:e02028-23.doi.org/10.1128/mbio.02028-23</a>&nbsp;
+            <a href="assets/publications/通讯作者/2023 - mBio - PhcX Is a LqsR-family response regulator that contributes to Ralstonia solanacearum virulence and regulates multiple virulence factors.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Qian He#, Juming Li#, Qingmei Liu#, Yonglin Li, Xinyue Liao, Jianuan Zhou, and Xiaofan Zhou* (2023). Complete genome sequence resource of Pantoea anthophila CL1 causing soft rot disease in Clausena lansium (Wampee) in China. <a href="https://doi.org/10.1094/PDIS-10-22-2504-A" rel="noopener noreferrer" target="_blank">Plant Disease 2023 107:1613-1616 doi: 10.1094/PDIS-10-22-2504-A</a>&nbsp;
+            <a href="assets/publications/通讯作者/2023 - PD - Complete genome sequence resource of Pantoea anthophila CL1 causing soft rot disease in Clausena lansium (Wampee) in China.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            WenJuan Chen, ShaoFang Chen, Haoran Song, Zeren Li, Xiaofang Luo, Xidong Zhang, Xiaofan Zhou (2024). Current insights into environmental acetochlor toxicity and remediation strategies. <a href="https://doi.org/10.1007/s10653-024-02136-4" rel="noopener noreferrer" target="_blank">Environ Geochem Health (2024) 46:356 doi: 10.1007/s10653-024-02136-4</a>&nbsp;
+            <a href="assets/publications/通讯作者/2024 - EGH - Current insights into environmental acetochlor toxicity and remediation strategies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Minghui Qiu#, Yonglin Li#, Qingmei Liu#, Xiaohan Zhang, Yulong Huang, Rui Guo, Ming Hu, Jianuan Zhou and Xiaofan Zhou* (2024). Pseudomonas machongensis sp. nov. and Stenotrophomonas capsici sp. nov., isolated from wilted pepper plants. <a href="https://doi.org/10.1099/ijsem.0.006550" rel="noopener noreferrer" target="_blank">Int. J. Syst. Evol. Microbiol. 2024;74:006550 DOI 10.1099/ijsem.0.006550</a>&nbsp;
+            <a href="assets/publications/通讯作者/2024 - IJSEM - Pseudomonas machongensis sp. nov. and Stenotrophomonas capsici sp. nov., isolated from wilted pepper plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xiuxiu Li#, Sheng Yu#, Zhihao Cheng#, Xiaojun Chang#, Yingzi Yun#, Mengwei Jiang#, Xuequn Chen, Xiaohui Wen, Hua Li, Wenjun Zhu, Shiyao Xu, Yanbing Xu, Xianjun Wang, Chen Zhang, Qiong Wu, Jin Hu, Zhenguo Lin, Jean-Marc Aury, Yves Van de Peer*, Zonghua Wang*, Xiaofan Zhou*, Jihua Wang*, Peitao Lü*, Liangsheng Zhang* (2024). Origin and evolution of the triploid cultivated banana genome. <a href="https://doi.org/10.1038/s41588-023-01589-3" rel="noopener noreferrer" target="_blank">Nat Genet 56, 136–142 (2024). doi: 10.1038/s41588-023-01589-3</a>&nbsp;
+            <a href="assets/publications/通讯作者/2024 - NG - Origin and evolution of the triploid cultivated banana genome.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xiaoqing Wang, Chuhao Li, Shaohua Huang, Huagui Gao, Yonglin Li, Xuemei Chen, Liangzhou Huang, Jianhua Luo, LianHui Zhang and Xiaofan Zhou (2024). Pathogenic and Comparative Genomic Analysis of Ralstonia pseudosolanacearum Isolated from Casuarina. <a href="https://doi.org/10.1094/PDIS-01-24-0118-RE" rel="noopener noreferrer" target="_blank">Plant Disease 2024 108:2809-2819 doi.org/10.1094/PDIS-01-24-0118-RE</a>&nbsp;
+            <a href="assets/publications/通讯作者/2024 - PD - Pathogenic and Comparative Genomic Analysis of Ralstonia pseudosolanacearum Isolated from Casuarina.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Siliang Zuo, Linghui Xu, Huiyan Zhang, Meiqian Jiang, Sifeng Wu, Lian-Hui Zhang, Xiaofan Zhou and Junxia Wan (2024). FlgI Is a Sec-Dependent Effector of Candidatus Liberibacter asiaticus That Can Be Blocked by Small Molecules Identified Using a Yeast Screen. <a href="https://doi.org/10.3390/plants13020318" rel="noopener noreferrer" target="_blank">Plants 2024, 13, 318. doi.org/10.3390/plants13020318</a>&nbsp;
+            <a href="assets/publications/通讯作者/2024 - Plants - FlgI Is a Sec-Dependent Effector of Candidatus Liberibacter asiaticus That Can Be Blocked by Small Molecules Identified Using a Yeast Screen.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yixiao Zhu, Yonglin Li, Chuhao Li, Xing-Xing Shen*, Xiaofan Zhou* (2025). A critical evaluation of deep-learning based phylogenetic inference programs using simulated data sets. <a href="https://doi.org/10.1016/j.jgg.2025.01.006" rel="noopener noreferrer" target="_blank">Journal of Genetics and Genomics 52 (2025) 714e717 doi.org/10.1016/j.jgg.2025.01.006</a>&nbsp;
+            <a href="assets/publications/通讯作者/2025 - JGG - A critical evaluation of deep-learning based phylogenetic inference programs using simulated data sets.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Bo Feng#, Yonglin Li#, Biyang Xu#, Hongyue Liu, Jacob L Steenwyk, Kyle T Davi, Xiaolin Tian, Carla Gonçalves, Dana A Opulente, Abigail L LaBella, Marie-Claire Harrison, John F Wolters 10, Shengyuan Shao, Zhaohao Chen, Kaitlin J Fisher, Marizeth Groenewald, Chris Todd Hittinger, Xing-Xing Shen, Shengying Li, Antonis Rokas*, Xiaofan Zhou* and Yuanning Li* (2025). Unique trajectory of gene family-evolution from genomic analysis of nearly all known species in an ancient yeast lineage. <a href="https://doi.org/10.1038/s44320-025-00118-0" rel="noopener noreferrer" target="_blank">Mol Syst Biol(2025)21: 1066 - 1089 doi.org/10.1038/s44320-025-00118-0</a>&nbsp;
+            <a href="assets/publications/通讯作者/2025 - MSB - Unique trajectory of gene family-evolution from genomic analysis of nearly all known species in an ancient yeast lineage.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Yuwei Liang#, Qiang Gao#, Fan Li#, Yunpeng Du#, Jian Wu#, Wenqiang Pan, Shaokun Wang, Xiuhai Zhang, Mingfang Zhang, Xiaoming Song, Linlin Zhong, Fan Zhang, Yan Li, Zhiwei Wang, Danqing Li, Qing Duan, Shenchong Li, Chunlian Jin, Peihua Zhang, Yang Gu, Zhong-Hua Chen, Klaus F. X. Mayer*, Xiaofan Zhou*, Jihua Wang* & Liangsheng Zhang* (2025). The giant genome of lily provides insights into the hybridization of cultivated lilies. <a href="https://doi.org/10.1038/s41467-024-55545-8" rel="noopener noreferrer" target="_blank">Nat Commun 16, 45 (2025). doi.org/10.1038/s41467-024-55545-8</a>&nbsp;
+            <a href="assets/publications/通讯作者/2025 - NC - The giant genome of lily provides insights into the hybridization of cultivated lilies.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xiaohui Wen#, Yuwei Liang#, Hongyan Shan#, Xiaojun Chang#, Xiaoming Song#, Shaoqin Shen, Yanhong Fu, Dan Chen, Fei Chen, Yueqing Li, Qian Guan, Qiang Gao, Qi Wang, Yonglin Li, Zhengjia Wang, Hongzhi Kong, Huan Liu*, Xiang Gao*, Xiaofan Zhou*, Chris Thorogood* and Liangsheng Zhang* (2025). The genome of giant waterlily provides insights into the origin of angiosperms, leaf gigantism, and stamen function innovation. <a href="https://doi.org/10.1016/j.xplc.2025.101342" rel="noopener noreferrer" target="_blank">Plant Commun. doi.org/10.1016/j.xplc.2025.101342</a>&nbsp;
+            <a href="assets/publications/通讯作者/2025 - Plant Commun - The genome of giant waterlily provides insights into the origin of angiosperms, leaf gigantism, and stamen function innovation.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="corresponding-author">
+            Xiaoqing Wang#, Hongyu Shi#, Xiaoyan Wu, Xuemei Chen, Shaobo Liu, Qinglin Yu, Lian-Hui Zhang and Xiaofan Zhou* (2025). Microbial diversity in coastal Casuarina equisetifolia forest and its potential in counteracting bacterial wilt infections. <a href="https://doi.org/10.1002/ps.8822" rel="noopener noreferrer" target="_blank">Pest Manag Sci 2025 DOI 10.1002/ps.8822</a>&nbsp;
+            <a href="assets/publications/通讯作者/2025 - PMS - Microbial diversity in coastal Casuarina equisetifolia forest and its potential in counteracting bacterial wilt infections.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Danhua Jiang, Changsong Yin, Aiping Yu, Xiaofan Zhou, Wanqi Liang, Zheng Yuan, Yun Xu, Qingbo Yu, Tieqiao Wen, Dabing Zhang* (2006). Duplication and expression analysis of multicopy miRNA gene family members in Arabidopsis and rice. <a href="https://doi.org/10.1038/sj.cr.7310062" rel="noopener noreferrer" target="_blank">Cell Res 16, 507–518 (2006). doi.org/10.1038/sj.cr.7310062</a>&nbsp;
+            <a href="assets/publications/co-author/2006 - Cell Res - Duplication and expression analysis of multicopy miRNA gene family members in Arabidopsis and rice.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Yujin Sun, Xiaofan Zhou and Hong Ma* (2007). Genome‐wide Analysis of Kelch Repeat‐containing F‐box Family. <a href="https://doi.org/10.1111/j.1744-7909.2007.00498.x" rel="noopener noreferrer" target="_blank">Journal of Integrative Plant Biology   2007, 49 (6): 940−952 doi.org/10.1111/j.1744-7909.2007.00498.x</a>&nbsp;
+            <a href="assets/publications/co-author/2007 - JIPB - Genome‐wide Analysis of Kelch Repeat‐containing F‐box Family.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Alexandra Surcel, Xiaofan Zhou, Li Quan, Hong Ma* (2008). Long-term maintenance of stable copy number in the eukaryotic SMC family - origin of a vertebrate meiotic SMC1 and fate of recent segmental duplicates. <a href="https://www.jse.ac.cn/CN/10.3724/SP.J.1002.2008.08031" rel="noopener noreferrer" target="_blank">Journal of Systematics and Evolution 46 (3): 405–423 (2008) DOI: 10.3724/SP.J.1002.2008.08031</a>&nbsp;
+            <a href="assets/publications/co-author/2008 - JSE - Long-term maintenance of stable copy number in the eukaryotic SMC family - origin of a vertebrate meiotic SMC1 and fate of recent segmental duplicates.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Baomin Feng, Lianchao Li, Xiaofan Zhou, Bruce Stanley and Hong Ma* (2009). Analysis of the Arabidopsis Floral Proteome：Detection of over 2000 Proteins and Evidence for Posttranslational Modifications. <a href="https://doi.org/10.1111/j.1744-7909.2008.00787.x" rel="noopener noreferrer" target="_blank">Journal of Integrative Plant Biology 2009, 51 (2): 207–223 DOI: 10.1111/j.1744-7909.2008.00787.x</a>&nbsp;
+            <a href="assets/publications/co-author/2009 - JIPB - Analysis of the Arabidopsis Floral Proteome：Detection of over 2000 Proteins and Evidence for Posttranslational Modifications.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Antonis Rokas*, John G. Gibbons, Xiaofan Zhou, Anne Beauvais, and Jean-Paul Latg ́(2012). The diverse applications of RNA‐seq for functional genomic studies in Aspergillus fumigatus. <a href="https://doi.org/10.1111/j.1749-6632.2012.06755.x" rel="noopener noreferrer" target="_blank">Ann. N.Y. Acad. Sci. 1273 (2012) 25–34 doi: 10.1111/j.1749-6632.2012.06755.x</a>&nbsp;
+            <a href="assets/publications/co-author/2012 - NYAS - The diverse applications of RNA‐seq for functional genomic studies in Aspergillus fumigatus.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Sree V Chintapalli, Gaurav Bhardwaj, Jagadish Babu, Loukia Hadjiyianni, Yoojin Hong, George K Todd, Casey A Boosalis, Zhenhai Zhang, Xiaofan Zhou, Hong Ma, Andriy Anishkin, Damian B van Rossum and Randen L Patterson (2013). Reevaluation of the evolutionary events within recA-RAD51 phylogeny. <a href="https://doi.org/10.1186/1471-2164-14-240" rel="noopener noreferrer" target="_blank">BMC Genomics 14, 240 (2013). doi.org/10.1186/1471-2164-14-240</a>&nbsp;
+            <a href="assets/publications/co-author/2013 - BMC Genomics - Reevaluation of the evolutionary events within recA-RAD51 phylogeny.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            David C. Rinkera, R. Jason Pitts, Xiaofan Zhou, Eunho Suh, Antonis Rokas, and Laurence J. Zwiebel* (2013). Blood meal-induced changes to antennal transcriptome profiles reveal shifts in odor sensitivities in the malaria vector mosquito Anopheles gambiae. <a href="https://doi.org/10.1073/pnas.1302562110" rel="noopener noreferrer" target="_blank">Natl. Acad. Sci. U.S.A. 110 (20) 8260-8265, doi.org/10.1073/pnas.1302562110</a>&nbsp;
+            <a href="assets/publications/co-author/2013 - PNAS - Blood meal-induced changes to antennal transcriptome profiles reveal shifts in odor sensitivities in the malaria vector mosquito Anopheles gambiae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Yuyu Wang, Xiaofan Zhou, Ding Yang* and Antonis Rokas* (2015). A genome-scale investigation of incongruence in culicidae mosquitoes. <a href="https://doi.org/10.1093/gbe/evv235" rel="noopener noreferrer" target="_blank">Genome Biol. Evol. 7(12):3463–3471. doi:10.1093/gbe/evv235</a>&nbsp;
+            <a href="assets/publications/co-author/2015 - GBE - A genome-scale investigation of incongruence in culicidae mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Daniel E. Neafsey#*, Robert M. Waterhouse#, Mohammad R. Abai, Sergey S. Aganezov, Max A. Alekseyev, James E. Allen, James Amon, Bruno Arcà, Peter Arensburger, Gleb Artemov, Lauren A. Assour, Hamidreza Basseri, Aaron Berlin, Bruce W. Birren, Stephanie A. Blandin, Andrew I. Brockman, Thomas R. Burkot, Austin Burt, Clara S. Chan, Cedric Chauve, Joanna C. Chiu, Mikkel Christensen, Carlo Costantini, Victoria L. M. Davidson, Elena Deligianni, Tania Dottorini, Vicky Dritsou, Stacey B. Gabriel, Wamdaogo M. Guelbeogo, Andrew B. Hall, Mira V. Han, Thaung Hlaing, Daniel S. T. Hughes, Adam M. Jenkins, Xiaofang Jiang, Irwin Jungreis, Evdoxia G. Kakani, Maryam Kamali, Petri Kemppainen, Ryan C. Kennedy, Ioannis K. Kirmitzoglou, Lizette L. Koekemoer, Njoroge Laban, Nicholas Langridge, Mara K. N. Lawniczak, Manolis Lirakis, Neil F. Lobo, Ernesto Lowy, Robert M. MacCallum, Chunhong Mao, Gareth Maslen, Charles Mbogo, Jenny McCarthy, Kristin Michel, Sara N. Mitchell, Wendy Moore, Katherine A. Murphy, Anastasia N. Naumenko, Tony Nolan, Eva M. Novoa, Samantha O’Loughlin, Chioma Oringanje, Mohammad A. Oshaghi, Nazzy Pakpour, Philippos A. Papathanos, Ashley N. Peery, Michael Povelones, Anil Prakash, David P. Price, Ashok Rajaraman, Lisa J. Reimer, David C. Rinker, Antonis Rokas, Tanya L. Russell, N’Fale Sagnon, Maria V. Sharakhova, Terrance Shea, Felipe A. Simão, Frederic Simard, Michel A. Slotman, Pradya Somboon, Vladimir Stegniy, Claudio J. Struchiner, Gregg W. C. Thomas, Marta Tojo, Pantelis Topalis, José M. C. Tubio, Maria F. Unger, John Vontas, Catherine Walton, Craig S. Wilding, Judith H. Willis, Yi-Chieh Wu, Guiyun Yan, Evgeny M. Zdobnov, Xiaofan Zhou, Flaminia Catteruccia, George K. Christophides, Frank H. Collins, Robert S. Cornman, Andrea Crisanti, Martin J. Donnelly, Scott J. Emrich, Michael C. Fontaine, William Gelbart, Matthew W. Hahn, Immo A. Hansen, Paul I. Howell, Fotis C. Kafatos, Manolis Kellis, Daniel Lawson, Christos Louis, Shirley Luckhart, Marc A. T. Muskavitch, José M. Ribeiro, Michael A. Riehle, Igor V. Sharakhov, Zhijian Tu, Laurence J. Zwiebel, and Nora J. Besansky* (2015). Highly evolvable malaria vectors - the genomes of 16 Anopheles mosquitoes. <a href="https://doi.org/10.1126/science.1258522">Science347,1258522(2015).DOI:10.1126/science.1258522</a>&nbsp;
+            <a href="assets/publications/co-author/2015 - Science - Highly evolvable malaria vectors - the genomes of 16 Anopheles mosquitoes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Yue Zhao, Qi Liu, Pankaj Acharya, Kristy R. Stengel, Quanhu Sheng, Xiaofan Zhou, Hojoong Kwak, Melissa A. Fischer, James E. Bradner, Stephen A. Strickland, Sanjay R. Mohan, Michael R. Savona, Bryan J. Venters, Ming-Ming Zhou, John T. Lis, and Scott W. Hiebert* (2016). High-Resolution Mapping of RNA Polymerases Identifies Mechanisms of Sensitivity and Resistance to BET Inhibitors in t(8;21) AML. <a href="https://doi.org/10.1016/j.celrep.2016.07.032" rel="noopener noreferrer" target="_blank">Cell Reports 16, 2003–2016, August 16, 2016 doi.org/10.1016/j.celrep.2016.07.032</a>&nbsp;
+            <a href="assets/publications/co-author/2016 - Cell Report - High-Resolution Mapping of RNA Polymerases Identifies Mechanisms of Sensitivity and Resistance to BET Inhibitors in t(8;21) AML.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Xing-Xing Shen, Xiaofan Zhou, Jacek Kominek, Cletus P. Kurtzman*, Chris Todd Hittinger*, and Antonis Rokas* (2016). Reconstructing the Backbone of the Saccharomycotina Yeast Phylgoeny Using Genome-Scale Data. <a href="https://doi.org/10.1534/g3.116.034744">G3 Genes|Genomes|Genetics, Volume 6, Issue 12, 1 December 2016, Pages 3927–3939 doi.org/10.1534/g3.116.034744</a>&nbsp;
+            <a href="assets/publications/co-author/2016 - G3 - Reconstructing the Backbone of the Saccharomycotina Yeast Phylgoeny Using Genome-Scale Data.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Hua Yan, Comzit Opachaloemphan, Giacomo Mancini, Huan Yang, Matthew Gallitto, Jakub Mlejnek, Alexandra Leibholz, Kevin Haight, Majid Ghaninia, Lucy Huo, Michael Perry, Jesse Slone, Xiaofan Zhou, Maria Traficante, Clint A. Penick, Kelly Dolezal, Kaustubh Gokhale, Kelsey Stevens, Ingrid Fetter-Pruneda, Roberto Bonasio, Laurence J. Zwiebel, Shelley L. Berger*, Jürgen Liebig*, Danny Reinberg* and Claude Desplan* (2017). An Engineered orco Mutation Produces Aberrant Social Behavior and Defective Neural Development in Ants. <a href="https://doi.org/10.1016/j.cell.2017.06.051">Cell Volume 170, Issue 4p736-747.e9August 10, 2017 DOI: 10.1016/j.cell.2017.06.051</a>&nbsp;
+            <a href="assets/publications/co-author/2017 - Cell - An Engineered orco Mutation Produces Aberrant Social Behavior and Defective Neural Development in Ants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Sha Jin, Xiaofan Zhou, Feng Gu, Guohua Zhong, and Xin Yi* (2017). Olfactory plasticity variation in the expression of chemosensory receptors in Bactrocera dorsalis in different physiological states. <a href="https://doi.org/10.3389/fphys.2017.00672">Front. Physiol. 8:672. doi: 10.3389/fphys.2017.00672</a>&nbsp;
+            <a href="assets/publications/co-author/2017 - FIP - Olfactory plasticity variation in the expression of chemosensory receptors in Bactrocera dorsalis in different physiological states.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Gregory M. Pask, Jesse D. Slone, Jocelyn G. Millar, Prithwiraj Das, Jardel A. Moreira, Xiaofan Zhou, Jan Bello, Shelley L. Berger, Roberto Bonasio, Claude Desplan, Danny Reinberg, Jürgen Liebig, Laurence J. Zwiebel & Anandasankar Ray (2017). Specialized odorant receptors in social insects that detect cuticular hydrocarbon cues and candidate pheromones. NC.&nbsp;
+            <a href="assets/publications/co-author/2017 - NC - Specialized odorant receptors in social insects that detect cuticular hydrocarbon cues and candidate pheromones.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Liyuan Zhao, Xiaofan Zhou, Antonis Rokas & Roger D. Con* (2017). Functional variants of the melanocortin-4 receptor associated with the Odontoceti and Mysticeti suborders of cetaceans. <a href="https://doi.org/10.1038/s41598-017-05962-1">SCIENTIFIC RepoRts 7: 5684 DOI:10.1038/s41598-017-05962-1</a>&nbsp;
+            <a href="assets/publications/co-author/2017 - SR - Functional variants of the melanocortin-4 receptor associated with the Odontoceti and Mysticeti suborders of cetaceans.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jing Wang#, Yue Zhao#, Xiaofan Zhou, Scott W. Hiebert, Qi Liu* and Yu Shyr* (2018). Nascent RNA sequencing analysis provides insights into enhancer-mediated gene regulation. <a href="https://doi.org/10.1186/s12864-018-5016-z">BMC Genomics  (2018) 19:633 doi.org/10.1186/s12864-018-5016-z</a>&nbsp;
+            <a href="assets/publications/co-author/2018 - BMC Genomics - Nascent RNA sequencing analysis provides insights into enhancer-mediated gene regulation.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Carla Gonc ̧alves, Jennifer H Wisecaver, Jacek Kominek, Madalena Salema Oom, Maria Jose ́ Leandro, Xing-Xing Shen, Dana A Opulente, Xiaofan Zhou, David Peris, Cletus P Kurtzman, Chris Todd Hittinger, Antonis Rokas, Paula Gonc ̧alves* (2018). Evidence for loss and reacquisition of alcoholic fermentation in a fructophilic yeast lineage. <a href="https://doi.org/10.7554/eLife.33034">eLife 2018;7:e33034. DOI: doi.org/10.7554/eLife.33034</a>&nbsp;
+            <a href="assets/publications/co-author/2018 - eLife - Evidence for loss and reacquisition of alcoholic fermentation in a fructophilic yeast lineage.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Tadeusz Krassowski, Aisling Y. Coughlan, Xing-Xing Shen, Xiaofan Zhou, Jacek Kominek, Dana A. Opulente, Robert Riley, Igor V. Grigoriev, Nikunj Maheshwari, Denis C. Shields, Cletus P. Kurtzman, Chris Todd Hittinger, Antonis Rokas & Kenneth H. Wolfe* (2018). Evolutionary instability of CUG-Leu in the genetic code of budding yeasts. <a href="https://doi.org/10.1038/s41467-018-04374-7">NATURE COMMUNICATIONS (2018) 9:1887 DOI: 10.1038/s41467-018-04374-7</a>&nbsp;
+            <a href="assets/publications/co-author/2018 - NC - Evolutionary instability of CUG-Leu in the genetic code of budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            David J. Krausea, Jacek Komineka, Dana A. Opulentea, Xing-Xing Shen, Xiaofan Zhou, Quinn K. Langdon, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Antonis Rokas and Chris Todd Hittinger* (2018). Functional and evolutionary characterization of a secondary metabolite gene cluster in budding yeasts. <a href="https://doi.org/10.1073/pnas.1806268115">Proc. Natl. Acad. Sci. U.S.A. 115 (43) 11030-11035 doi.org/10.1073/pnas.1806268115</a>&nbsp;
+            <a href="assets/publications/co-author/2018 - PNAS - Functional and evolutionary characterization of a secondary metabolite gene cluster in budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jacek Kominek#, Drew T#. Doering, Dana A. Opulente, Xing-Xing Shen, Xiaofan Zhou, Jeremy DeVirgilio, Amanda B. Hulfachor, Marizeth Groenewald, Mcsean A. Mcgee, Steven D. Karlen, Cletus P. Kurtzman, Antonis Rokas, and Chris Todd Hittinger* (2019). Eukaryotic acquisition of a bacterial operon. <a href="https://doi.org/10.1016/j.cell.2019.01.034">Cell 176, 1–11 March 7, 2019 doi.org/10.1016/j.cell.2019.01.034</a>&nbsp;
+            <a href="assets/publications/co-author/2019 - Cell - Eukaryotic acquisition of a bacterial operon.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Tadeusz Krassowski, Jacek Kominek, Xing-Xing Shen, Dana A. Opulente, Xiaofan Zhou, Antonis Rokas, Chris Todd Hittinger and Kenneth H. Wolfe* (2019). Multiple reinventions of mating-type switching during budding yeast evolution. <a href="https://doi.org/10.1016/j.cub.2019.06.056">Current Biology 29, 1–8 August 5, 2019 doi.org/10.1016/j.cub.2019.06.056</a>&nbsp;
+            <a href="assets/publications/co-author/2019 - Current Biol - Multiple reinventions of mating-type switching during budding yeast evolution.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Susu Zhang, Yue Zhao, Tiffany M. Heaster, Melissa A. Fischer, Kristy R. Stengel, Xiaofan Zhou, Haley Ramsey, Ming‐Ming Zhou, Michael R. Savona, Melissa C. Skala, Scott W. Hiebert* (2019). BET inhibitors reduce cell size and induce reversible cell cycle arrest in AML. <a href="https://doi.org/10.1002/jcb.280">J Cell Biochem. 2018;1-14. DOI: 10.1002/jcb.280</a>&nbsp;
+            <a href="assets/publications/co-author/2019 - JCB - BET inhibitors reduce cell size and induce reversible cell cycle arrest in AML.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Zhibin Liang, Luhao Huang, Fei He, Xiaofan Zhou, Zurong Shi, Jianuan Zhou, Yufan Chen, Mingfa Lv, Yumei Chen, Lian-Hui Zhang* (2019). A Substrate-Activated Efflux Pump, DesABC, Confers Zeamine Resistance to Dickeya zeae. <a href="https://doi.org/10.1128/mbio.00713-19">mBio 10:10.1128/mbio.00713-19. doi.org/10.1128/mbio.00713-19</a>&nbsp;
+            <a href="assets/publications/co-author/2019 - mBio - A Substrate-Activated Efflux Pump, DesABC, Confers Zeamine Resistance to Dickeya zeae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jacob L. Steenwyk, Dana A. Opulente, Jacek Kominek, Xing-Xing Shen, Xiaofan Zhou, Abigail L. Labella, Noah P. Bradley, Brandt F. Eichman, Nezˇa Čadezˇ, Diego Libkind, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Chris Todd Hittinger*, Antonis Rokas* (2019). Extensive loss of cell-cycle and DNA repair genes in an ancient lineage of bipolar budding yeasts. <a href="https://doi.org/10.1371/journal.pbio.3000255">PLoS Biol 17(5): e3000255. 10.1371/journal.pbio.3000255</a>&nbsp;
+            <a href="assets/publications/co-author/2019 - PLoS Biol - Extensive loss of cell-cycle and DNA repair genes in an ancient lineage of bipolar budding yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Hua Yan#, Shadi Jafari#, Gregory Pask, Xiaofan Zhou, Danny Reinberg and Claude Desplan* (2020). Evolution, developmental expression and function of odorant receptors in insects. <a href="https://doi.org/10.1242/jeb.208215">Journal of Experimental Biology (2020) 223, jeb208215. doi:10.1242/jeb.208215</a>&nbsp;
+            <a href="assets/publications/co-author/2020 - JEB - Evolution, developmental expression and function of odorant receptors in insects.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Liangsheng Zhang#, Fei Chen#, Xingtan Zhang#, Zhen Li#, Yiyong Zhao#, Rolf Lohaus#, Xiaojun Chang#, Wei Dong, Simon Y. W. Ho, Xing Liu, Aixia Song, Junhao Chen, Wenlei Guo, Zhengjia Wang, Yingyu Zhuang, Haifeng Wang, Xuequn Chen, Juan Hu, Yanhui Liu, Yuan Qin, Kai Wang, Shanshan Dong, Yang Liu, Shouzhou Zhang, Xianxian Yu, Qian Wu, Liangsheng Wang, Xueqing Yan, Yuannian Jiao, Hongzhi Kong, Xiaofan Zhou, Cuiwei Yu, Yuchu Chen, Fan Li, Jihua Wang, Wei Chen, Xinlu Chen, Qidong Jia, Chi Zhang, Yifan Jiang, Wanbo Zhang, Guanhua Liu, Jianyu Fu, Feng Chen, Hong Ma, Yves Van de Peer & Haibao Tang (2020). The water lily genome and the early evolution of flowering plants. <a href="https://doi.org/10.1038/s41586-019-1852-5">Nature 577, 79–84 (2020). doi.org/10.1038/s41586-019-1852-5</a>&nbsp;
+            <a href="assets/publications/co-author/2020 - Nature - The water lily genome and the early evolution of flowering plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Lingxiao Yang, Danyan Su1, Xin Chang, Charles S.P. Foster, Linhua Sun, Chien-Hsun Huang, Xiaofan Zhou, Liping Zeng, Hong Ma and Bojian Zhong (2020). Phylogenomic insights into deep phylogeny of Angiosperms based on broad nuclear gene sampling. <a href="https://doi.org/10.1016/j.xplc.2020.100027" rel="noopener noreferrer" target="_blank">Plant Communications 1, 100027, March 2020 doi.org/10.1016/j.xplc.2020.100027</a>&nbsp;
+            <a href="assets/publications/co-author/2020 - Plant Comm - Phylogenomic insights into deep phylogeny of Angiosperms based on broad nuclear gene sampling.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Xing-Xing Shen, Jacob L. Steenwyk, Abigail L. LaBella, Dana A. Opulente, Xiaofan Zhou, Jacek Kominek, Yuanning Li, Marizeth Groenewald, Chris T. Hittinger, Antonis Rokas (2020). Genome-scale phylogeny and contrasting modes of genome evolution in the fungal phylum Ascomycota. <a href="https://doi.org/10.1126/sciadv.abd0079">Sci. Adv.6,eabd0079(2020). DOI:10.1126/sciadv.abd0079</a>&nbsp;
+            <a href="assets/publications/co-author/2020 - SA - Genome-scale phylogeny and contrasting modes of genome evolution in the fungal phylum Ascomycota.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Kai Wang#, Xia Li#, Chunxi Yang, Shihao Song, Chaoyu Cui, Xiaofan Zhou, Yinyue Deng* (2021). A LysR Family Transcriptional Regulator Modulates Burkholderia cenocepacia Biofilm Formation and Protease Production. <a href="https://doi.org/10.1128/AEM.00202-21">Appl Environ Microbiol 87:e00202-21. doi.org/10.1128/AEM.00202-21</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - AEM - A LysR Family Transcriptional Regulator Modulates Burkholderia cenocepacia Biofilm Formation and Protease Production.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Wen Li, Peng Li, Xiaofan Zhou, Junjian Situ, Yiming Lin, Jiahui Qiu, Yuling Yuan, Pinggen Xi, Zide Jiang* and Guanghui Kong* (2021). A Cytochrome B 5-Like HemeSteroid Binding Domain Protein, PlCB5L1, Regulates Mycelial Growth, Pathogenicity and Oxidative Stress Tolerance in Peronophythora litchii. <a href="https://doi.org/10.3389/fpls.2021.783438">Front. Plant Sci. 12:783438. doi: 10.3389/fpls.2021.783438</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - FIPS - A Cytochrome B 5-Like HemeSteroid Binding Domain Protein, PlCB5L1, Regulates Mycelial Growth, Pathogenicity and Oxidative Stress Tolerance in Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Max A. B. Haase#, Jacek Kominek#, Dana A. Opulente, Xing-Xing Shen, Abigail L. LaBella, Xiaofan Zhou, Jeremy DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, Antonis Rokas* and Chris Todd Hittinger* (2021). Repeated horizontal gene transfer of GALactose metabolism genes violates Dollo's law of irreversible loss. <a href="https://doi.org/10.1093/genetics/iyaa012">Genetics, Volume 217, Issue 2, February 2021, iyaa012 DOI: 10.1093/genetics/iyaa012</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - Genetics - Repeated horizontal gene transfer of GALactose metabolism genes violates Dollo's law of irreversible loss.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Rui-Fang Gao#, Jie-Yu Wang#, Ke-Wei Liu#, Kouki Yoshida#, Yu-Yun Hsiao#, Yi-Xiang Shi, Kun-Chan Tsai, You-Yi Chen, Nobutaka Mitsuda, Chieh-Kai Liang, Zhi-Wen Wang, Ying Wang, Di-Yang Zhang, Laiqiang Huang, Xiang Zhao, Wen-Ying Zhong, Ying-Hui Cheng, Zi-De Jiang, Ming-He Li, Wei-Hong Sun, Xia Yu, Wenqi Hu, Zhuang Zhou, Xiao-Fan Zhou, Chuan-Ming Yeh*, Kazutaka Katoh*, Wen-Chieh Tsai*, Zhong-Jian Liu*, Francis Martin*, Gui-Ming Zhang* (2021). Comparative analysis of Phytophthora genomes reveals oomycete pathogenesis in crops.  <a href="https://doi.org/10.1016/j.heliyon.2021.e06317">HeliyonHeliyon,Volume 7, Issue 2,2021,e06317. doi.org/10.1016/j.heliyon.2021.e06317</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - Heliyon - Comparative analysis of Phytophthora genomes reveals oomycete pathogenesis in crops.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Danyan Su#, Lingxiao Yang#, Xuan Shi, Xiaoya Ma, Xiaofan Zhou, S. Blair Hedges, and Bojian Zhong* (2021). Large-scale phylogenomic analyses reveal the monophyly of bryophytes and Neoproterozoic origin of land plants. <a href="https://doi.org/10.1093/molbev/msab106">Mol. Biol. Evol. 38(8):3332–3344 doi:10.1093/molbev/msab106</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - MBE - Large-scale phylogenomic analyses reveal the monophyly of bryophytes and Neoproterozoic origin of land plants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jacob L. Steenwyk, Matthew E. Mead, Patrícia Alves de Castro, Clara Valero, André Damasio, Renato A. C. dos Santos, Abigail L. Labella, Yuanning Li, Sonja L. Knowles, Huzefa A. Raja, Nicholas H. Oberlies, Xiaofan Zhou, Oliver A. Cornely, Frieder Fuchs, Philipp Koehler*, Gustavo H. Goldman*, Antonis Rokas* (2021). Genomic and Phenotypic Analysis of COVID-19-Associated Pulmonary Aspergillosis Isolates of Aspergillus fumigatu. <a href="https://doi.org/10.1128/Spectrum.00010-21">Microbiol Spectr 9:e00010-21. 10.1128/Spectrum.00010-21</a>&nbsp;
+            <a href="assets/publications/co-author/2021 - Microbiol. Spectr. - Genomic and Phenotypic Analysis of COVID-19-Associated Pulmonary Aspergillosis Isolates of Aspergillus fumigatu.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jinli Yan#, Peng Li#, Xiaoqing Wang, Minya Zhu, Hongyu Shi, Guohui Yu, Xuemei Chen, Huishan Wang, Xiaofan Zhou, Lisheng Liao*, Lianhui Zhang* (2022). RasI-R Quorum Sensing System Controls the Virulence of Ralstonia solanacearum Strain EP1. <a href="https://doi.org/10.1128/aem.00325-22">Appl Environ Microbiol 88:e00325-22. doi.org/10.1128/aem.00325-22</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - AEM - RasI-R Quorum Sensing System Controls the Virulence of Ralstonia solanacearum Strain EP1.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Yuanning Li*, Hongyue Liu, Jacob L. Steenwyk, Abigail L. LaBella, Marie-Claire Harrison, Marizeth Groenewald, Xiaofan Zhou, Xing-Xing Shen, Tao Zhao, Chris Todd Hittinger and Antonis Rokas* (2022). Contrasting modes of macro and microsynteny evolution in a eukaryotic subphylum. <a href="https://doi.org/10.1016/j.cub.2022.10.025">Current Biology 32, 1—9 December 19, 2022 doi.org/10.1016/j.cub.2022.10.025</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - CB - Contrasting modes of macro and microsynteny evolution in a eukaryotic subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Peiyi Ye#, Xia Li#, Binbin Cui#, Shihao Song#, Fangfang Shen, Xiayu Chen, Gerun Wang, Xiaofan Zhou & Yinyue Deng* (2022). Proline utilization A controls bacterial pathogenicity by sensing its substrate and cofactors. <a href="https://doi.org/10.1038/s42003-022-03451-4">COMMUNICATIONS BIOLOGY (2022) 5:496 doi.org/10.1038/s42003-022-03451-4</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - Commun Biol - Proline utilization A controls bacterial pathogenicity by sensing its substrate and cofactors.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jinli Yan, Nuoqiao Lin, Xiaoqing Wang, Xuemei Chen, Huishan Wang, Qiqi Lin, <strong>Xiaofan Zhou</strong>, Lianhui Zhang* and Lisheng Liao* (2022). Markerless gene deletion in Ralstonia solanacearum based on its natural transformation competence. <a href="https://doi.org/10.3389/fmicb.2022.977580">Front. Microbiol. 13:977580. doi: 10.3389/fmicb.2022.977580</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - FiM - Markerless gene deletion in Ralstonia solanacearum based on its natural transformation competence.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jinli Yan, Nuoqiao Lin, Xiaoqing Wang, Xuemei Chen, Huishan Wang, Qiqi Lin, Xiaofan Zhou, Lianhui Zhang and Lisheng Liao (2022). Two-component system ArcBA modulates cell motility and biofilm formation in Dickeya oryzae. <a href="https://doi.org/10.3389/fpls.2022.1033192">Front. Plant Sci. 13:1033192. doi: 10.3389/fpls.2022.1033192</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - FiPS - Two-component system ArcBA modulates cell motility and biofilm formation in Dickeya oryzae.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Yu Shi, Xiaobei Yang, Xiaoxin Ye, Jiaying Feng, Tianfang Cheng, Xiaofan Zhou, Ding Xiang Liu, Linghui Xu* and Junxia Wang* (2022). The Methyltransferase HemK Regulates the Virulence and Nutrient Utilization of the Phytopathogenic Bacterium Xanthomonas citri subsp. citri. <a href="https://doi.org/10.3390/ijms23073931">Int. J. Mol. Sci. 2022, 23, 3931. doi: 10.3390/ijms23073931</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - IJMS - The Methyltransferase HemK Regulates the Virulence and Nutrient Utilization of the Phytopathogenic Bacterium Xanthomonas citri subsp. citri.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Huishan Wang, Lisheng Liao, Xiaofan Zhou, Lingling Dong, Xin Lin and Lianhui Zhang* (2022). Genome Sequence Resource of a Quorum-Quenching Biocontrol Agent, Pseudomonas nitroreducens HS-18. <a href="https://doi.org/10.1094/MPMI-12-21-0310-A">MPMI Vol. 35, No. 4, 2022, pp. 364–367, https://doi.org/10.1094/MPMI-12-21-0310-A</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - MPMI - Genome Sequence Resource of a Quorum-Quenching Biocontrol Agent, Pseudomonas nitroreducens HS-18.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Shanshan Chen, Ming Hu, Anqun Hu, Yang Xue, Si Wang, Fan Liu, Chuhao Li, <strong>Xiaofan Zhou</strong>, Jianuan Zhou* (2022). The integration host factor regulates multiple virulence pathways in bacterial pathogen Dickeya zeae MS2. <a href="https://doi.org/10.1111/mpp.13244"></a>Mol Plant Pathol. 2022;23:1487–1507. DOI: 10.1111/mpp.13244</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - MPP - The integration host factor regulates multiple virulence pathways in bacterial pathogen Dickeya zeae MS2.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Hua Yan1#, Comzit Opachaloemphan#, Francisco Carmona-Aldana#, Giacomo Mancini, Jakub Mlejnek, Nicolas Descostes, Bogdan Sieriebriennikov, Alexandra Leibholz, Xiaofan Zhou, Long Ding, Maria Traficante, Claude Desplan*, Danny Reinberg* (2022). Insulin signaling in the long-lived reproductive caste of ants. <a href="https://doi.org/10.1126/science.abm8767">Science377,1092-1099(2022). DOI:10.1126/science.abm8767</a>&nbsp;
+            <a href="assets/publications/co-author/2022 - Science - Insulin signaling in the long-lived reproductive caste of ants.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Danqing Li#, Han‑Yang Lin#, Xiuyun Wang#, Bo Bi, Yuan Gao, Lingmei Shao, Runlong Zhang, Yuwei Liang, Yiping Xia, Yun‑Peng Zhao, Xiaofan Zhou and Liangsheng Zhang* (2023). Genome and whole-genome resequencing of Cinnamomum camphora elucidate its dominance in subtropical urban landscapes. <a href="https://doi.org/10.1186/s12915-023-01692-1">BMC Biology (2023) 21:192 doi.org/10.1186/s12915-023-01692-1</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - BMC Biol - Genome and whole-genome resequencing of Cinnamomum camphora elucidate its dominance in subtropical urban landscapes.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Zhibin Liang#, Qiqi Lin#, Qingwei Wang#, Luhao Huang, Huidi Liu, Zurong Shi, Zining Cui, Xiaofan Zhou, Yong‑Gui Gao, Jianuan Zhou, Lian‑Hui Zhang* and Yizhen Deng* (2023). Gram‑negative bacteria resist antimicrobial agents by a DzrR‑mediated envelope stress response. <a href="https://doi.org/10.1186/s12915-023-01565-7">BMC Biology (2023) 21:62 doi.org/10.1186/s12915-023-01565-7</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - BMC Biol - Gram‑negative bacteria resist antimicrobial agents by a DzrR‑mediated envelope stress response.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Si Wang, Ming Hu, Huilin Chen, Chuhao Li, Yang Xue, Xinyue Song, Yuqing Qi, Fan Liu, Xiaofan Zhou, Lian-hui Zhang and Jianuan Zhou* (2023). Pseudomonas forestsoilum sp. nov. and P. tohonis biocontrol bacterial wilt by quenching 3-hydroxypalmitic acid methyl ester. <a href="https://doi.org/10.3389/fpls.2023.1193297">Front. Plant Sci. 14:1193297. doi: 10.3389/fpls.2023.1193297</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - FiPS - Pseudomonas forestsoilum sp. nov. and P. tohonis biocontrol bacterial wilt by quenching 3-hydroxypalmitic acid methyl ester.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Fan Liu, Ming Hu, Xu Tan, Yang Xue, Chuhao Li, Si Wang, Mingfa Lv, Xiaoyuan Chen, Xiaofan Zhou, Lian-hui Zhang and Jianuan Zhou* (2023). Pseudomonas chlororaphis L5 and Enterobacter asburiae L95 biocontrol Dickeya soft. <a href="https://doi.org/10.1111/1751-7915.14351">Microbial Biotechnology. 2023;16:2145–2160. DOI: 10.1111/1751-7915.14351</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - Microbial Biotech - Pseudomonas chlororaphis L5 and Enterobacter asburiae L95 biocontrol Dickeya soft.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jacob L. Steenwyk, Yuanning Li, Xiaofan Zhou, Xing-Xing Shen & Antonis Rokas* (2023). Incongruence in the phylogenomics era. <a href="https://doi.org/10.1038/s41576-023-00620-x">Nat Rev Genet 24, 834–850 (2023). https://doi.org/10.1038/s41576-023-00620-x</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - NRG - Incongruence in the phylogenomics era.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Junjian Situ#, Xinning Zhang#, Xiaofan Zhou, Zijing Zhang, Pinggen Xi, Guanghui Kong and Zide Jiang* (2023). The ankyrin repeat-containing protein PlANK1 mediates mycelial growth, oospore development, and virulence in Peronophythora litchii.<a href="https://doi.org/10.1186/s42483-023-00211-y"> Phytopathology Research (2023) 5:54 doi.org/10.1186/s42483-023-00211-y</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - Phyto Res - The ankyrin repeat-containing protein PlANK1 mediates mycelial growth, oospore development, and virulence in Peronophythora litchii.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Danlu Han, Wenliang Li, Zhuangwei Hou, Chufang Lin, Yun Xie, Xiaofang Zhou, Yuan Gao, Junwen Huang, Jianbin Lai, Li Wang, Liangsheng Zhang* and Chengwei Yang* (2023). The chromosome-scale assembly of the Salvia rosmarinus genome provides insight into carnosic acid biosynthesis. <a href="https://doi.org/10.1111/tpj.16087">The Plant Journal (2023) 113, 819–832 doi: 10.1111/tpj.16087</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - PJ - The chromosome-scale assembly of the Salvia rosmarinus genome provides insight into carnosic acid biosynthesis .pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Peng Li, Wen Li, Xiaofan Zhou, Junjian Situ, Lizhu Xie, Pinggen Xi, Bo Yang, Guanghui Kong* and Zide Jiang* (2023). Peronophythora litchii RXLR effector P. litchii avirulence homolog 202 destabilizes a host ethylene biosynthesis enzyme. <a href="https://doi.org/10.1093/plphys/kiad311">Plant Physiology, Volume 193, Issue 1, September 2023, Pages 756–774 doi.org/10.1093/plphys/kiad311</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - PP - Peronophythora litchii RXLR effector P. litchii avirulence homolog 202 destabilizes a host ethylene biosynthesis enzyme.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            M. Groenewald*, C.T. Hittinger, K. Bensch1, D.A. Opulente, X.-X. Shen, Y. Li5, C. Liu, A.L. LaBella, X. Zhou, S. Limtong, S. Jindamorakot, P. Gonçalves, V. Robert, K.H. Wolfe, C.A. Rosa, T. Boekhout, N. Čadež, G. Péter, J.P. Sampaio, M.-A. Lachance, A.M. Yurkov, H.-M. Daniel, M. Takashima, K. Boundy-Mills, D. Libkind, K. Aoki, T. Sugita, A. Rokas (2023). A genome-informed higher rank classification of the biotechnologically important fungal subphylum Saccharomycotina. <a href="https://doi.org/10.3114/sim.2023.105.01">Studies in Mycology 105: 1–22. doi: 10.3114/sim.2023.105.01</a>&nbsp;
+            <a href="assets/publications/co-author/2023 - Studies in Mycology - A genome-informed higher rank classification of the biotechnologically important fungal subphylum Saccharomycotina.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Bryan Zavala, Lauren Dineen, Kaitlin J. Fisher, Dana A. Opulente, Marie-Claire Harrison, John F. Wolters, Xing-Xing Shen, Xiaofan Zhou, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas, Abigail Leavitt LaBella* (2024). Genomic factors shaping codon usage across the Saccharomycotina subphylum. <a href="https://doi.org/10.1093/g3journal/jkae207">G3 Genes|Genomes|Genetics, Volume 14, Issue 11, November 2024, jkae207 doi.org/10.1093/g3journal/jkae207</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - G3 - Genomic factors shaping codon usage across the Saccharomycotina subphylum.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Na Zhang#, Xinyang Li#, Liangping Ming, Wenda Sun, Xiaofang Xie, Cailing Zhi, Xiaofan Zhou, Yanhua Wen, Zhibin Liang* and Yizhen Deng* (2024). Comparative Genomics and Pathogenicity Analysis of Three Fungal Isolates Causing Barnyard Grass Blast. <a href="https://doi.org/10.3390/jof10120868">J. Fungi 2024, 10, 868.doi.org/10.3390/jof10120868</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - J Fungi - Comparative Genomics and Pathogenicity Analysis of Three Fungal Isolates Causing Barnyard Grass Blast.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Liang Sun, Kyle T. David, John F. Wolters, Steven D. Karlen, Carla Gonçalves, Dana A. Opulente, Abigail Leavitt LaBella, Marizeth Groenewald, Xiaofan Zhou, Xing-Xing Shen, Antonis Rokas and Chris Todd Hittinger* (2024). Functional and evolutionary integration of a fungal gene with a bacterial operon. <a href="https://doi.org/10.1093/molbev/msae045">Mol. Biol. Evol. 41(4):msae045 doi.org/10.1093/molbev/msae045</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - MBE - Functional and evolutionary integration of a fungal gene with a bacterial operon.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Johnathan G. Crandall, Xiaofan Zhou, Antonis Rokas, Chris Todd Hittinger* (2024). Specialization Restricts the Evolutionary Paths Available to Yeast Sugar Transporters. <a href="https://doi.org/10.1093/molbev/msae228">Molecular Biology and Evolution, Volume 41, Issue 11, November 2024, msae228 doi.org/10.1093/molbev/msae228</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - MBE - Specialization Restricts the Evolutionary Paths Available to Yeast Sugar Transporters.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jacob L. Steenwyk, Sonja Knowles, Rafael W. Bastos, Charu Balamurugan, David Rinker, Matthew E. Mead, Christopher D. Roberts, Huzefa A. Raja, Yuanning Li, Ana Cristina Colabardini, Patrícia Alves de Castro, Thaila Fernanda dos Reis, Adiyantara Gumilang, María Almagro-Molto, Alexandre Alanio, Dea Garcia-Hermoso, Endrews Delbaje, Laís Pontes, Camila Figueiredo Pinzan, Angélica Zaninelli Schreiber, David Canóvas, Rafael Sanchez Luperini, Katrien Lagrou, Egídio Torrado, Fernando Rodrigues, Nicholas H. Oberlies, Xiaofan Zhou, Gustavo H. Goldman* & Antonis Rokas* (2024). Evolutionary origin and population diversity of a cryptic hybrid pathogen. <a href="https://doi.org/10.1038/s41467-024-52639-1">Nat Commun 15, 8412 (2024). doi.org/10.1038/s41467-024-52639-1</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - NC - Evolutionary origin and population diversity of a cryptic hybrid pathogen.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Jingyang Sun#, Yonglin Li#, Li Zheng, Daipeng Chen, Xiaofan Zhou and Peng Li* (2024). The first complete genome of Robbsia andropogonis reveals its arsenal of virulence system causing leaf spot disease of areca palm. <a href="https://doi.org/10.1186/s42483-024-00269-2">Phytopathology Research (2024) 6:51 doi.org/10.1186/s42483-024-00269-2</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - Phyto Res - The first complete genome of Robbsia andropogonis reveals its arsenal of virulence system causing leaf spot disease of areca palm.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Hongyue Liu, Jacob L. Steenwyk, Xiaofan Zhou, Darrin T. Schultz, Kevin M. Kocot, Xing-Xing Shen, Antonis Rokas*, Yuanning Li* (2024). A taxon-rich and genome-scale phylogeny of Opisthokonta. <a href="https://doi.org/10.1371/journal.pbio.3002794">PLoS Biol 22(9): e3002794. doi.org/10.1371/journal.pbio.3002794</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - PLoS Biol - A taxon-rich and genome-scale phylogeny of Opisthokonta.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Carla Gonçalves, Marie-Claire Harrison, Jacob L. Steenwyk, Dana A. Opulente, Abigail L. LaBella, John F. Wolters, Xiaofan Zhou, Xing-Xing Shen, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas* (2024). Diverse signatures of convergent evolution in cactus-associated yeasts. <a href="https://doi.org/10.1371/journal.pbio.3002832">PLoS Biol 22(9):e3002832. doi.org/10.1371/journal.pbio.3002832</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - PLoS Biol - Diverse signatures of convergent evolution in cactus-associated yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Marie- Claire Harrison, Emily J. Ubbelohde, Abigail L. LaBellaa, Dana A. Opulenteb, John F. Wolters, Xiaofan Zhou, Xing-Xing Shen,  Marizeth Groenewald, Chris Todd Hittinger*, and Antonis Rokas* (2024). Machine learning enables identification of an alternative yeast galactose utilization pathway. <a href="https://doi.org/10.1073/pnas.2315314121">Proc. Natl. Acad. Sci. U.S.A. 121 (18) e2315314121 doi.org/10.1073/pnas.2315314121</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - PNAS - Machine learning enables identification of an alternative yeast galactose utilization pathway.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Marie- Claire Harrison, Emily J. Ubbelohde, Abigail L. LaBella, Dana A. Opulente, John F. Wolters, Xiaofan Zhou, Xing- Xing Shen, Marizeth Groenewald, Chris Todd Hittinger, and Antonis Rokas* (2024). Saccharomycotina yeasts defy long-standing macroecological patterns. <a href="https://doi.org/10.1073/pnas.2316031121">Proc. Natl. Acad. Sci. U.S.A. 121 (10) e2316031121 doi.org/10.1073/pnas.2316031121</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - PNAS - Saccharomycotina yeasts defy long-standing macroecological patterns.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Dana A. Opulente#, Abigail Leavitt LaBella#, Marie-Claire Harrison, John F. Wolters, Chao Liu, Yonglin Li, Jacek Kominek, Jacob L. Steenwyk, Hayley R. Stoneman, Jenna VanDenAvond, Caroline R. Miller, Quinn K. Langdon, Margarida Silva, Carla Gonçalves, Emily J. Ubbelohde, Yuanning Li, Kelly V. Buh, Martin Jarzyna, Max A. B. Haase, Carlos A. Rosa, Neža C ˇadež, Diego Libkind, Jeremy H. DeVirgilio, Amanda Beth Hulfachor, Cletus P. Kurtzman, José Paulo Sampaio, Paula Gonçalves, Xiaofan Zhou, Xing-Xing Shen, Marizeth Groenewald, Antonis Rokas*, Chris Todd Hittinger* (2024). Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts. <a href="https://doi.org/10.1126/science.adj4503">Science 384, eadj4503 (2024). DOI:10.1126/science.adj4503</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - Science - Genomic factors shape carbon and nitrogen metabolic niche breadth across Saccharomycotina yeasts.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Marie‐Claire Harrison, Dana A. Opulente, John F. Wolters, Xing‐Xing Shen, Xiaofan Zhou, Marizeth Groenewald, Chris Todd Hittinger, Antonis Rokas, Abigail Leavitt LaBella* (2024). Exploring Saccharomycotina Yeast Ecology Through an Ecological Ontology Framework. <a href="https://doi.org/10.1002/yea.3981">Yeast, 2024; 41:615–628 doi.org/10.1002/yea.3981</a>&nbsp;
+            <a href="assets/publications/co-author/2024 - Yeast - Exploring Saccharomycotina Yeast Ecology Through an Ecological Ontology Framework.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+        <li data-role="other">
+            Wen-Juan Chen, Xiaofang Luo, Xuanrui Zhang, Kalpana Bhatt, Shao-Fang Chen, Mohamed A. Ghorab, Xiaofan Zhou and Yaohua Huang* (2025). Elucidating the kinetics and mechanisms of tetramethrin biodegradation by the fungal strain Neocosmospora sp. AF3. <a href="https://doi.org/10.1186/s12934-025-02747-4">Microbial Cell Factories (2025) 24:124 doi.org/10.1186/s12934-025-02747-4</a>&nbsp;
+            <a href="assets/publications/co-author/2025 - MCF - Elucidating the kinetics and mechanisms of tetramethrin biodegradation by the fungal strain Neocosmospora sp. AF3.pdf" rel="noopener noreferrer" target="_blank">PDF</a>
+        </li>
+    </ol>
+    </div>
 
-  <footer class="site-footer" style="background:#f8f9fa;border-top:1px solid #e5e5e5;margin-top:60px;font-family:Arial, sans-serif;">
+    <footer class="site-footer" style="background:#f8f9fa;border-top:1px solid #e5e5e5;margin-top:60px;font-family:Arial, sans-serif;">
     <div class="container py-4" style="max-width:1180px;">
-      <div class="row g-4">
+        <div class="row g-4">
         <!-- Logo / Intro -->
-        <div class="col-12 col-md-4">
-          <div style="display:flex;align-items:center;gap:12px;">
-            <img src="assets/image/icons/zhou_logo_2.png" alt="ZXF Lab" style="height:60px;width:auto;">
-            <div>
-              <h6 style="margin:0 0 4px;font-weight:600;">Xiaofan-Zhou Lab</h6>
-              <p style="margin:0;font-size:12px;line-height:1.4;color:#555;">Integrative Microbiology Research Centre<br>South China Agricultural University<br>Guangzhou, Guangdong, P.R. China</p>
+            <div class="col-12 col-md-4">
+                <div style="display:flex;align-items:center;gap:12px;">
+                <img src="assets/image/icons/zhou_logo_2.png" alt="ZXF Lab" style="height:60px;width:auto;">
+                <div>
+                    <h6 style="margin:0 0 4px;font-weight:600;">Xiaofan-Zhou Lab</h6>
+                    <p style="margin:0;font-size:12px;line-height:1.4;color:#555;">Integrative Microbiology Research Centre<br>South China Agricultural University<br>Guangzhou, Guangdong, P.R. China</p>
+                </div>
+                </div>
+                <p style="margin:14px 0 0;font-size:13px;color:#666;line-height:1.5;">
+                Advancing data‑driven life science research through integrative genomics, algorithm design, and collaborative innovation.
+                </p>
             </div>
-          </div>
-          <p style="margin:14px 0 0;font-size:13px;color:#666;line-height:1.5;">
-            Advancing data‑driven life science research through integrative genomics, algorithm design, and collaborative innovation.
-          </p>
+
+            <!-- Quick Links -->
+            <div class="col-6 col-md-2">
+                <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Navigate</h6>
+                <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.7;">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="people.html">Team</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="halloffame.html">Alumni</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="col-6 col-md-3">
+                <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Resources</h6>
+                <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.7;">
+                <li><a href="#" rel="noopener">Software / Tools</a></li>
+                    <li><a href="#" rel="noopener">Datasets</a></li>
+                    <li><a href="#" rel="noopener">Protocols</a></li>
+                    <li><a href="#" rel="noopener">Collaborations</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-12 col-md-3">
+                <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Contact</h6>
+                <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
+                <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
+                <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;flex-wrap: wrap;justify-content: space-around;align-items: baseline;align-content: space-between;flex-direction: row-reverse;">
+                    <li><a href="https://scholar.google.com/citations?hl=en&user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
+                    <!-- 改为 SVG：ResearchGate -->
+                    <li>
+                    <a href="https://www.researchgate.net/profile/Xiaofan-Zhou-3" aria-label="ResearchGate">
+                        <img src="https://cdn.simpleicons.org/researchgate/00CCBB" alt="ResearchGate" style="width:13px;height:12px;display:inline-block;vertical-align:middle;">
+                    </a>
+                    </li>
+                    <!-- 改为 SVG：ORCID -->
+                    <li>
+                    <a href="https://orcid.org/0000-0002-2879-6317" aria-label="ORCID">
+                        <img src="https://cdn.simpleicons.org/orcid/A6CE39" alt="ORCID" style="width:13px;height:12px;display:inline-block;vertical-align:middle;">
+                    </a>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <!-- Quick Links -->
-        <div class="col-6 col-md-2">
-          <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Navigate</h6>
-          <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.7;">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="people.html">Team</a></li>
-            <li><a href="research.html">Research</a></li>
-            <li><a href="publications.html">Publications</a></li>
-            <li><a href="news.html">News</a></li>
-            <li><a href="halloffame.html">Alumni</a></li>
-          </ul>
-        </div>
+        <hr style="margin:28px 0 16px;opacity:.25;">
 
-        <!-- Resources -->
-        <div class="col-6 col-md-3">
-          <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Resources</h6>
-          <ul style="list-style:none;padding:0;margin:0;font-size:13px;line-height:1.7;">
-            <li><a href="#" rel="noopener">Software / Tools</a></li>
-              <li><a href="#" rel="noopener">Datasets</a></li>
-              <li><a href="#" rel="noopener">Protocols</a></li>
-              <li><a href="#" rel="noopener">Collaborations</a></li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div class="col-12 col-md-3">
-          <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Contact</h6>
-          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
-          <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
-          <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;">
-            <li><a href="https://scholar.google.com/citations?hl=en&amp;user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
-          </ul>
-        </div>
-      </div>
-
-      <hr style="margin:28px 0 16px;opacity:.25;">
-
-      <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3" style="font-size:12px;color:#666;">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3" style="font-size:12px;color:#666;">
         <div>
-          © <span id="year">2025</span> ZXF Lab. All rights reserved.
-          <span style="margin-left:6px;">Content for academic &amp; research purposes.</span>
+            © <span id="year">2025</span> ZXF Lab. All rights reserved.
+            <span style="margin-left:6px;">Content for academic &amp; research purposes.</span>
         </div>
-      </div>
+        </div>
     </div>
 
     <script>
-      (function(){
+        (function(){
         var y = document.getElementById('year');
         if(y){ y.textContent = new Date().getFullYear(); }
-      })();
+        })();
     </script>
-  </footer>
+    </footer>
+    <button id="backToTop" aria-label="回到顶部" title="回到顶部">↑</button>
 
-
-  <script src="assets/js/vendor/bootstrap.min.js"></script>
-  <script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script>
     (function(){
-      const nav = document.querySelector('nav.site-nav');
-      if(!nav) return;
-      const btn = nav.querySelector('.nav-toggle');
-      if(btn){
+        const nav = document.querySelector('nav.site-nav');
+        if(!nav) return;
+        const btn = nav.querySelector('.nav-toggle');
+        if(btn){
         btn.addEventListener('click', function(){
-          const open = nav.classList.toggle('open');
-          btn.setAttribute('aria-expanded', String(open));
+            const open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', String(open));
         });
         window.addEventListener('resize', function(){
-          if(window.innerWidth > 992 && nav.classList.contains('open')){
+            if(window.innerWidth > 992 && nav.classList.contains('open')){
             nav.classList.remove('open');
             btn.setAttribute('aria-expanded','false');
-          }
+            }
         });
-      }
+        }
     })();
-  </script>
-  <script>
-  (function(){
+    </script>
+    <script>
+    (function(){
     var wrap = document.getElementById('Research');
     if(!wrap) return;
     var list = document.getElementById('pub-list-research');
@@ -820,20 +878,20 @@ nav.site-nav > ul.main-menu li a{
     var items = Array.prototype.slice.call(list.querySelectorAll('li'));
 
     function apply(filter){
-      var f = String(filter || 'all').toLowerCase();
-      items.forEach(function(li){
+        var f = String(filter || 'all').toLowerCase();
+        items.forEach(function(li){
         var role = String(li.dataset.role || 'other').toLowerCase();
         var hide = (f !== 'all' && role !== f);
         li.classList.toggle('is-hidden', hide);
-      });
+        });
     }
 
     wrap.addEventListener('click', function(e){
-      var btn = e.target.closest('[data-filter]');
-      if(!btn) return;
-      btns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      apply(btn.dataset.filter);
+        var btn = e.target.closest('[data-filter]');
+        if(!btn) return;
+        btns.forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        apply(btn.dataset.filter);
     });
 
     apply('all');
@@ -842,44 +900,140 @@ nav.site-nav > ul.main-menu li a{
     var ol = document.getElementById('pub-list-research');
     var lis = Array.from(ol.children);
     lis.sort(function(a, b) {
-      var yearA = parseInt(a.textContent.match(/\(\d{4}\)/)[0].slice(1, -1));
-      var yearB = parseInt(b.textContent.match(/\(\d{4}\)/)[0].slice(1, -1));
-      return yearB - yearA;
+        var yearA = parseInt(a.textContent.match(/\(\d{4}\)/)[0].slice(1, -1));
+        var yearB = parseInt(b.textContent.match(/\(\d{4}\)/)[0].slice(1, -1));
+        return yearB - yearA;
     });
     lis.forEach(function(li) {
-      ol.appendChild(li);
+        ol.appendChild(li);
     });
 
-        // 自动将“Xiaofan Zhou / Xiao-Fan Zhou”（大小写均可）加粗，避免逐条手工维护
-        // - 仅处理文本节点，跳过已在 <strong> 中或链接等标签内的内容
+    </script>
+    <script>
+    (function(){
+    var btn = document.getElementById('backToTop');
+    if(!btn) return;
+
+    var showAt = 200; // 滚动超过 200px 显示
+    function onScroll(){
+    if (window.scrollY > showAt){
+        btn.classList.add('show');
+    } else {
+        btn.classList.remove('show');
+    }
+    }
+    window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+
+    btn.addEventListener('click', function(){
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: prefersReduced ? 'auto' : 'smooth' });
+    });
+    })();
+    </script>
+    <script>
+    (function(){
+    var wrap = document.getElementById('Research');
+    if(!wrap) return;
+    var list = document.getElementById('pub-list-research');
+    if(!list) return;
+
+    // 筛选
+    var btns = wrap.querySelectorAll('.pub-filter [data-filter]');
+    var items = Array.prototype.slice.call(list.querySelectorAll('li'));
+
+    function apply(filter){
+    var f = String(filter || 'all').toLowerCase();
+    items.forEach(function(li){
+        var role = String(li.dataset.role || 'other').toLowerCase();
+        var hide = (f !== 'all' && role !== f);
+        li.classList.toggle('is-hidden', hide);
+    });
+    }
+
+    wrap.addEventListener('click', function(e){
+    var btn = e.target.closest('[data-filter]');
+    if(!btn) return;
+    btns.forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    apply(btn.dataset.filter);
+    });
+
+    apply('all');
+
+    // 按年份降序排序
+    var ol = list;
+    var lis = Array.from(ol.children);
+    function getYear(li){
+    var m = li.textContent.match(/\((\d{4})\)/);
+    return m ? parseInt(m[1], 10) : 0;
+    }
+    lis.sort(function(a,b){ return getYear(b) - getYear(a); });
+    lis.forEach(function(li){ ol.appendChild(li); });
+
+    // 1) 将 “Xiaofan Zhou / Xiao‑Fan Zhou” 加粗（跳过已在 <strong>/<a>/<sup> 内）
     try{
-        var nameRegex = /\bXiao-?Fan\s+Zhou\b/gi; // 匹配 Xiaofan Zhou 或 Xiao-Fan Zhou
-
-        function wrapNameInNode(node){
-            if(!node) return;
-            // 文本节点
-            if(node.nodeType === 3){
-                var text = node.nodeValue;
-                if(nameRegex.test(text)){
-                    var span = document.createElement('span');
-                    span.innerHTML = text.replace(nameRegex, '<strong>$&</strong>');
-                    var frag = document.createDocumentFragment();
-                    while(span.firstChild){ frag.appendChild(span.firstChild); }
-                    node.parentNode && node.parentNode.replaceChild(frag, node);
-                }
-                return;
-            }
-            // 元素节点：跳过不需要处理的标签
-            if(node.nodeType === 1){
-                var tag = node.tagName ? node.tagName.toLowerCase() : '';
-                if(tag === 'script' || tag === 'style' || tag === 'strong' || tag === 'a') return;
-                var children = Array.prototype.slice.call(node.childNodes || []);
-                children.forEach(wrapNameInNode);
-            }
+    var nameRegex = /\bXiao-?Fan\s+Zhou\b/gi;
+    function skipStrongAorSup(el){
+        if(!el || el.nodeType !== 1) return false;
+        var t = el.tagName.toLowerCase();
+        return t === 'script' || t === 'style' || t === 'a' || t === 'strong' || t === 'sup';
+    }
+    function walkBold(node){
+        if(!node) return;
+        if(node.nodeType === 3){
+        var t = node.nodeValue;
+        if(nameRegex.test(t)){
+            var html = t.replace(nameRegex, '<strong>$&</strong>');
+            var span = document.createElement('span');
+            span.innerHTML = html;
+            var frag = document.createDocumentFragment();
+            while(span.firstChild) frag.appendChild(span.firstChild);
+            node.parentNode.replaceChild(frag, node);
         }
+        return;
+        }
+        if(node.nodeType === 1){
+        if(skipStrongAorSup(node)) return;
+        Array.prototype.slice.call(node.childNodes).forEach(walkBold);
+        }
+    }
+    walkBold(list);
+    }catch(e){}
 
-        wrapNameInNode(list);
-    }catch(e){ /* 静默失败，不影响页面其他功能 */ }
-  })();
-  </script>
-</body></html>    
+    // 2) 将作者名字后紧跟的 # 与 * 上标（跳过 <a>/<sup>/<script>/<style>）
+    try{
+    function superscriptMarkers(root){
+        function shouldSkip(el){
+        if(!el || el.nodeType !== 1) return false;
+        var tag = el.tagName.toLowerCase();
+        return tag === 'script' || tag === 'style' || tag === 'a' || tag === 'sup';
+        }
+        function walk(node){
+        if(!node) return;
+        if(node.nodeType === 3){
+            var t = node.nodeValue;
+            // 字母/中文/点/连字符后紧跟 # 或 *（结尾或跟标点/空白）
+            var replaced = t.replace(/([A-Za-z\u00C0-\u024F\u4E00-\u9FFF.\-])([#\*]+)(?=(?:[,;\s]|$))/g, '$1<sup>$2</sup>');
+            if(replaced !== t){
+            var span = document.createElement('span');
+            span.innerHTML = replaced;
+            var frag = document.createDocumentFragment();
+            while(span.firstChild) frag.appendChild(span.firstChild);
+            node.parentNode.replaceChild(frag, node);
+            }
+            return;
+        }
+        if(node.nodeType === 1){
+            if(shouldSkip(node)) return;
+            Array.prototype.slice.call(node.childNodes).forEach(walk);
+        }
+        }
+        walk(root);
+    }
+    superscriptMarkers(list);
+    }catch(e){}
+    })();
+    </script>
+</body>
+</html>

@@ -30,215 +30,6 @@
 /* 解除 body 固定宽度 + 容器 translate 影响 */
 body{width:auto !important;max-width:100%;overflow-x:hidden;}
 .container[style*="translate"]{transform:none !important;margin:0 auto !important;}
-
-/* Team 调整team 和team photo 在页面的位置，上下*/
-/* ≥1400px 超大屏 */
-.team-member > .row.mb-5{margin-top:0px;}
-.team-member > .text-center.mb-4{margin-top:0px;}
-/* 1200px–1399px */
-@media (min-width:1440px){
-  .team-member > .row.mb-5{margin-top:-40px;}
-  .team-member > .text-center.mb-4{margin-top:-20px;}
-}
-/* 992px–1199px (lg) */
-@media (min-width:1024px){
-  .team-member > .row.mb-5{margin-top:-100px;}
-  .team-member > .text-center.mb-4{margin-top:-48px;}
-}
-/* 768px–991px (md) */
-@media (min-width:768px) and (max-width:991.98px){
-  .team-member > .row.mb-5{margin-top:50px;}
-  .team-member > .text-center.mb-4{margin-top:15px;}
-}
-/* 576px–767px (sm) */
-@media (max-width:767.98px){
-  .team-member > .row.mb-5{margin-top:-35px;}
-  .team-member > .text-center.mb-4{margin-top:-28px;}
-}
-/* <576px (xs) */
-@media (max-width:575.98px){
-  .team-member > .row.mb-5{margin-top:0px;}
-  .team-member > .text-center.mb-4{margin-top:0px;}
-}
-
-/* PI 区*/
-/* PI 区：左右列在 md 以下堆叠并居中 */
-@media (max-width:991.98px){
-  .row.gy-4.align-items-start > .col-md-4,
-  .row.gy-4.align-items-start > .col-md-8{
-    width:100% !important;flex:0 0 100% !important;max-width:100% !important;
-    text-align:center;
-  }
-}
-/* 调整“The PI”标题：大屏向上浮动，小屏恢复，正文随其移动 */
-  .row.gy-4.align-items-start .col-md-8 > p:first-child{
-    position:relative;          /* 取消原来的 absolute，避免遮挡 */
-    transform:translateY(-22px);/* 默认大屏上移 */
-    margin:0 0 .55rem;
-    transition:transform .25s;
-  }
-
-  .row.gy-4.align-items-start .col-md-8 > p:nth-child(2){
-    margin-top:0;
-  }
-
-  /* 1400px 以上再多上移一些 */
-  @media (min-width:1400px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:translateY(-28px);
-    }
-  }
-
-  /* 992–1399px：稍微减少上移幅度，保持平衡 */
-  @media (min-width:992px) and (max-width:1399.98px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:translateY(-18px);
-    }
-  }
-
-  /* <992px：与头像纵向堆叠，取消上移，防重叠 */
-  @media (max-width:991.98px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child{
-      transform:none;
-    }
-  }
-
-  /* 极小屏：缩小标题字号 */
-  @media (max-width:576px){
-    .row.gy-4.align-items-start .col-md-8 > p:first-child span{
-      font-size:1.25rem !important;
-    }
-  }
-
-/* 放大 PI 区照片（保持响应式与不裁剪） */
-.row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-  width:380px !important;
-  max-width:100% !important;
-  height:auto !important;
-  object-fit:contain !important;
-}
-@media (min-width:1200px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:520px !important;
-  }
-}
-@media (max-width:991.98px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:360px !important;
-  }
-}
-@media (max-width:576px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:220px !important;
-  }
-}
-/* 小屏适当缩小宽度，防止撑出屏幕 */
-@media (max-width:576px){
-  .row.gy-4.align-items-start > .col-md-4.text-center > img[alt="Xiaofan Zhou"]{
-    width:200px !important;
-  }
-}
-
-/* member区 */
-/* 统一成员图片在大屏保持 200px 高，小屏自适应减小 */
-.team-member img{
-  width: 100% !important;
-  max-width: 100% !important;
-  height: 200px !important;
-  object-fit: contain !important; /* 由 cover 改为 contain */
-  margin: 0 auto !important;
-  background: #f5f5f500; /* 保证背景一致 */
-}
-/* 针对内联设置了 max-width:52/56/62% 或 margin-left 的图片在中小屏恢复全宽 */
-@media (max-width:1200px){
-  img[style*="max-width: 52"], img[style*="max-width: 56"], img[style*="max-width: 62"]{
-    max-width:100% !important;margin-left:0 !important;
-  }
-}
-/* 成员网格：逐步从 4→2→1 列 */
-@media (max-width:1199.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 33.333%;max-width:33.333%;}
-}
-@media (max-width:991.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 50%;max-width:50%;}
-}
-@media (max-width:575.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col{flex:0 0 100%;max-width:100%;}
-}
-/* 缩小小屏字体与间距，避免拥挤 */
-@media (max-width:767.98px){
-  h2.mt-2{font-size:1.9rem;}
-  .team-member .name{font-size:18px !important;}
-  .team-member p{font-size:13px !important;line-height:1.45;}
-  .row.mb-5{margin-bottom:1.5rem !important;}
-  .team-member img{height:180px !important;}
-}
-@media (max-width:575.98px){
-  .team-member img{height:160px !important;}
-  .pi-section .pi-name{font-size:26px !important;}
-  .pi-section .pi-bio{font-size:16px !important;}
-}
-/* 去除因图片不同宽度造成的水平偏移 */
-.team-member img[style*="margin-left"]{margin-left:0 !important;}
-/* 强制高度统一（已有行内 height:200px 的保持，其他按比例补齐） */
-.team-member img:not([style*="height: 200px"]){height:200px !important;}
-/* 让“占位空列”在小屏隐藏以减少空白 */
-@media (max-width:991.98px){
-  .row.gy-4.row-cols-1.row-cols-md-2.row-cols-xl-3 > .col:empty{display:none !important;}
-}
-/* 修正部分字体缩放以防换行溢出 */
-@media (max-width:420px){
-  .pi-section .pi-bio{word-break:break-word;}
-}
-/* 防止图片拉伸导致抖动 */
-.team-member img{background:#ffffff00;}
-/* 解除针对非 200px 图像的强制高度对合影的影响 */
-.team-member img[alt="Team Photo"],
-  img[alt="Team Photo"]{
-    width:85% !important;
-    max-width:800px;
-    height:auto !important;
-    object-fit:contain !important;
-    display:block;
-    margin:0 auto;
-    background:transparent;
-  }
-  /* 图片居中与尺寸 */
-.team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
-.team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]) {
-  display:block;
-  margin:0 auto !important;
-  width:100% !important;
-  max-width:240px;
-  height:200px !important;
-  object-fit:cover;
-  border-radius:6px;
-}
-/* 简介和名字文本块居中 */
-.team-member > .py-4{
-  text-align:center;
-  padding-top:.55rem;
-}
-.team-member > .py-4 .name{
-  display:block;
-  margin:0 0 .4rem;
-  text-align:center;
-  font-weight:600;
-}
-/* 小屏缩小头像 */
-@media (max-width:575.98px){
-  .team-member > img:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]),
-  .team-member > .rounded.img-fluid:not([alt="Team Photo"]):not([alt="Xiaofan Zhou"]){
-    max-width:200px;
-    height:180px !important;
-  }
-}
-/* 成员姓名字体与颜色统一：Times New Roman + 黑色 */
-.team-member .name{
-  font-family:"Times New Roman","TimesNewRoman",Times,serif !important;
-  color:#000 !important;
-}
-
 /* 导航响应式（Logo 缩放 + 折叠菜单） */
 nav.site-nav{
   position:fixed;top:0;left:0;right:0;z-index:9999;
@@ -375,6 +166,16 @@ nav.site-nav > ul.main-menu li a{
     font-family:Arial, sans-serif;
   }
 }
+
+/* 防止固定导航遮住正文（含小屏），并修正锚点滚动偏移 */
+:root{ --nav-h: 60px; }
+body{ padding-top: calc(var(--nav-h) + 12px); }
+@media (max-width: 576px){
+  body{ padding-top: calc(var(--nav-h) + 8px); }
+}
+/* 锚点跳转时预留顶部空间 */
+html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
+
 </style>
 </head>
 <body>
@@ -404,6 +205,25 @@ nav.site-nav > ul.main-menu li a{
       <li><a href="halloffame.html">Alumni</a></li>
     </ul>
   </nav>
+
+
+  <div class="container" style="font-family: Arial, sans-serif; font-size: 20px; margin-top: 50px;">
+    <article id="RESEARCH" style="margin-top: 50px;color: #03623c;">
+
+      <div class="row" style="margin-top: 50px">
+          <b>
+            <font face="verdana" size="4.5" style="padding: 0;">◆9/10/2025 - Celebration of teacher's day!</font>
+            <img src="assets/image/news/teacher's day.jpg" alt="Welcome Huiming, Xiaoting and Sirui to the Zhou lab!" style="display:block;max-width:100%;height:auto;margin-top:20px;">
+            </b>
+      </div>
+      <div class="row" style="margin-top: 50px">
+          <b>
+            <font face="verdana" size="4.5" style="padding: 0;">◆9/04/2025 - Welcome Huiming, Xiaoting and Sirui to the Zhou lab!</font>
+            <img src="assets/image/funlife/2025迎新.jpg" alt="Welcome Huiming, Xiaoting and Sirui to the Zhou lab!" style="display:block;max-width:100%;height:auto;margin-top:20px;">
+          </b>
+      </div>
+    </article>
+  </div>
 
   <footer class="site-footer" style="background:#f8f9fa;border-top:1px solid #e5e5e5;margin-top:60px;font-family:Arial, sans-serif;">
     <div class="container py-4" style="max-width:1180px;">
@@ -451,8 +271,20 @@ nav.site-nav > ul.main-menu li a{
           <h6 style="font-weight:600;font-size:14px;margin-bottom:10px;">Contact</h6>
           <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Email: <a href="mailto:xiaofan_zhou@scau.edu.cn">xiaofan_zhou@scau.edu.cn</a></p>
           <p style="margin:0 0 6px;font-size:13px;color:#98adc2;">Phone: <a href="tel: +86-20-8528822"> +86-20-8528822</a></p>
-          <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;">
-            <li><a href="https://scholar.google.com/citations?hl=en&amp;user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
+          <ul style="display:flex;gap:10px;list-style:none;padding:0;margin:8px 0 0;flex-wrap: wrap;justify-content: space-around;align-items: baseline;align-content: space-between;flex-direction: row-reverse;">
+            <li><a href="https://scholar.google.com/citations?hl=en&user=AGl1eyAAAAAJ" aria-label="Google Scholar"><i class="fab fa-google"></i></a></li>
+            <!-- 改为 SVG：ResearchGate -->
+            <li>
+              <a href="https://www.researchgate.net/profile/Xiaofan-Zhou-3" aria-label="ResearchGate">
+                <img src="https://cdn.simpleicons.org/researchgate/00CCBB" alt="ResearchGate" style="width:13px;height:12px;display:inline-block;vertical-align:middle;">
+              </a>
+            </li>
+            <!-- 改为 SVG：ORCID -->
+            <li>
+              <a href="https://orcid.org/0000-0002-2879-6317" aria-label="ORCID">
+                <img src="https://cdn.simpleicons.org/orcid/A6CE39" alt="ORCID" style="width:13px;height:12px;display:inline-block;vertical-align:middle;">
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -477,7 +309,7 @@ nav.site-nav > ul.main-menu li a{
 
 
   <script src="assets/js/vendor/bootstrap.min.js"></script>
-  <script>
+<script>
     (function(){
       const nav = document.querySelector('nav.site-nav');
       if(!nav) return;
@@ -497,5 +329,21 @@ nav.site-nav > ul.main-menu li a{
     })();
   </script>
 
+  <!-- 动态按导航真实高度设置顶部内边距，避免遮挡 -->
+  <script>
+    (function(){
+      var nav = document.querySelector('nav.site-nav');
+      if(!nav) return;
+      function setPad(){
+        var h = nav.offsetHeight || 60;
+        var extra = window.innerWidth <= 576 ? 8 : 12;
+        document.body.style.paddingTop = (h + extra) + 'px';
+        document.documentElement.style.scrollPaddingTop = (h + 16) + 'px';
+      }
+      setPad();
+      window.addEventListener('resize', setPad);
+      window.addEventListener('load', setPad);
+    })();
+  </script>
 
 </body></html>
