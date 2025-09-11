@@ -868,7 +868,7 @@ button {
 }
 
 /* Masonry 容器与项目 */
-.masonry{ column-count: 3; column-gap:16px; }
+.masonry{ column-count: 4; column-gap:16px; }
 .masonry-item{ break-inside: avoid; display:inline-block; width:100%; margin:0 0 16px; }
 
 /* 卡片与悬停文字（复用你现有 overlay 思路） */
