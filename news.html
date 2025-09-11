@@ -337,7 +337,6 @@ html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
       function setPad(){
         var h = nav.offsetHeight || 60;
         var extra = window.innerWidth <= 576 ? 8 : 12;
-        document.body.style.paddingTop = (h + extra) + 'px';
         document.documentElement.style.scrollPaddingTop = (h + 16) + 'px';
       }
       setPad();
