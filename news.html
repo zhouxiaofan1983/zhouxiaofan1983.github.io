@@ -175,8 +175,45 @@ body{ padding-top: calc(var(--nav-h) + 12px); }
 }
 /* 锚点跳转时预留顶部空间 */
 html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
-
+/* 新闻轮播 */
+.news-slider{
+  position:relative;
+  max-width:680px;
+  margin:20px 0 0;
+}
+.news-slider .slides{
+  position:relative;
+  width:100%;
+  overflow:hidden;
+}
+.news-slider .slides img{
+  display:block;
+  width:100%;
+  height:auto;
+  position:absolute;
+  left:0;top:0;
+  opacity:0;
+  transition:opacity .8s ease;
+}
+.news-slider .slides img:first-child{position:relative;}
+.news-slider .dots{
+  display:flex;
+  gap:8px;
+  justify-content:center;
+  margin-top:12px;
+}
+.news-slider .dots button{
+  width:12px;height:12px;
+  border-radius:50%;
+  border:0;
+  background:#c4c4c4;
+  cursor:pointer;
+  padding:0;
+}
+.news-slider .dots button.active{background:#03623c;}
+.news-slider .dots button:focus{outline:2px solid #03623c;}
 </style>
+
 </head>
 <body>
   <symbol id="chevron" viewbox="0 0 15 8">
@@ -210,6 +247,20 @@ html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
   <div class="container" style="font-family: Arial, sans-serif; font-size: 20px; margin-top: 50px;">
     <article id="RESEARCH" style="margin-top: 50px;color: #03623c;">
 
+      <div class="row" style="margin-top: 50px">
+        <b>
+          <font face="verdana" size="4.5" style="padding: 0;">
+            ◆1/11/2025 - Congratulations to Shaojie for winning the Outstanding Poster Award at the 2025 Annual Meeting of the Chinese Society for Microbiology held in Hangzhou.</font>
+          <div class="news-slider" data-slider>
+            <div class="slides">
+              <img src="assets/image/news/2025学术年会1.jpg" alt="Poster Award Photo 1">
+              <img src="assets/image/news/2025学术年会2.jpg" alt="Poster Award Photo 2">
+              <img src="assets/image/news/2025学术年会3.jpg" alt="Poster Award Photo 3">
+            </div>
+            <div class="dots" aria-label="切换图片"></div>
+          </div>
+        </b>
+      </div>
       <div class="row" style="margin-top: 50px">
           <b>
             <font face="verdana" size="4.5" style="padding: 0;">◆9/10/2025 - Celebration of teacher's day!</font>
@@ -307,7 +358,54 @@ html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
     </script>
   </footer>
 
+<script>
+(function(){
+  const slider = document.querySelector('[data-slider]');
+  if(!slider) return;
+  const imgs = Array.from(slider.querySelectorAll('.slides img'));
+  const dotsWrap = slider.querySelector('.dots');
+  let cur = 0, timer = null, interval = 4000;
 
+  // 创建圆点
+  imgs.forEach((_,i)=>{
+    const b = document.createElement('button');
+    b.type='button';
+    b.setAttribute('aria-label','第 '+(i+1)+' 张');
+    b.addEventListener('click', ()=>{ go(i,true); });
+    dotsWrap.appendChild(b);
+  });
+  const dots = Array.from(dotsWrap.querySelectorAll('button'));
+
+  function render(){
+    imgs.forEach((im,i)=>{ im.style.opacity = (i===cur)?1:0; im.style.position = (i===0)?'relative':'absolute'; });
+    dots.forEach((d,i)=>d.classList.toggle('active', i===cur));
+  }
+  function go(i, manual){
+    cur = i;
+    render();
+    if(manual){
+      restart();
+    }
+  }
+  function next(){
+    cur = (cur+1) % imgs.length;
+    render();
+  }
+  function start(){
+    timer = setInterval(next, interval);
+  }
+  function restart(){
+    clearInterval(timer);
+    start();
+  }
+  // 可暂停（鼠标悬停）
+  slider.addEventListener('mouseenter', ()=>clearInterval(timer));
+  slider.addEventListener('mouseleave', restart);
+
+  render();
+  start();
+})();
+</script>
   <script src="assets/js/vendor/bootstrap.min.js"></script>
 <script>
     (function(){
