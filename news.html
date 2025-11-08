@@ -178,21 +178,19 @@ html{ scroll-padding-top: calc(var(--nav-h) + 16px); }
 /* 新闻轮播（缩小尺寸） */
 .news-slider{
   position:relative;
-  width:100%;
-  max-width:480px;          /* 原 680px 改小 */
+  width:50%;
   margin:16px auto 0;        /* 居中 */
 }
 .news-slider .slides{
   position:relative;
-  width:100%;
+  width:50%;
   overflow:hidden;
   aspect-ratio:16 / 9;       /* 更扁，如果想保留原来就改回 4 / 3 */
 }
 .news-slider .slides img{
   position:absolute;
   inset:0;
-  width:100%;
-  height:100%;
+  width:50%;
   object-fit:cover;
   opacity:0;
   transition:opacity .6s ease;
@@ -448,3 +446,4 @@ document.querySelectorAll('[data-slider]').forEach(function(slider){
 });
 </script>  
 </body></html>
+
